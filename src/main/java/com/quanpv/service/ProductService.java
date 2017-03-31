@@ -1,14 +1,26 @@
 package com.quanpv.service;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.quanpv.dao.ProductRepository;
+import com.quanpv.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class ProductService {
 
-    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private ProductRepository productRepository;
 
-    public void getData(){
+    public Product get(int id){
+        return productRepository.findOne(id);
+    }
 
+    public void save(Product product){
+        productRepository.save(product);
+    }
+
+    public void delete(Product product) {
+        productRepository.delete(product);
     }
 }
