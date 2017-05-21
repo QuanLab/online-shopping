@@ -1,7 +1,7 @@
 package com.quanpv.service;
 
 import com.quanpv.dao.UserRepository;
-import com.quanpv.model.User;
+import com.quanpv.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +26,5 @@ public class UserService {
     public Iterable<User> getAllUser(){
         return userRepository.findAll();
     }
+
 }

@@ -1,25 +1,26 @@
 package com.quanpv.service;
 
-import com.quanpv.dao.CustomerRepository;
-import com.quanpv.domain.Customer;
+import com.quanpv.dao.CategoryRepository;
+import com.quanpv.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService {
+public class CategoryService {
 
     @Autowired
-    private CustomerRepository repository;
+    private CategoryRepository repository;
 
-    public Iterable<Customer> getAll(){
+
+    public Iterable<Category> getAll(){
         return repository.findAll();
     }
 
-    public Customer getById(int id){
+    public Category getById(int id){
         return repository.findOne(id);
     }
 
-    public void save(Customer product){
+    public void save(Category product){
         repository.save(product);
     }
 

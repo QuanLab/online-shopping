@@ -2,21 +2,18 @@ package com.quanpv.controller;
 
 import com.quanpv.domain.Product;
 import com.quanpv.service.ProductService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
-@RequestMapping("/api/products")
-public class ProductController {
+@RequestMapping("/api/pack")
+public class PackageController {
 
-    final static Logger logger = LoggerFactory.getLogger(ProductController.class);
+    final static Logger logger = LoggerFactory.getLogger(PackageController.class);
 
     @Autowired
     private ProductService service;
