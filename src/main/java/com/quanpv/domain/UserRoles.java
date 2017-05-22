@@ -11,10 +11,8 @@ public class UserRoles {
     private long id;
     private String name;
 
-    @ManyToMany
-    private Set<User> users;
-
     public UserRoles() {
+
     }
 
     public long getId() {
@@ -33,11 +31,4 @@ public class UserRoles {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 }

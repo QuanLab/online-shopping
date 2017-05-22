@@ -14,20 +14,19 @@ public class Product {
     private String name;
     private String description;
     private String imageUrl;
+    private float price;
+    private int quantity ;
 
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
-    @JoinTable(name = "PRODUCT_CATEGORY")
     private Category category;
 
-    @OneToOne
-    @JoinColumn(name = "PACK_ID")
-    private Pack pack;
-
-    public Product(String name, String description, String imageUrl) {
+    public Product(String name, String description, String imageUrl, float price, int quantity) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public Product() {
@@ -65,20 +64,28 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public Pack getPack() {
-        return pack;
-    }
-
-    public void setPack(Pack pack) {
-        this.pack = pack;
     }
 
     @Override
@@ -88,6 +95,8 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
                 '}';
     }
 }
