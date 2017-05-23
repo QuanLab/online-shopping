@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public interface UserRepository extends CrudRepository<User, String>{
-
+public interface UserRepository extends CrudRepository<User, Integer>{
+    User findUserByUsernameAndPassword(String username, String password);
 }

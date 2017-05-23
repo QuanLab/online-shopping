@@ -20,7 +20,7 @@ public class CustomerController {
     private CustomerService service;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Customer> addEmployee(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         service.save(customer);
         logger.debug("Added:: " + customer);
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
@@ -28,7 +28,7 @@ public class CustomerController {
 
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateEmployee(@RequestBody Customer customer) {
+    public ResponseEntity<Void> updateCustomer(@RequestBody Customer customer) {
         Customer existingCustomer = service.getById(customer.getId());
         if (existingCustomer == null) {
             logger.debug("Customer with id " + customer.getId() + " does not exists");
@@ -41,7 +41,7 @@ public class CustomerController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Customer> getEmployee(@PathVariable("id") int id) {
+    public ResponseEntity<Customer> getCustomer(@PathVariable("id") int id) {
         Customer customer = service.getById(id);
         if (customer == null) {
             logger.debug("Customer with id " + id + " does not exists");
@@ -53,7 +53,7 @@ public class CustomerController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Customer>> getAllEmployees() {
+    public ResponseEntity<Iterable<Customer>> getAllECustomers() {
         Iterable<Customer> customers = service.getAll();
         if (!customers.iterator().hasNext()) {
             logger.debug("Customer does not exists");
@@ -64,7 +64,7 @@ public class CustomerController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteEmployee(@PathVariable("id") int id) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable("id") int id) {
         Customer customer = service.getById(id);
         if (customer == null) {
             logger.debug("Customer with id " + id + " does not exists");

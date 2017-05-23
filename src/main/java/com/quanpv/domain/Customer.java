@@ -13,8 +13,7 @@ public class Customer {
     private int id;
 
     private String email;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String address;
     private String phoneNumber;
 
@@ -22,10 +21,9 @@ public class Customer {
 
     }
 
-    public Customer(String email, String firstName, String lastName, String address, String phoneNumber) {
+    public Customer(String email, String name, String address, String phoneNumber) {
         this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
@@ -46,20 +44,12 @@ public class Customer {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {

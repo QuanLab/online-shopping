@@ -1,5 +1,7 @@
 package com.quanpv.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -10,13 +12,29 @@ import java.util.Set;
 @Table(name = "USERS")
 public class User {
     @Id
+    private int id;
     private String username;
     private String email;
+    @JsonIgnore
     private String password;
     private int enabled;
 
     @ManyToMany
-    Set<UserRoles> userRoles;
+    Set<Role> roles;
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -50,11 +68,11 @@ public class User {
         this.enabled = enable;
     }
 
-    public Set<UserRoles> getUserRoles() {
-        return userRoles;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setUserRoles(Set<UserRoles> userRoles) {
-        this.userRoles = userRoles;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -20,7 +20,7 @@ public class CategoryController {
     private CategoryService service;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Category> addEmployee(@RequestBody Category category) {
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         service.save(category);
         logger.debug("Added:: " + category);
         return new ResponseEntity<>(category, HttpStatus.CREATED);
@@ -28,7 +28,7 @@ public class CategoryController {
 
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateEmployee(@RequestBody Category category) {
+    public ResponseEntity<Void> updateCategory(@RequestBody Category category) {
         Category existingCategory = service.getById(category.getId());
         if (existingCategory == null) {
             logger.debug("Category with id " + category.getId() + " does not exists");
@@ -41,7 +41,7 @@ public class CategoryController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Category> getEmployee(@PathVariable("id") int id) {
+    public ResponseEntity<Category> getCategory(@PathVariable("id") int id) {
         Category category = service.getById(id);
         if (category == null) {
             logger.debug("Category with id " + id + " does not exists");
@@ -53,7 +53,7 @@ public class CategoryController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Category>> getAllEmployees() {
+    public ResponseEntity<Iterable<Category>> getAllCategorys() {
         Iterable<Category> categories = service.getAll();
         if (!categories.iterator().hasNext()) {
             logger.debug("Category does not exists");
@@ -64,7 +64,7 @@ public class CategoryController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteEmployee(@PathVariable("id") int id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id") int id) {
         Category category = service.getById(id);
         if (category == null) {
             logger.debug("Category with id " + id + " does not exists");

@@ -21,16 +21,18 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Product> addEmployee(@RequestBody Product product) {
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         service.save(product);
         logger.debug("Added:: " + product);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateEmployee(@RequestBody Product product) {
+    public ResponseEntity<Void> updateProduct(@RequestBody Product product) {
         Product existingProduct = service.getById(product.getId());
         if (existingProduct == null) {
             logger.debug("Employee with id " + product.getId() + " does not exists");
@@ -41,9 +43,9 @@ public class ProductController {
         }
     }
 
-
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Product> getEmployee(@PathVariable("id") int id) {
+    public ResponseEntity<Product> getProduct(@PathVariable("id") int id) {
         Product employee = service.getById(id);
         if (employee == null) {
             logger.debug("Product with id " + id + " does not exists");
@@ -54,8 +56,9 @@ public class ProductController {
     }
 
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Product>> getAllEmployees() {
+    public ResponseEntity<Iterable<Product>> getAllProducts() {
         Iterable<Product> products = service.getAll();
         if (!products.iterator().hasNext()) {
             logger.debug("Products does not exists");
@@ -64,6 +67,7 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteEmployee(@PathVariable("id") int id) {
         Product product = service.getById(id);
@@ -77,6 +81,7 @@ public class ProductController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "category/{id}", method = RequestMethod.GET)
     public ResponseEntity<Iterable<Product>> getProductByCategory(@PathVariable("id") int id) {
         Iterable<Product> products = service.getByCategoryId(id);

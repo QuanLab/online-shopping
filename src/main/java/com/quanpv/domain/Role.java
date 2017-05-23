@@ -1,17 +1,16 @@
 package com.quanpv.domain;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-public class UserRoles {
+public class Role {
 
     @Id
     @GeneratedValue
     private long id;
     private String name;
 
-    public UserRoles() {
+    public Role() {
 
     }
 

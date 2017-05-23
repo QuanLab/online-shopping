@@ -1,18 +1,17 @@
 package com.quanpv.dto;
 
-import com.quanpv.domain.UserRoles;
-
+import com.quanpv.domain.Role;
 import java.util.Set;
 
 public class UserDTO {
 
     private String username;
-    private Set<UserRoles> userRoles;
+    private Set<Role> roles;
 
 
-    public UserDTO(String username, Set<UserRoles> userRoles) {
+    public UserDTO(String username, Set<Role> roles) {
         this.username = username;
-        this.userRoles = userRoles;
+        this.roles = roles;
     }
 
     public UserDTO() {
@@ -26,11 +25,11 @@ public class UserDTO {
         this.username = username;
     }
 
-    public Set<UserRoles> getUserRoles() {
-        return userRoles;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setUserRoles(Set<UserRoles> userRoles) {
-        this.userRoles = userRoles;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
