@@ -14,54 +14,37 @@ public class Application implements CommandLineRunner {
 		SpringApplication.run(Application.class, args);
 	}
 
-    @Autowired
+	@Autowired
 	private ProductService productService;
 
 	@Autowired
-    private CategoryService categoryService;
+	private CategoryService categoryService;
 
-	@Autowired
-    private CustomerService customerService;
+	@Override
+	public void run(String... strings) throws Exception {
 
-	@Autowired
-    private CardService cardService;
+		Category category = new Category("Thời trang nam", "Thoi trang danh cho nam");
+		Category category2 = new Category("Thời trang nữ", "Thoi trang danh cho nu");
 
-	@Autowired
-    private ItemService itemService;
+		Product product = new Product("Áo phông nam", "Sản phẩm mới về", "product.jpg", 120000, 12 );
+		Product product2 = new Product("Váy ngắn", "Sản phẩm mới về", "product2.jpg", 110000, 25);
+		Product product3 = new Product("Quần Jean nam", "Sản phẩm mới về", "product3.jpg", 150000, 25);
+		Product product4 = new Product("Quần âu nam", "Sản phẩm mới về", "product4.jpg", 110000, 35);
+		Product product5 = new Product("Áo sơ mi", "Sản phẩm nhập khẩu về", "product5.jpg", 210000, 25);
 
-    @Override
-    public void run(String... strings) throws Exception {
+		product.setCategory(category);
+		product2.setCategory(category2);
+		product3.setCategory(category);
+		product4.setCategory(category);
+		product5.setCategory(category2);
 
-        Category category = new Category("Thoi trang nam", "Thoi trang danh cho nam");
-        Category category2 = new Category("Thoi trang nu", "Thoi trang danh cho nu");
+		categoryService.save(category);
+		categoryService.save(category2);
 
-
-        Product product = new Product("Ao nam", "Sản phẩm mới về", "image.png", 120000, 12 );
-        Product product2 = new Product("Ao nu", "Sản phẩm mới về", "image.png", 110000, 25);
-
-        Customer customer = new Customer("Quan Pham", "admin@gmail.com", "Hai Duong", "01202125201");
-        Customer customer2 = new Customer("Hoa Nguyen", "author@gmail.com", "Ha Noi", "1252152441");
-
-        Card card = new Card(customer, "NEW");
-
-        product.setCategory(category);
-        product2.setCategory(category2);
-
-        Item item = new Item(card, product, 2);
-        Item item2 = new Item(card, product2, 3);
-
-        categoryService.save(category);
-        categoryService.save(category2);
-
-        productService.save(product);
-        productService.save(product2);
-
-        customerService.save(customer);
-        customerService.save(customer2);
-
-        cardService.save(card);
-        itemService.save(item);
-        itemService.save(item2);
-
+		productService.save(product);
+		productService.save(product2);
+		productService.save(product3);
+		productService.save(product4);
+		productService.save(product5);
 	}
 }

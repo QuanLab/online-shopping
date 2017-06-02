@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="css/login.css" type="text/css" media="screen" />
+</head>
+<body>
+<div th:if="${param.error}">
+    <h1 style="color:red">Tên đăng nhập hoặc mật khẩu không đúng</h1>
+</div>
+<div th:if="${param.logout}">
+    <h1 style="color:blue; text-align: center">Đã đăng xuất thành công</h1>
+</div>
+<div class="modal-dialog">
+    <div class="loginmodal-container">
+        <h1>Đăng nhập</h1><br></br>
+        <form th:action="@{/login}" method="post">
+            <input type="text" name="username" placeholder="Tài khoản"/>
+            <input type="password" name="password" placeholder="Mật khẩu"/>
+            <input type="submit" value="Đăng nhập" class="login loginmodal-submit"/>
+        </form>
+
+        <div class="login-help">
+            <a href="register">Đăng ký</a> - <a href="">Quên mật khẩu</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

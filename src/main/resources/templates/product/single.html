@@ -1,0 +1,62 @@
+<div class="products-grid" th:fragment="single">
+    <main class="main-content grid__item medium-up--four-fifths" id="MainContent" role="main">
+        <hr class="hr--border-top small--hide">
+        <div id="shopify-section-product-template" class="shopify-section">
+
+            <div itemscope itemtype="http://schema.org/Product" id="ProductSection">
+                <div class="grid product-single">
+                    <div class="grid__item medium-up--one-half">
+                        <div class="product-single__featured-image-wrapper">
+                            <div class="product-single__photos" id="ProductPhoto">
+                                <img th:src="@{/images/products/{id}(id=${product.imageUrl})}" id="ProductPhotoImg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid__item medium-up--one-half">
+                        <div class="product-single__meta small--text-center">
+                            <h1 class="product-single__title" itemprop="name" th:text="${product.name}"></h1>
+                            <p class="product-single__prices">
+                                <span id="ProductPrice" class="product-single__price" th:text="${product.price}"></span>
+                            </p>
+                            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                <form action="" method="post" enctype="multipart/form-data" class="product-form">
+                                    <select name="id" id="productSelect" class="product-single__variants">
+                                        <option  selected="selected"  data-sku="60011" value="27816690824">Default Title - $120.00 CAD</option>
+                                    </select>
+                                    <div class="product-single__cart-submit-wrapper">
+                                        <button type="submit" name="add" id="AddToCart" class="btn product-single__cart-submit btn--secondary">
+                                            <span id="AddToCartText">Thêm vào giỏ hàng</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-single__description rte" itemprop="description">
+                    <p th:text="${product.description}"></p>
+                </div>
+                <section class="related-products">
+                    <hr>
+                    <h2 class="section-header__title h3">Sản phẩm tương tự</h2>
+                    <div class="grid grid--uniform">
+
+                        <div th:each="product : ${products}" class="product grid__item medium-up--one-third small--one-half slide-up-animation animated" role="listitem">
+                            <a th:href="@{/products/{id}(id=${product.id})}" class="product__image" title="Ball Handle Flat Pestle &amp; Mortar - Large">
+                                <img th:src="@{/images/products/{id}(id=${product.imageUrl})}" alt="Ball Handle Flat Pestle &amp; Mortar - Large">
+                            </a>
+                            <div class="product__title text-center">
+                                <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}"></a>
+                            </div>
+                            <div class="product__prices text-center">
+                                 <span class="product__price" th:text="${product.price}">
+                                 </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>

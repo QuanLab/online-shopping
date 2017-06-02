@@ -1,0 +1,56 @@
+<div class="header" th:fragment="header" xmlns="http://www.w3.org/1999/html">
+    <div id="shopify-section-header" class="shopify-section">
+        <style>
+            .site-header__logo {
+                width: 200px;
+            }
+        </style>
+        <div class="top-bar grid">
+            <div class="grid__item medium-up--one-fifth small--one-half">
+                <div class="top-bar__search">
+                    <a href="/search" class="medium-up--hide">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 20 20">
+                            <path fill="#444" d="M18.64 17.02l-5.31-5.31c.81-1.08 1.26-2.43 1.26-3.87C14.5 4.06 11.44 1 7.75 1S1 4.06 1 7.75s3.06 6.75 6.75 6.75c1.44 0 2.79-.45 3.87-1.26l5.31 5.31c.45.45 1.26.54 1.71.09.45-.36.45-1.17 0-1.62zM3.25 7.75c0-2.52 1.98-4.5 4.5-4.5s4.5 1.98 4.5 4.5-1.98 4.5-4.5 4.5-4.5-1.98-4.5-4.5z"/>
+                        </svg>
+                    </a>
+                    <form action="/products" method="get" class="search-bar small--hide" role="search">
+                        <button type="submit" class="search-bar__submit">
+                            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 20 20">
+                                <path fill="#444" d="M18.64 17.02l-5.31-5.31c.81-1.08 1.26-2.43 1.26-3.87C14.5 4.06 11.44 1 7.75 1S1 4.06 1 7.75s3.06 6.75 6.75 6.75c1.44 0 2.79-.45 3.87-1.26l5.31 5.31c.45.45 1.26.54 1.71.09.45-.36.45-1.17 0-1.62zM3.25 7.75c0-2.52 1.98-4.5 4.5-4.5s4.5 1.98 4.5 4.5-1.98 4.5-4.5 4.5-4.5-1.98-4.5-4.5z"/>
+                            </svg>
+                            <span class="icon__fallback-text">Search</span>
+                        </button>
+                        <input type="search" name="q" class="search-bar__input" value="" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+            </div>
+            <div class="grid__item  medium-up--four-fifths  small--one-half text-right">
+                <a href="/cart" class="site-header__cart">
+                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart" viewBox="0 0 20 20">
+                        <path fill="#444" d="M18.936 5.564c-.144-.175-.35-.207-.55-.207h-.003L6.774 4.286c-.272 0-.417.089-.491.18-.079.096-.16.263-.094.585l2.016 5.705c.163.407.642.673 1.068.673h8.401c.433 0 .854-.285.941-.725l.484-4.571c.045-.221-.015-.388-.163-.567z"/>
+                        <path fill="#444" d="M17.107 12.5H7.659L4.98 4.117l-.362-1.059c-.138-.401-.292-.559-.695-.559H.924c-.411 0-.748.303-.748.714s.337.714.748.714h2.413l3.002 9.48c.126.38.295.52.942.52h9.825c.411 0 .748-.303.748-.714s-.336-.714-.748-.714zM10.424 16.23a1.498 1.498 0 1 1-2.997 0 1.498 1.498 0 0 1 2.997 0zM16.853 16.23a1.498 1.498 0 1 1-2.997 0 1.498 1.498 0 0 1 2.997 0z"/>
+                    </svg>
+                    <span class="small--hide">
+                     Cart
+                     (<span id="CartCount" th:text="${cart.items.size()}"></span>)
+                     </span>
+                </a>
+                <span class="vertical-divider small--hide"></span>
+                <a href="/checkout" class="site-header__cart small--hide">
+                    Check Out
+                </a>
+            </div>
+        </div>
+        <hr class="small--hide hr--border">
+        <header class="site-header grid medium-up--grid--table" role="banner">
+            <div class="grid__item small--text-center">
+                <div itemscope itemtype="http://schema.org/Organization">
+                    <a href="/" itemprop="url">
+                        <img class="site-header__logo"
+                             src="../static/images/web/logo.png" th:src="@{/images/web/logo.png}">
+                    </a>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>

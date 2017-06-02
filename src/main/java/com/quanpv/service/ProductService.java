@@ -23,6 +23,14 @@ public class ProductService {
         return repository.findByCategory_Id(id);
     }
 
+    public Iterable<Product> getByNameContaining(String name){
+        return repository.findByNameContaining(name);
+    }
+
+    public Iterable<Product> getTop3ByCategory_Id(int id){
+        return repository.findTop3ByCategory_Id(id);
+    }
+
     public void save(Product product){
         repository.save(product);
     }

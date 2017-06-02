@@ -1,0 +1,85 @@
+<div class="other-products" th:fragment="orders">
+   <div class="wrapper" id="wrapper">
+      <div id="body" class="clearfix" data-tg-refresh="body">
+         <main class="has-bottom-messages" id="content" role="main">
+            <div id="products-index" data-tg-refresh="products-index" class="page products-page has-contextual-help">
+               <div class="ui-layout ui-layout--full-width">
+                  <div class="ui-layout__sections">
+                     <div class="ui-layout__section">
+                        <div class="ui-layout__item">
+                           <section class="ui-card">
+                              <div class="has-bulk-actions">
+                                 <div>
+                                    <div class="next-card__section next-card__section--no-bottom-spacing">
+                                       <div class="obj-filter hide-when-printing table-filter-container  show-saved-search-actions">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div id="products-results" data-tg-refresh="products">
+                                    <div class="ui-card__section">
+                                       <div class="ui-type-container">
+                                          <div class="table-wrapper">
+                                             <table id="all-products" class="table-hover expanded">
+                                                <thead>
+                                                <tr>
+                                                   <th class="title">
+                                                      <span>ID</span>
+                                                   </th>
+                                                   <th class="date-time">
+                                                      <span>Date</span>
+                                                   </th>
+                                                   <th class="price">
+                                                      <span>Customer</span>
+                                                   </th>
+                                                   <th class="quantity">
+                                                      <span>Address</span>
+                                                   </th>
+                                                   <th class="phone">
+                                                      <span>Phone Number</span>
+                                                   </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody data-context="bulkOperations">
+
+                                                <tr th:each="order : ${orders}">
+                                                   <td class="name">
+                                                      <div class="ui-stack ui-stack--wrap">
+                                                         <div class="ui-stack-item">
+                                                            <a th:href="@{/dashboard/orders/{id}(id=${order.id})}"
+                                                               data-nested-link-target="true" th:text="${order.id}">
+                                                            </a>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                   <td class="category">
+                                                      <div class="type--subdued inline-block tooltip tooltip-bottom tooltip-left-align"
+                                                           th:text="${order.dateCreated}">
+                                                      </div>
+                                                   </td>
+                                                   <td class="price">
+                                                      <p th:text="${order.getCustomer().getName()}"></p>
+                                                   </td>
+                                                   <td class="quantity">
+                                                      <p th:text="${order.getCustomer().getAddress()}"></p>
+                                                   </td>
+                                                   <td class="phone">
+                                                      <p th:text="${order.getCustomer().getPhoneNumber()}"></p>
+                                                   </td>
+                                                </tr>
+                                                </tbody>
+                                             </table>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </section>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </main>
+      </div>
+   </div>
+</div>

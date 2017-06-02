@@ -1,0 +1,79 @@
+<div class="other-products" th:fragment="productNew">
+   <div class="wrapper" id="wrapper">
+      <div id="body" class="clearfix" data-tg-refresh="body">
+         <main class="has-bottom-messages" id="content" role="main">
+            <div id="products-show" class="page">
+               <form data-context="form" class="edit_product" action="" accept-charset="UTF-8" method="post" enctype="multipart/form-data">
+                  <div class="section">
+                     <div class="next-layout--fixed-width next-layout--fixed-width--large">
+                        <div class="ui-layout">
+                           <div class="ui-layout__sections">
+                              <div class="ui-layout__section ui-layout__section--primary">
+                                 <div class="ui-layout__item">
+                                    <section class="ui-card">
+                                       <div class="ui-card__section">
+                                          <div class="ui-type-container">
+                                             <div class="next-input-wrapper">
+                                                <label class="next-label">Title</label>
+                                                <input class="next-input" size="30" type="text" name="name" />
+                                             </div>
+                                             <div class="next-input-wrapper">
+                                                <label class="next-label">Description</label>
+                                                <div>
+                                                   <div class="next-input-wrapper">
+                                                      <textarea class="ui-text-area s-none rte-plainview" id="product-description"
+                                                                name="description">
+                                                   </textarea>
+                                                   </div>
+
+                                                </div>
+                                             </div>
+                                             <div class="next-input-wrapper">
+                                                <label class="next-label">Category</label>
+                                                <select th:field="${product.category.id}">
+                                                      <option th:each="category : ${categories}"
+                                                              th:value="${{category.id}}" th:text="${category.name}" name= "category">
+                                                      </option>
+                                                </select>
+                                             </div>
+                                             <div class="next-input-wrapper">
+                                                <label class="next-label">Price</label>
+                                                <input class="next-input" size="30" type="number" name="price" />
+                                             </div>
+                                             <div class="next-input-wrapper">
+                                                <label class="next-label">Quantity</label>
+                                                <input class="next-input" size="30" type="text" name="quantity" />
+                                             </div>
+                                             <div class="next-input-wrapper">
+                                                <label class="next-label">Image</label>
+                                                <input type="file" name="file" />
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </section>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="ui-layout">
+                        <div class="ui-layout__sections">
+                           <div class="ui-layout__section">
+                              <div class="ui-layout__item">
+                                 <div class="ui-stack ui-stack--wrap ui-stack--distribution-equal-spacing">
+                                    <div class="ui-stack-item">
+                                       <button class="btn btn-primary js-btn-loadable js-btn-primary"
+                                               type="submit" name="save" value="Save">Save</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </main>
+      </div>
+   </div>
+</div>

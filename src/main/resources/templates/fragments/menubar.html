@@ -1,0 +1,28 @@
+<div class="banner-top"  th:fragment="menubar">
+     <div id="shopify-section-sidebar" class="shopify-section">
+         <div data-section-id="sidebar" data-section-type="sidebar-section">
+            <nav class="grid__item small--text-center medium-up--one-fifth" role="navigation">
+               <hr class="hr--small medium-up--hide">
+               <button id="ToggleMobileMenu" class="mobile-menu-icon medium-up--hide" aria-haspopup="true" aria-owns="SiteNav">
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="line"></span>
+                  <span class="icon__fallback-text">Menu</span>
+               </button>
+               <div id="SiteNav" class="site-nav" role="menu">
+                  <ul class="list--nav">
+                     <li class="site-nav__element site-nav--active">
+                        <a href="/" class="site-nav__link">Trang chủ</a>
+                     </li>
+                     <li th:each="category : ${categories}" class="site-nav__element ">
+                        <a class="site-nav__link" th:href="@{/products/categories/{id}(id=${category.id})}"
+                           th:text="${category.name}" ></a>
+                     </li>
+                  </ul>
+               </div>
+               <hr class="medium-up--hide hr--small hr--border-bottom">
+            </nav>
+         </div>
+      </div>
+</div>

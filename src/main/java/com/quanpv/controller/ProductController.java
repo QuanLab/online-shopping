@@ -1,94 +1,117 @@
 package com.quanpv.controller;
 
+import com.quanpv.domain.Cart;
+import com.quanpv.domain.Item;
 import com.quanpv.domain.Product;
-import com.quanpv.service.ProductService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.quanpv.service.*;
+import com.quanpv.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
 
-@CrossOrigin
-@RestController
-@RequestMapping("/api/products")
+import java.util.Date;
+
+@Controller
+@RequestMapping("/products")
 public class ProductController {
 
-    final static Logger logger = LoggerFactory.getLogger(ProductController.class);
-
     @Autowired
-    private ProductService service;
+    private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private ItemService itemService;
+    @Autowired
+    private CartDTOService cartDTOService;
 
-    @CrossOrigin
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        service.save(product);
-        logger.debug("Added:: " + product);
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
-    }
-
-
-    @CrossOrigin
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateProduct(@RequestBody Product product) {
-        Product existingProduct = service.getById(product.getId());
-        if (existingProduct == null) {
-            logger.debug("Employee with id " + product.getId() + " does not exists");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            service.save(product);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Product> getProduct(@PathVariable("id") int id) {
-        Product employee = service.getById(id);
-        if (employee == null) {
-            logger.debug("Product with id " + id + " does not exists");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        logger.debug("Found Product:: " + employee);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
-    }
-
-
-    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Product>> getAllProducts() {
-        Iterable<Product> products = service.getAll();
-        if (!products.iterator().hasNext()) {
-            logger.debug("Products does not exists");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(products, HttpStatus.OK);
-    }
+    public String getAllProducts(@RequestParam(value = "q", defaultValue = "") String query, Model model){
 
-    @CrossOrigin
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteEmployee(@PathVariable("id") int id) {
-        Product product = service.getById(id);
-        if (product == null) {
-            logger.debug("Product with id " + id + " does not exists");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
+
+        Iterable<Product> products;
+        if(query.equals("")) {
+            products= productService.getAll();
         } else {
-            service.delete(id);
-            logger.debug("Product with id " + id + " deleted");
-            return new ResponseEntity<>(HttpStatus.GONE);
+            products = productService.getByNameContaining(query);
         }
+
+        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute("products", products);
+        return "products";
     }
 
-    @CrossOrigin
-    @RequestMapping(value = "category/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Product>> getProductByCategory(@PathVariable("id") int id) {
-        Iterable<Product> products = service.getByCategoryId(id);
-        if (!products.iterator().hasNext()) {
-            logger.debug("Products does not exists");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(products, HttpStatus.OK);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String getProduct(@PathVariable("id") int id,  Model model){
+
+        Product product = productService.getById(id);
+
+        Iterable<Product> relatedProduct = productService.getTop3ByCategory_Id(
+                product.getCategory().getId());
+
+        model.addAttribute("product", productService.getById(id));
+        model.addAttribute("products", relatedProduct);
+        model.addAttribute("categories", categoryService.getAll());
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
+
+        return "singleProduct";
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public String addToCart(@PathVariable("id") int id, Model model){
+
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Cart existingCart = cartService.getByIdCustom(sessionID);
+
+        if(existingCart ==null) {
+            System.out.println("NO EXISTING CART");
+            Cart cart = new Cart(sessionID, new Date(), Constant.STATUS_NEW);
+            cartService.save(cart);
+
+            Item item = new Item(cart, productService.getById(id), 1);
+            itemService.save(item);
+
+        } else {
+
+            Item item = itemService.getByCardIdAndStatusAndProductId(
+                    sessionID, Constant.STATUS_NEW, id);
+
+            if(item!=null) {
+                item.setQuantity(item.getQuantity() + 1);
+                itemService.save(item);
+
+            } else {
+                itemService.save(new Item(existingCart, productService.getById(id), 1));
+            }
+        }
+
+        model.addAttribute("product", productService.getById(id));
+        model.addAttribute("products", productService.getTop3ByCategory_Id(id));
+        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
+
+        return "singleProduct";
+    }
+
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
+    public String getProductByCategory(@PathVariable("id") int id, Model model){
+
+        Iterable<Product> products = productService.getByCategoryId(id);
+        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute("products", products);
+
+        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
+        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
+        return "products";
+    }
+
 }

@@ -1,0 +1,49 @@
+<div class="products-grid" th:fragment="categories">
+    <main class="main-content grid__item medium-up--four-fifths" id="MainContent" role="main">
+        <hr class="hr--border-top small--hide">
+        <!-- /templates/collection.liquid -->
+        <div id="shopify-section-collection-template" class="shopify-section">
+            <div data-section-id="collection-template" data-section-type="collection-template" data-sort-enabled="true" data-tags-enabled="false">
+                <header class="grid">
+                    <h1 class="grid__item small--text-center medium-up--one-third">Products</h1>
+                    <div class="collection-sorting grid__item medium-up--two-thirds medium-up--text-right small--text-center">
+                        <div class="collection-sorting__dropdown">
+                            <label for="SortBy" class="label--hidden">Sắp xếp</label>
+                            <select name="SortBy" id="SortBy" data-value="title-ascending">
+e                               <option value="best-selling">Bán chạy nhất</option>
+                                <option value="title-ascending">Sắp xếp A-Z</option>
+                                <option value="title-descending">Sắp xếp Z-A</option>
+                                <option value="price-ascending">Giá thấp tới cao</option>
+                                <option value="price-descending">Giá cao tới thấp</option>
+                                <option value="created-descending">Mới nhất</option>
+                            </select>
+                        </div>
+                    </div>
+                </header>
+                <div class="grid grid--uniform" role="list">
+
+                    <div th:each="product : ${products}" class="product grid__item medium-up--one-third small--one-half
+                    slide-up-animation animated" role="listitem">
+                        <a th:href="@{/products/{id}(id=${product.id})}" class="product__image">
+                            <img th:src="@{/images/products/{id}(id=${product.imageUrl})}">
+                        </a>
+                        <div class="product__title text-center">
+                            <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}"></a>
+                        </div>
+                        <div class="product__prices text-center">
+                                 <span class="product__price" th:text="${product.price}"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="pagination text-center">
+                    <span class="page current">1</span>
+                    <span class="page"><a href="/products?page=2" title="">2</a></span>
+                    <span class="page"><a href="/products?page=3" title="">3</a></span>
+                    <span class="page"><a href="/products?page=4" title="">4</a>
+                    </span> <span class="next"><a href="/products?page=2" title="">Next &raquo;</a></span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
