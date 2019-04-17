@@ -1,11 +1,129 @@
-<div th:fragment="footer" class="footer">
-    <div id="shopify-section-footer" class="shopify-section">
-        <footer class="site-footer" role="contentinfo">
-            <div class="grid medium-up--grid--table sub-footer small--text-center">
-                <div class="grid__item medium-up--one-half">
-                    <small>Copyright &copy 2017, <a href="/" title="">LiteShop</a>. <a target="_blank" rel="nofollow" href="https://www.LiteShop.com">Shopping Cart by LiteShop</a></small>
+<footer th:fragment="footer">
+    <div class="infor-footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 item-footer">
+                    <h4 class="name"><span>Liên hệ </span></h4>
+                    <ul class="list-unstyled list-block">
+                        <li class="clearfix">
+                            <div class="icon">
+                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="contact">
+                                <span>266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, Hà Nội</span>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="icon">
+                                <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="contact">
+                                <a class="hotline" href="tel:18006750">1800 6750 </a><span>Thứ 2 - Chủ Nhật: 9:00 - 18:00</span>
+                            </div>
+                        </li>
+                        <li class="clearfix action">
+                            <div class="icon">
+                                <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="contact">
+                                <a class="email" href="mailto:support@sapo.vn">support@sapo.vn</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 item-footer footer-click">
+                    <h4 class="cliked">Hỗ trợ khách hàng</h4>
+                    <ul class="detail_content toggle-mn" style="display:none;">
+
+                        <li><a class="ef" href="/">Trang chủ</a></li>
+
+                        <li><a class="ef" href="/collections/all">Sản phẩm</a></li>
+
+                        <li><a class="ef" href="/gioi-thieu">Giới thiệu</a></li>
+
+                        <li><a class="ef" href="/tin-tuc">Blog</a></li>
+
+                        <li><a class="ef" href="/lien-he">Liên hệ</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 item-footer footer-click">
+                    <h4 class="cliked">Chính sách mua hàng</h4>
+                    <ul class="detail_content toggle-mn" style="display:none;">
+
+                        <li><a class="ef" href="/">Trang chủ</a></li>
+
+                        <li><a class="ef" href="/collections/all">Sản phẩm</a></li>
+
+                        <li><a class="ef" href="/gioi-thieu">Giới thiệu</a></li>
+
+                        <li><a class="ef" href="/tin-tuc">Blog</a></li>
+
+                        <li><a class="ef" href="/lien-he">Liên hệ</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 item-footer">
+                    <h4>Đăng ký nhận tin</h4>
+                    <div class="content">
+                        <div class="text_content">
+                            Đăng ký nhận thông tin khuyến mãi và món ăn mới
+                        </div>
+                        <div class="sign-in">
+
+                            <form action="//sapo.us19.list-manage.com/subscribe/post?u=2887dcda77021868cccd236ea&id=7ace19f37b"
+                                  method="POST" role="form">
+                                <input class="form-email" type="email" id="mail" placeholder="Email của bạn">
+                                <button class="btn btn-primary subscribe"><span>Đăng ký</span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </footer>
+        </div>
     </div>
-</div>
+    <div class="bottom-footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="hidden-xs col-sm-12 col-md-7 col-lg-7 menu col-lg-push-5 col-md-push-5">
+                    <div class="wrap-ul">
+                        <ul class="list-unstyled extra-menu">
+
+                            <li><a class="ef" href="/">Trang chủ</a></li>
+
+                            <li><a class="ef" href="/collections/all">Sản phẩm</a></li>
+
+                            <li><a class="ef" href="/gioi-thieu">Giới thiệu</a></li>
+
+                            <li><a class="ef" href="/tin-tuc">Blog</a></li>
+
+                            <li><a class="ef" href="/lien-he">Liên hệ</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 copyright col-lg-pull-7 col-md-pull-7">
+                    <div class="text_copyright">
+                            <span class="mobile">© Bản quyền thuộc về <a class="team"
+                                                                         href="/"> Awesome Team</a>. </span><span
+                            class="mobiles">Cung cấp bởi </span>
+                        <a class="system" rel="nofollow"
+                           href="https://www.sapo.vn/?utm_campaign=cpn%3Asite_khach_hang-plm%3Afooter&utm_source=site_khach_hang&utm_medium=referral&utm_content=fm%3Atext_link-km%3A-sz%3A&utm_term=&campaign=site_khach_hang"
+                           title="Sapo" target="_blank">Sapo</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="back-to-top" class="backtop back-to-top" title="Lên đầu trang"><i
+            class="fa fa-arrow-up"></i></a>
+
+</footer>

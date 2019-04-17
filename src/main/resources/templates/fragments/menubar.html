@@ -1,28 +1,80 @@
-<div class="banner-top"  th:fragment="menubar">
-     <div id="shopify-section-sidebar" class="shopify-section">
-         <div data-section-id="sidebar" data-section-type="sidebar-section">
-            <nav class="grid__item small--text-center medium-up--one-fifth" role="navigation">
-               <hr class="hr--small medium-up--hide">
-               <button id="ToggleMobileMenu" class="mobile-menu-icon medium-up--hide" aria-haspopup="true" aria-owns="SiteNav">
-                  <span class="line"></span>
-                  <span class="line"></span>
-                  <span class="line"></span>
-                  <span class="line"></span>
-                  <span class="icon__fallback-text">Menu</span>
-               </button>
-               <div id="SiteNav" class="site-nav" role="menu">
-                  <ul class="list--nav">
-                     <li class="site-nav__element site-nav--active">
-                        <a href="/" class="site-nav__link">Trang chủ</a>
-                     </li>
-                     <li th:each="category : ${categories}" class="site-nav__element ">
-                        <a class="site-nav__link" th:href="@{/products/categories/{id}(id=${category.id})}"
-                           th:text="${category.name}" ></a>
-                     </li>
-                  </ul>
-               </div>
-               <hr class="medium-up--hide hr--small hr--border-bottom">
-            </nav>
-         </div>
-      </div>
+<div class="menu_mobile max_991 hidden-md hidden-lg" th:fragment="menubar">
+    <div class="acction">
+
+        <div class="log">
+            <img src="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/user.png?1553482554643"
+                 alt="Tạo tài khoản hoặc đăng nhập">
+            <div class="linkacc">
+
+                <a href="/account/login">Đăng nhập</a>
+                <a href="/account/register">Đăng ký</a>
+
+            </div>
+        </div>
+        <div class="search">
+            <div class="header_search search_form">
+                <form class="input-group search-bar search_form" action="/search" method="get" role="search">
+                    <input type="search" name="query" value="" placeholder="Tìm sản phẩm"
+                           class="input-group-field st-default-search-input search-text" autocomplete="off">
+                    <span class="input-group-btn">
+						<button class="btn icon-fallback-text">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <ul class="ul_collections">
+        <li class="special">
+            <a href="/collections/all">Menu</a>
+        </li>
+
+        <li class="level0 level-top parent">
+            <a href="/">Trang chủ</a>
+        </li>
+
+        <li class="level0 level-top parent">
+            <a href="/collections/all">Sản phẩm</a>
+
+            <i class="fa fa-angle-down"></i>
+            <ul class="level0 " style="display:none;">
+
+                <li class="level1 ">
+                    <a href="/san-pham-noi-bat"><span>Món ăn nổi bật</span> </a>
+                </li>
+
+                <li class="level1 ">
+                    <a href="/mon-an-ua-chuong"> <span>Món ăn ưa chuộng</span> </a><i class="fa fa-angle-down"></i>
+                    <ul class="level1" style="display:none;">
+                        <li class="level2 ">
+                            <a href="/tra"><span>Trà</span></a>
+                        </li>
+                        <li class="level2 ">
+                            <a href="/banh"><span>Bánh</span></a>
+                        </li>
+                        <li class="level2 ">
+                            <a href="/kem-tuoi"><span>Kem tươi</span></a>
+                        </li>
+                        <li class="level2 ">
+                            <a href="/ca-phe"><span>Cà phê</span></a>
+                        </li>
+                        <li class="level2 ">
+                            <a href="/nuoc-ep"><span>Nước ép</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="level1 ">
+                    <a href="/mon-an-moi"> <span>Món ăn mới</span> </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="level0 level-top parent"><a href="/gioi-thieu">Giới thiệu</a></li>
+        <li class="level0 level-top parent"><a href="/tin-tuc">Blog</a></li>
+        <li class="level0 level-top parent"><a href="/lien-he">Liên hệ</a></li>
+    </ul>
+
 </div>

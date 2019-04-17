@@ -1,56 +1,202 @@
-<div class="header" th:fragment="header" xmlns="http://www.w3.org/1999/html">
-    <div id="shopify-section-header" class="shopify-section">
-        <style>
-            .site-header__logo {
-                width: 200px;
-            }
-        </style>
-        <div class="top-bar grid">
-            <div class="grid__item medium-up--one-fifth small--one-half">
-                <div class="top-bar__search">
-                    <a href="/search" class="medium-up--hide">
-                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 20 20">
-                            <path fill="#444" d="M18.64 17.02l-5.31-5.31c.81-1.08 1.26-2.43 1.26-3.87C14.5 4.06 11.44 1 7.75 1S1 4.06 1 7.75s3.06 6.75 6.75 6.75c1.44 0 2.79-.45 3.87-1.26l5.31 5.31c.45.45 1.26.54 1.71.09.45-.36.45-1.17 0-1.62zM3.25 7.75c0-2.52 1.98-4.5 4.5-4.5s4.5 1.98 4.5 4.5-1.98 4.5-4.5 4.5-4.5-1.98-4.5-4.5z"/>
-                        </svg>
-                    </a>
-                    <form action="/products" method="get" class="search-bar small--hide" role="search">
-                        <button type="submit" class="search-bar__submit">
-                            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 20 20">
-                                <path fill="#444" d="M18.64 17.02l-5.31-5.31c.81-1.08 1.26-2.43 1.26-3.87C14.5 4.06 11.44 1 7.75 1S1 4.06 1 7.75s3.06 6.75 6.75 6.75c1.44 0 2.79-.45 3.87-1.26l5.31 5.31c.45.45 1.26.54 1.71.09.45-.36.45-1.17 0-1.62zM3.25 7.75c0-2.52 1.98-4.5 4.5-4.5s4.5 1.98 4.5 4.5-1.98 4.5-4.5 4.5-4.5-1.98-4.5-4.5z"/>
-                            </svg>
-                            <span class="icon__fallback-text">Search</span>
-                        </button>
-                        <input type="search" name="q" class="search-bar__input" value="" placeholder="Search" aria-label="Search">
-                    </form>
+<header class="header" th:fragment="header" lang="en">
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-7 a-left">
+                    <div class="top_left">
+                        <span>Hotline: <a href="tel:18006750">1800 6750</a></span>
+                    </div>
                 </div>
-            </div>
-            <div class="grid__item  medium-up--four-fifths  small--one-half text-right">
-                <a href="/cart" class="site-header__cart">
-                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart" viewBox="0 0 20 20">
-                        <path fill="#444" d="M18.936 5.564c-.144-.175-.35-.207-.55-.207h-.003L6.774 4.286c-.272 0-.417.089-.491.18-.079.096-.16.263-.094.585l2.016 5.705c.163.407.642.673 1.068.673h8.401c.433 0 .854-.285.941-.725l.484-4.571c.045-.221-.015-.388-.163-.567z"/>
-                        <path fill="#444" d="M17.107 12.5H7.659L4.98 4.117l-.362-1.059c-.138-.401-.292-.559-.695-.559H.924c-.411 0-.748.303-.748.714s.337.714.748.714h2.413l3.002 9.48c.126.38.295.52.942.52h9.825c.411 0 .748-.303.748-.714s-.336-.714-.748-.714zM10.424 16.23a1.498 1.498 0 1 1-2.997 0 1.498 1.498 0 0 1 2.997 0zM16.853 16.23a1.498 1.498 0 1 1-2.997 0 1.498 1.498 0 0 1 2.997 0z"/>
-                    </svg>
-                    <span class="small--hide">
-                     Cart
-                     (<span id="CartCount" th:text="${cart.items.size()}"></span>)
-                     </span>
-                </a>
-                <span class="vertical-divider small--hide"></span>
-                <a href="/checkout" class="site-header__cart small--hide">
-                    Check Out
-                </a>
+                <div class="hidden-xs hidden-sm col-md-3 col-lg-3">
+                    <div class="header-search">
+                        <form class="search_form" action="/search" method="get" role="search">
+                            <input type="text" class="form-control" name="query" value="" autocomplete="off"
+                                   placeholder="Tìm sản phẩm">
+                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="hidden-xs col-sm-6 col-md-2 col-lg-2 f-right">
+                    <ul class="list-unstyled top_right">
+
+                        <li><a href="/account/login">Đăng nhập</a></li>
+                        <li><a>&</a></li>
+                        <li><a href="/account/register">Đăng ký</a></li>
+
+                    </ul>
+                </div>
             </div>
         </div>
-        <hr class="small--hide hr--border">
-        <header class="site-header grid medium-up--grid--table" role="banner">
-            <div class="grid__item small--text-center">
-                <div itemscope itemtype="http://schema.org/Organization">
-                    <a href="/" itemprop="url">
-                        <img class="site-header__logo"
-                             src="../static/images/web/logo.png" th:src="@{/images/web/logo.png}">
+    </div>
+    <div class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="menu-bar button-menu hidden-md hidden-lg col-xs-1 col-sm-1">
+                    <a href="javascript:;">
+                        <i class="fa fa-align-justify"></i>
                     </a>
                 </div>
+                <div class="menu">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 logos">
+                        <div class="logo_image">
+
+                            <a href="/" class="logo-wrapper ">
+                                <img src="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/logo.jpg?1553482554643"
+                                     alt="logo Delicious" title="logo Delicious">
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="hidden-xs hidden-sm colmenu">
+                        <div class="main-menu">
+                            <ul class="list-unstyled main_menu">
+
+
+                                <li class=" nav-item nav-items active ">
+                                    <a class="nav-link" href="/">
+
+                                        <i class="fa fa-home"></i>
+
+                                        Trang chủ
+
+                                    </a>
+                                </li>
+
+
+                                <li class="menu_hover nav-item nav-items ">
+                                    <a href="/collections/all" class="nav-link">
+
+                                        <i class="fa fa-birthday-cake"></i>
+
+                                        Sản phẩm
+                                    </a>
+                                    <ul class="list-unstyled menu_child_1">
+
+
+                                        <li><a href="/san-pham-noi-bat">Món ăn nổi bật</a></li>
+
+
+                                        <li>
+                                            <a href="/mon-an-ua-chuong">Món ăn ưa chuộng</a>
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                            <ul class="list-unstyled menu_child_2">
+
+                                                <li>
+                                                    <a href="/tra">Trà</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/banh">Bánh</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/kem-tuoi">Kem tươi</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/ca-phe">Cà phê</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/nuoc-ep">Nước ép</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+
+                                        <li><a href="/mon-an-moi">Món ăn mới</a></li>
+
+
+                                    </ul>
+                                </li>
+
+
+                                <li class=" nav-item nav-items ">
+                                    <a class="nav-link" href="/gioi-thieu">
+
+                                        <i class="fa fa-info-circle"></i>
+
+                                        Giới thiệu
+
+                                    </a>
+                                </li>
+
+
+                                <li class=" nav-item nav-items ">
+                                    <a class="nav-link" href="/tin-tuc">
+
+                                        <i class="fa fa-pencil-square-o"></i>
+
+                                        Blog
+
+                                    </a>
+                                </li>
+
+
+                                <li class=" nav-item nav-items ">
+                                    <a class="nav-link" href="/lien-he">
+
+                                        <i class="fa fa-phone"></i>
+
+                                        Liên hệ
+
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2 f-right">
+                        <div class="top-cart-contain-update">
+                            <div class="mini-cart text-xs-center">
+                                <div class="heading-cart">
+                                    <a class="bg_cart" href="/cart" title="Giỏ hàng">
+                                        <span class="absolute count_item count_item_pr" id="cart-total"></span>
+                                        <i class="shopping-bag"></i>
+                                        <span class="block-small-cart hidden-xs hidden-sm visible-md visible-lg">
+											<span class="text-giohang hidden-xs">Giỏ hàng</span>
+											<span class="block-count-pr">
+												(
+												<span class="count_item count_item_pr"></span>
+												) sản phẩm
+											</span>
+										</span>
+                                    </a>
+                                </div>
+                                <div class="top-cart-content">
+                                    <ul id="cart-sidebar" class="mini-products-list count_li">
+                                        <li class="list-item">
+                                            <ul></ul>
+                                        </li>
+                                        <li class="action">
+                                            <ul>
+                                                <li class="li-fix-1">
+                                                    <div class="top-subtotal">
+                                                        Tổng tiền thanh toán:
+                                                        <span class="price"></span>
+                                                    </div>
+                                                </li>
+                                                <li class="li-fix-2" style="">
+                                                    <div class="actions">
+                                                        <a href="/cart" class="btn btn-primary">
+                                                            <span>Giỏ hàng</span>
+                                                        </a>
+                                                        <a href="/checkout" class="btn btn-checkout btn-gray">
+                                                            <span>Thanh toán</span>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </header>
+        </div>
     </div>
-</div>
+</header>
