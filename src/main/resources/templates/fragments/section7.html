@@ -1,4 +1,4 @@
-<section class="awe-section-7" th:fragment="section4">
+<section class="awe-section-7" th:fragment="section7">
     <section class="section_dichvu">
         <div class="container">
             <div class="row">
@@ -6,52 +6,45 @@
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="dichvu">
                         <div class="dichvu_image">
-                            <img src="//bizweb.dktcdn.net/thumb/thumb/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
-                                 data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/dichvu_1.png?1553482554643"
-                                 alt="Chuyển phát nhanh">
+                            <img src="assets/load-image.gif" data-lazyload="assets/dichvu_1.png" th:alt="${mapConfig.footer1}">
                         </div>
                         <div class="dichvu_title">
-                            <span>Chuyển phát nhanh</span>
+                            <span th:text="${mapConfig.footer1}"></span>
                         </div>
                         <div class="dichvu_content">
-                            <span>Chúng tôi miễn phí với đơn hàng trên <span> 350.000đ</span> tại Hà Nội và free ship toàn quốc với đơn hàng <span>700.000đ</span></span>
+                            <span th:utext="${mapConfig.footer1_content}"></span>
                         </div>
                     </div>
                 </div>
 
-
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="dichvu">
                         <div class="dichvu_image">
-                            <img src="//bizweb.dktcdn.net/thumb/thumb/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
-                                 data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/dichvu_2.png?1553482554643"
+                            <img src="assets/load-image.gif"
+                                 data-lazyload="assets/dichvu_2.png"
                                  alt="Làm bánh theo yêu cầu">
                         </div>
                         <div class="dichvu_title">
-                            <span>Làm bánh theo yêu cầu</span>
+                            <span th:text="${mapConfig.footer2}"></span>
                         </div>
                         <div class="dichvu_content">
-                            <span>Một chiếc bánh được thiết kế riêng biệt, độc đáo dành cho người thân, bạn bè chắc hẳn sẽ là một món quà bất ngờ và đặc biệt nhất.</span>
+                            <span th:utext="${mapConfig.footer2_content}"></span>
                         </div>
                     </div>
                 </div>
 
-
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="dichvu">
                         <div class="dichvu_image">
-                            <img src="//bizweb.dktcdn.net/thumb/thumb/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
-                                 data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/dichvu_3.png?1553482554643"
+                            <img src="assets/load-image.gif"
+                                 data-lazyload="assets/dichvu_3.png"
                                  alt="Làm bánh theo yêu cầu">
                         </div>
                         <div class="dichvu_title">
-                            <span>Hỗ trợ khách hàng</span>
+                            <span th:text="${mapConfig.footer3}"></span>
                         </div>
                         <div class="dichvu_content">
-						<span>Trung tâm chăm sóc khách hàng của DELICIOUS, hotline
-							<span><a class="hotline" href="tel:18006750">1800 6750</a></span>
-							để được hỗ trợ giải đáp.
-						</span>
+						<span th:utext="${mapConfig.footer3_content}"></span>
                         </div>
                     </div>
                 </div>

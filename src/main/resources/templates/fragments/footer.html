@@ -11,7 +11,7 @@
                                 <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
                             </div>
                             <div class="contact">
-                                <span>266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, Hà Nội</span>
+                                <span th:text="${mapConfig.address}"></span>
                             </div>
                         </li>
                         <li class="clearfix">
@@ -19,7 +19,7 @@
                                 <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
                             </div>
                             <div class="contact">
-                                <a class="hotline" href="tel:18006750">1800 6750 </a><span>Thứ 2 - Chủ Nhật: 9:00 - 18:00</span>
+                                <a class="hotline" th:href="@{'tel:' + ${mapConfig.phone}}" th:text="${mapConfig.phone}"></a><span>Thứ 2 - Chủ Nhật: 9:00 - 18:00</span>
                             </div>
                         </li>
                         <li class="clearfix action">
@@ -27,7 +27,7 @@
                                 <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                             </div>
                             <div class="contact">
-                                <a class="email" href="mailto:support@sapo.vn">support@sapo.vn</a>
+                                <a class="email" th:href="@{'mailto' + ${mapConfig.contact}}" th:text="${mapConfig.contact}"></a>
                             </div>
                         </li>
                     </ul>

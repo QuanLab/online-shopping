@@ -1,7 +1,7 @@
 package com.quanpv.service;
 
 import com.quanpv.dao.CategoryRepository;
-import com.quanpv.domain.Category;
+import com.quanpv.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class CategoryService {
     }
 
     public Category getById(int id){
-        return repository.findOne(id);
+        return repository.findById(id).orElse(null);
     }
 
     public void save(Category product){
@@ -25,7 +25,7 @@ public class CategoryService {
     }
 
     public void delete(int id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
 }

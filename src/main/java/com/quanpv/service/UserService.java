@@ -1,7 +1,7 @@
 package com.quanpv.service;
 
 import com.quanpv.dao.UserRepository;
-import com.quanpv.domain.User;
+import com.quanpv.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public class UserService {
     }
 
     public User getById(int id){
-        return repository.findOne(id);
+        return repository.findById(id).orElse(null);
     }
 
     public User getUserByUsernameAndPassword(String userName, String password){
@@ -27,8 +27,8 @@ public class UserService {
         repository.save(product);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void delete(Integer id) {
+        repository.deleteById(id);
     }
 
 }

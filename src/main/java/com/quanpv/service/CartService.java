@@ -1,7 +1,7 @@
 package com.quanpv.service;
 
 import com.quanpv.dao.CartRepository;
-import com.quanpv.domain.Cart;
+import com.quanpv.model.Cart;
 import com.quanpv.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class CartService {
     }
 
     public Cart getById(int id){
-        return repository.findOne(id);
+        return repository.findById(id).orElse(null);
     }
 
     public Iterable<Cart> getByStatusCheckout(){
@@ -37,7 +37,7 @@ public class CartService {
     }
 
     public void delete(int id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
 }

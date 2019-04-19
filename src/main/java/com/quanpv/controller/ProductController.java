@@ -1,8 +1,8 @@
 package com.quanpv.controller;
 
-import com.quanpv.domain.Cart;
-import com.quanpv.domain.Item;
-import com.quanpv.domain.Product;
+import com.quanpv.model.Cart;
+import com.quanpv.model.Item;
+import com.quanpv.model.Product;
 import com.quanpv.service.*;
 import com.quanpv.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.Date;
 
-@Controller
+/**
+ *
+ */
+//@Controller
 @RequestMapping("/products")
 public class ProductController {
 
@@ -39,7 +42,7 @@ public class ProductController {
 
         Iterable<Product> products;
         if(query.equals("")) {
-            products= productService.getAll();
+            products= productService.getAll(0, 12);
         } else {
             products = productService.getByNameContaining(query);
         }

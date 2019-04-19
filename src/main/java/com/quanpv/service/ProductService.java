@@ -1,8 +1,10 @@
 package com.quanpv.service;
 
 import com.quanpv.dao.ProductRepository;
-import com.quanpv.domain.Product;
+import com.quanpv.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,12 +13,13 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    public Iterable<Product> getAll(){
-        return repository.findAll();
+    public Iterable<Product> getAll(int offset, int limit){
+        Pageable pageable = new PageRequest(offset, limit);
+        return repository.findAll(pageable);
     }
 
-    public Product getById(int id){
-        return repository.findOne(id);
+    public Product getById(Integer id){
+        return repository.findById(id).orElse(null);
     }
 
     public Iterable<Product> getByCategoryId(int id){
@@ -36,7 +39,11 @@ public class ProductService {
     }
 
     public void delete(int id) {
-        repository.delete(id);
+        repository.deleteById(id);
+    }
+
+    public Iterable<Product> getLastProduct() {
+        return repository.findTop4ByOrderByIdDesc();
     }
 
 }

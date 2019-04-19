@@ -1,7 +1,10 @@
-package com.quanpv.domain;
+package com.quanpv.model;
 
 import javax.persistence.*;
 
+/**
+ * @author quanpv
+ */
 @Entity
 public class Role {
 

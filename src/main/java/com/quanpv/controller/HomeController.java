@@ -1,8 +1,8 @@
 package com.quanpv.controller;
 
-import com.quanpv.domain.Cart;
-import com.quanpv.domain.Customer;
-import com.quanpv.domain.Item;
+import com.quanpv.model.Cart;
+import com.quanpv.model.Customer;
+import com.quanpv.model.Item;
 import com.quanpv.service.*;
 import com.quanpv.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +29,13 @@ public class HomeController {
     private CartService cartService;
     @Autowired
     private CartDTOService cartDTOService;
+    @Autowired
+    private WebConfigService webConfigService;
 
     @RequestMapping(value={""})
     public String home(Model model){
-        model.addAttribute("products", productService.getAll());
+        model.addAttribute("mapConfig", webConfigService.getAll());
+        model.addAttribute("products", productService.getAll(0, 12));
         model.addAttribute("categories", categoryService.getAll());
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));

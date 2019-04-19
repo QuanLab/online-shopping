@@ -1,7 +1,7 @@
 package com.quanpv.service;
 
 import com.quanpv.dao.CustomerRepository;
-import com.quanpv.domain.Customer;
+import com.quanpv.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +15,8 @@ public class CustomerService {
         return repository.findAll();
     }
 
-    public Customer getById(int id){
-        return repository.findOne(id);
+    public Customer getById(Integer id){
+        return repository.findById(id).orElse(null);
     }
 
     public void save(Customer product){
@@ -24,7 +24,7 @@ public class CustomerService {
     }
 
     public void delete(int id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
 }

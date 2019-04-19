@@ -1,7 +1,7 @@
 package com.quanpv.service;
 
 import com.quanpv.dao.ItemRepository;
-import com.quanpv.domain.Item;
+import com.quanpv.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,8 @@ public class ItemService {
         return repository.findAll();
     }
 
-    public Item getById(int id){
-        return repository.findOne(id);
+    public Item getById(Integer id){
+        return repository.findById(id).orElse(null);
     }
 
     public List<Item> getByCartId(int id){
@@ -50,8 +50,8 @@ public class ItemService {
         repository.save(item);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void delete(Integer id) {
+        repository.deleteById(id);
     }
 
 }

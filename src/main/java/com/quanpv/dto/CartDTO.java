@@ -1,10 +1,7 @@
 package com.quanpv.dto;
 
 
-import com.quanpv.domain.Item;
-import com.quanpv.service.ItemService;
-import com.quanpv.utils.Constant;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.quanpv.model.Item;
 
 import java.util.List;
 

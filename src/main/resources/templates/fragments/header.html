@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-7 col-lg-7 a-left">
                     <div class="top_left">
-                        <span>Hotline: <a href="tel:18006750">1800 6750</a></span>
+                        <span>Hotline: <a th:href="@{'tel:' + ${mapConfig.phone}}" th:text="${mapConfig.phone}"></a></span>
                     </div>
                 </div>
                 <div class="hidden-xs hidden-sm col-md-3 col-lg-3">
@@ -41,8 +41,7 @@
                         <div class="logo_image">
 
                             <a href="/" class="logo-wrapper ">
-                                <img src="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/logo.jpg?1553482554643"
-                                     alt="logo Delicious" title="logo Delicious">
+                                <img src="assets/logo.jpg" alt="logo Delicious" title="logo Delicious">
                             </a>
 
                         </div>

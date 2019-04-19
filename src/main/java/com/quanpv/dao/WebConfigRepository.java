@@ -1,12 +1,11 @@
 package com.quanpv.dao;
 
-import com.quanpv.model.Customer;
+
+import com.quanpv.model.WebConfig;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Transactional
-public interface CustomerRepository extends CrudRepository<Customer, Integer>{
-
+public interface WebConfigRepository extends CrudRepository<WebConfig, Integer> {
+    Iterable<WebConfig> findAll();
 }

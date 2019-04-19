@@ -1,9 +1,11 @@
 package com.quanpv.controller;
 
-import com.quanpv.domain.Category;
-import com.quanpv.domain.Product;
+import com.quanpv.model.Category;
+import com.quanpv.model.Product;
 import com.quanpv.service.*;
 import com.quanpv.utils.Constant;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +20,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Controller
+/**
+ * @author quanpv
+ *
+ */
+//@Controller
 @RequestMapping(value="/dashboard")
 public class AdminController {
+
+    private static final Logger logger = LogManager.getLogger();
 
     @Autowired
     private ProductService productService;
@@ -36,7 +44,7 @@ public class AdminController {
     @RequestMapping(value="", method = RequestMethod.GET)
     public String dashboard(Model model){
 
-        model.addAttribute("products", productService.getAll());
+        model.addAttribute("products", productService.getAll(0, 12));
         return "dashboard";
     }
 
@@ -44,7 +52,7 @@ public class AdminController {
     @RequestMapping(value="products", method = RequestMethod.GET)
     public String dashboardProducts(Model model){
 
-        model.addAttribute("products", productService.getAll());
+        model.addAttribute("products", productService.getAll(0, 12));
         return "dashboardProducts";
     }
 
@@ -65,9 +73,8 @@ public class AdminController {
                                              @RequestParam(value = "quantity", required = false, defaultValue = "") Integer quantity,
                                              @RequestParam("file") MultipartFile file, Model model){
 
-        System.out.println("create catch");
-
-        Product product = new Product(name, description, "", price, quantity);
+        Product product = new Product("", name, description, "", "", price, quantity);
+        logger.info("create new product: " + product.toString());
 
         if (!file.isEmpty()) {
             try {
@@ -75,7 +82,7 @@ public class AdminController {
                 Path path = Paths.get(Constant.FOLDER_UPLOAD + file.getOriginalFilename());
                 Files.write(path, bytes);
                 String fileName = file.getOriginalFilename();
-                product.setImageUrl(fileName);
+                product.setImage(fileName);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -86,7 +93,7 @@ public class AdminController {
         product.setCategory(category);
         productService.save(product);
 
-        model.addAttribute("products", productService.getAll());
+        model.addAttribute("products", productService.getAll(0, 12));
         return "dashboardProducts";
     }
 
@@ -122,7 +129,7 @@ public class AdminController {
                     Path path = Paths.get(Constant.FOLDER_UPLOAD + file.getOriginalFilename());
                     Files.write(path, bytes);
                     String fileName = file.getOriginalFilename();
-                    product.setImageUrl(fileName);
+                    product.setImage(fileName);
 
                     System.out.println(path);
 
@@ -145,7 +152,7 @@ public class AdminController {
 
         if(delete!=null) {
             productService.delete(id);
-            model.addAttribute("products", productService.getAll());
+            model.addAttribute("products", productService.getAll(0, 12));
             return "dashboardProducts";
         }
 

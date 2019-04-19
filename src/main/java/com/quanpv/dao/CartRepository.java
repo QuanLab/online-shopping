@@ -1,6 +1,6 @@
 package com.quanpv.dao;
 
-import com.quanpv.domain.Cart;
+import com.quanpv.model.Cart;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,6 @@
 package com.quanpv.service;
 
-import com.quanpv.domain.Item;
+import com.quanpv.model.Item;
 import com.quanpv.dto.CartDTO;
 import com.quanpv.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;

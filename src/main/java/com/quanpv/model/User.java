@@ -1,4 +1,4 @@
-package com.quanpv.domain;
+package com.quanpv.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
