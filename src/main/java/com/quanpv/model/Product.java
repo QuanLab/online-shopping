@@ -19,7 +19,7 @@ public class Product {
     private String name;
     private String slug;
     private String description;
-    private String image;
+    private String featureImage;
     private String imageList;
     private String color;
     private String size;
@@ -40,12 +40,12 @@ public class Product {
 
     }
 
-    public Product(String isdn, String name, String description, String image, String imageList, float price,
+    public Product(String isdn, String name, String description, String featureImage, String imageList, float price,
                    int quantity) {
         this.isdn = isdn;
         this.name = name;
         this.description = description;
-        this.image = image;
+        this.featureImage = featureImage;
         this.imageList = imageList;
         this.price = price;
         this.quantity = quantity;
@@ -94,12 +94,13 @@ public class Product {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+
+    public String getFeatureImage() {
+        return featureImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setFeatureImage(String featureImage) {
+        this.featureImage = featureImage;
     }
 
     public String getImageList() {
@@ -209,7 +210,7 @@ public class Product {
                 ", isdn='" + isdn + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
+                ", image='" + featureImage + '\'' +
                 ", imageList='" + imageList + '\'' +
                 ", color='" + color + '\'' +
                 ", size='" + size + '\'' +

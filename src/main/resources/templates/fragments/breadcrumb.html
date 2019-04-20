@@ -1,0 +1,14 @@
+<div class="container" th:fragment="breadcrumb">
+    <div class="row">
+        <div class="col-xs-12 a-left">
+            <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <li class="home">
+                    <a itemprop="url" href="/"><span itemprop="title">Trang chủ</span></a>
+                    <span class="mr_lr">&nbsp;/&nbsp;</span>
+                </li>
+                <li><strong><span itemprop="title" th:text="${mapConfig.breadcrumb}"></span></strong></li>
+
+            </ul>
+        </div>
+    </div>
+</div>

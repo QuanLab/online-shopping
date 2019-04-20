@@ -1,0 +1,142 @@
+<section class="margin-bottom-0" th:fragment="contactbody">
+    <div class="wrap_">
+        <div class="row">
+            <div class="section_maps">
+                <div class="container">
+                    <div class="template-contact row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contact">
+                            <div class="row">
+                                <form accept-charset="UTF-8" action="/lien-he" id="contact" method="post">
+                                    <input name="FormType" type="hidden" value="contact">
+                                    <input name="utf8" type="hidden" value="true">
+                                    <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+                                    <script src="https://www.google.com/recaptcha/api.js?render=6Ldtu4IUAAAAAMQzG1gCw3wFlx_GytlZyLrXcsuK"></script>
+                                    <script>
+                                        grecaptcha.ready(function () {
+                                            grecaptcha.execute("6Ldtu4IUAAAAAMQzG1gCw3wFlx_GytlZyLrXcsuK", {action: "/contact"})
+                                                .then(function (token) {
+                                                    document.getElementById("Token-d049729eb2164d2fb11c0ce25d1ea2bd").value = token
+                                                });
+                                        });
+                                    </script>
+                                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                        <div class="information">
+                                            <div class="form_contact">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-10">
+                                                        <span>Bạn hãy điền nội dung tin nhắn vào form dưới đây.
+                                                            Chúng tôi sẽ trả lời bạn sau khi nhận được.
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <span>Tên:</span>
+                                                        <input type="text" class="input-control margin-top-10"
+                                                               required="" value="" name="contact[Name]">
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <span>Email:</span>
+                                                        <input type="email"
+                                                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                               required="" id="email2"
+                                                               class="input-control margin-top-10" value=""
+                                                               name="contact[email]">
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <span>Nội dung:</span>
+                                                        <textarea name="contact[Body]" required=""
+                                                                  class="input-control margin-top-10" cols="5"
+                                                                  rows="4"></textarea>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
+                                                        <button type="submit" class="button_custome_45">Gửi tin nhắn
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class="info-contact">
+                                        <div class="logo_image">
+
+                                            <a href="/" class="logo-wrapper ">
+                                                <img src="assets/logo.jpg" alt="logo Delicious">
+                                            </a>
+
+                                        </div>
+                                        <div class="infor_contact">
+                                            <ul class="list-unstyled list-block">
+                                                <li class="clearfix">
+                                                    <div class="icon">
+                                                        <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+                                                    </div>
+                                                    <div class="contact">
+                                                        <span th:text="${mapConfig.address}"></span>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <div class="icon">
+                                                        <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                                                    </div>
+                                                    <div class="contact">
+                                                        <a class="hotline" th:href="@{'tel:' + ${mapConfig.phone}}"
+                                                           th:text="${mapConfig.phone}"></a>
+                                                        <span>Thứ 2 - Chủ Nhật: 9:00 - 18:00</span>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix action">
+                                                    <div class="icon">
+                                                        <a href="#"><i class="fa fa-envelope"
+                                                                       aria-hidden="true"></i></a>
+                                                    </div>
+                                                    <div class="contact">
+                                                        <a class="email"
+                                                           th:href="@{'mailto:' + ${mapConfig.contact}}"
+                                                           th:text="${mapConfig.contact}">support@sapo.vn</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="maps">
+                <div id="googleMap" style="width:100%;height:400px;"></div>
+                <script>
+                    var marker;
+                    //20.9833015,105.858969
+                    function initMap() {
+                        var map = new google.maps.Map(document.getElementById('googleMap'), {
+                            zoom: 15,
+                            center: {lat: 20.9833015, lng: 105.858969}
+                        });
+
+                        marker = new google.maps.Marker({
+                            map: map,
+                            draggable: true,
+                            animation: google.maps.Animation.DROP,
+                            position: {lat: 20.9833015, lng: 105.858969}
+                        });
+                        marker.addListener('click', toggleBounce);
+                    }
+
+                    function toggleBounce() {
+                        if (marker.getAnimation() !== null) {
+                            marker.setAnimation(null);
+                        } else {
+                            marker.setAnimation(google.maps.Animation.BOUNCE);
+                        }
+                    }
+                </script>
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT--7akn64w5R00kRkZauwMf4DBH0_v7I&callback=initMap">
+                </script>
+            </div>
+        </div>
+    </div>
+</section>

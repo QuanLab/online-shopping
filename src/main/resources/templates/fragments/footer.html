@@ -19,7 +19,8 @@
                                 <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
                             </div>
                             <div class="contact">
-                                <a class="hotline" th:href="@{'tel:' + ${mapConfig.phone}}" th:text="${mapConfig.phone}"></a><span>Thứ 2 - Chủ Nhật: 9:00 - 18:00</span>
+                                <a class="hotline" th:href="@{'tel:' + ${mapConfig.phone}}" th:text="${mapConfig.phone}"></a>
+                                <span>Thứ 2 - Chủ Nhật: 9:00 - 18:00</span>
                             </div>
                         </li>
                         <li class="clearfix action">
@@ -75,7 +76,7 @@
                         </div>
                         <div class="sign-in">
 
-                            <form action="//sapo.us19.list-manage.com/subscribe/post?u=2887dcda77021868cccd236ea&id=7ace19f37b"
+                            <form th:action="${mapConfig.email_subscribe}"
                                   method="POST" role="form">
                                 <input class="form-email" type="email" id="mail" placeholder="Email của bạn">
                                 <button class="btn btn-primary subscribe"><span>Đăng ký</span></button>
@@ -110,20 +111,13 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 copyright col-lg-pull-7 col-md-pull-7">
                     <div class="text_copyright">
-                            <span class="mobile">© Bản quyền thuộc về <a class="team"
-                                                                         href="/"> Awesome Team</a>. </span><span
-                            class="mobiles">Cung cấp bởi </span>
-                        <a class="system" rel="nofollow"
-                           href="https://www.sapo.vn/?utm_campaign=cpn%3Asite_khach_hang-plm%3Afooter&utm_source=site_khach_hang&utm_medium=referral&utm_content=fm%3Atext_link-km%3A-sz%3A&utm_term=&campaign=site_khach_hang"
-                           title="Sapo" target="_blank">Sapo</a>
+                        <span class="mobile">© Bản quyền thuộc về <a class="team" href="/">Hoàng Anh Food</a>.</span>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-
-    <a href="#" id="back-to-top" class="backtop back-to-top" title="Lên đầu trang"><i
-            class="fa fa-arrow-up"></i></a>
+    <a href="#" id="back-to-top" class="backtop back-to-top" title="Lên đầu trang"><i class="fa fa-arrow-up"></i></a>
 
 </footer>

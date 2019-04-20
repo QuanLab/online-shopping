@@ -24,7 +24,7 @@ import java.nio.file.Paths;
  * @author quanpv
  *
  */
-//@Controller
+@Controller
 @RequestMapping(value="/dashboard")
 public class AdminController {
 
@@ -82,7 +82,7 @@ public class AdminController {
                 Path path = Paths.get(Constant.FOLDER_UPLOAD + file.getOriginalFilename());
                 Files.write(path, bytes);
                 String fileName = file.getOriginalFilename();
-                product.setImage(fileName);
+                product.setFeatureImage(fileName);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -129,10 +129,8 @@ public class AdminController {
                     Path path = Paths.get(Constant.FOLDER_UPLOAD + file.getOriginalFilename());
                     Files.write(path, bytes);
                     String fileName = file.getOriginalFilename();
-                    product.setImage(fileName);
-
+                    product.setFeatureImage(fileName);
                     System.out.println(path);
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -65,9 +65,10 @@ public class Application implements CommandLineRunner {
 		webConfigService.save(new WebConfig("keywords", "hoàng anh food, bột chiên, bột rán"));
 		webConfigService.save(new WebConfig("contact", "contact@hoanganhfood.com"));
 		webConfigService.save(new WebConfig("email", "your-email@gmail.com"));
+		webConfigService.save(new WebConfig("email_subscribe", "http://hoanganhfood.com/subcribe"));
 		webConfigService.save(new WebConfig("password", "p@ssw0rds3cr3t"));
-		webConfigService.save(new WebConfig("phone", "84979508629"));
-		webConfigService.save(new WebConfig("address", "20 Mỹ Đình, Phường Mỹ Đình, Quận Nam Từ Liêm, Hà Nội"));
+		webConfigService.save(new WebConfig("phone", "0904 523 351"));
+		webConfigService.save(new WebConfig("address", "A4, Đền Lừ 2, Hoàng Văn Thụ, Hoàng Mai, Hà Nội"));
 		webConfigService.save(new WebConfig("facebook", "https://facebook.com/{{your-page-facebook-id}}"));
 		webConfigService.save(new WebConfig("youtube", "https://youtube.com/{{your-channel-id}}"));
 

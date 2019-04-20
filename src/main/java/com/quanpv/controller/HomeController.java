@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -47,10 +48,49 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping(value={"contact"})
-    public String contact(){
+    @RequestMapping(value={"collections"})
+    public String collectionAll(Model model){
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("breadcrumb", "Tất cả sản phẩm");
+        model.addAttribute("mapConfig", mapConfig);
+        return "products";
+    }
+
+    @RequestMapping(value={"lien-he"}, method = RequestMethod.GET)
+    public String contact(Model model){
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("breadcrumb", "Liên hệ");
+        model.addAttribute("mapConfig", mapConfig);
         return "contact";
     }
+
+    @RequestMapping(value={"lien-he"}, method = RequestMethod.POST)
+    public String contactInfo(Model model){
+        Map<String, String> mapConfig = webConfigService.getAll();
+
+        mapConfig.put("breadcrumb", "Liên hệ");
+        model.addAttribute("mapConfig", mapConfig);
+        return "contact";
+    }
+
+    @RequestMapping(value={"gioi-thieu"})
+    public String about(Model model){
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("title", "Giới thiệu Hoàng Anh Food");
+        mapConfig.put("breadcrumb", "Giới thiệu");
+        model.addAttribute("mapConfig", mapConfig);
+        return "about";
+    }
+
+    @RequestMapping(value={"tin-tuc"})
+    public String news (Model model){
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("title", "Blog Hoang Anh Food");
+        mapConfig.put("breadcrumb", "Blog");
+        model.addAttribute("mapConfig", mapConfig);
+        return "blog";
+    }
+
 
     @RequestMapping(value="/403")
     public String Error403(){
@@ -59,6 +99,11 @@ public class HomeController {
 
     @RequestMapping(value="/cart")
     public String cart(@RequestParam(value = "id", required = false) Integer id, Model model){
+
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("title", "Giỏ hàng của tôi");
+        mapConfig.put("breadcrumb", "Giỏ hàng");
+        model.addAttribute("mapConfig", mapConfig);
 
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         if(id!=null) {
@@ -94,6 +139,12 @@ public class HomeController {
 
     @RequestMapping(value="/checkout", method = RequestMethod.GET)
     public String checkOut(Model model){
+
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("title", "Giỏ hàng của tôi");
+        mapConfig.put("breadcrumb", "Giỏ hàng");
+        model.addAttribute("mapConfig", mapConfig);
+
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
         return "checkout";

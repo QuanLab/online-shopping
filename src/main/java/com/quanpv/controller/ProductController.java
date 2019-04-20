@@ -19,8 +19,8 @@ import java.util.Date;
 /**
  *
  */
-//@Controller
-@RequestMapping("/products")
+@Controller
+@RequestMapping("/san-pham/")
 public class ProductController {
 
     @Autowired

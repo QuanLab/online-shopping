@@ -47,11 +47,6 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>net.sourceforge.nekohtml</groupId>-->
-            <!--<artifactId>nekohtml</artifactId>-->
-            <!--<version>1.9.22</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
             <!--<groupId>com.h2database</groupId>-->
             <!--<artifactId>h2</artifactId>-->
         <!--</dependency>-->
@@ -60,15 +55,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.35</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.thymeleaf.extras</groupId>-->
-            <!--<artifactId>thymeleaf-extras-springsecurity4</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.security</groupId>-->
-            <!--<artifactId>spring-security-test</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
