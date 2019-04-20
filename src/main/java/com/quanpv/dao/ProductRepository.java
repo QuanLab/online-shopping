@@ -49,4 +49,8 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
     Iterable<Product> findTop4ByOrderByIdDesc();
 
 
+    Page<Product> findByIsFeatureIsTrue(Pageable pageable);
+
+
+    Page<Product> findByIsPopularIsTrue(Pageable pageable);
 }

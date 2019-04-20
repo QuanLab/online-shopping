@@ -28,7 +28,7 @@
 
     <ul class="ul_collections">
         <li class="special">
-            <a href="/collections/all">Menu</a>
+            <a href="/san-pham">Menu</a>
         </li>
 
         <li class="level0 level-top parent">
@@ -36,7 +36,7 @@
         </li>
 
         <li class="level0 level-top parent">
-            <a href="/collections/all">Sản phẩm</a>
+            <a href="/san-pham">Sản phẩm</a>
 
             <i class="fa fa-angle-down"></i>
             <ul class="level0 " style="display:none;">
@@ -67,7 +67,7 @@
                 </li>
 
                 <li class="level1 ">
-                    <a href="/mon-an-moi"> <span>Món ăn mới</span> </a>
+                    <a th:href="${mapConfig.new_product_url}"> <span th:text="${mapConfig.new_product}"></span> </a>
                 </li>
             </ul>
         </li>

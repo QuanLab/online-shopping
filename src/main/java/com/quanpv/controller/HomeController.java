@@ -3,9 +3,13 @@ package com.quanpv.controller;
 import com.quanpv.model.Cart;
 import com.quanpv.model.Customer;
 import com.quanpv.model.Item;
+import com.quanpv.model.Product;
 import com.quanpv.service.*;
 import com.quanpv.utils.Constant;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/")
 public class HomeController {
+
+    private static final Logger logger = LogManager.getLogger();
 
     @Autowired
     private CategoryService categoryService;
@@ -36,7 +41,13 @@ public class HomeController {
     @RequestMapping(value={""})
     public String home(Model model){
         model.addAttribute("mapConfig", webConfigService.getAll());
-        model.addAttribute("products", productService.getAll(0, 12));
+
+        Page<Product> featuredProducts = productService.getFeatured(0, 6);
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        Page<Product> popularProducts = productService.getPopular(0, 6);
+        model.addAttribute("popularProducts", popularProducts);
+
         model.addAttribute("categories", categoryService.getAll());
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
@@ -48,11 +59,79 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping(value={"collections"})
-    public String collectionAll(Model model){
+    @RequestMapping(value={"san-pham"})
+    public String collectionAll(Model model, @RequestParam(value = "page", required = false) Integer page,
+                                @RequestParam(value = "sort", required = false) String sortBy){
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Tất cả sản phẩm");
         model.addAttribute("mapConfig", mapConfig);
+        int offset = 0;
+        if(page != null) {
+            offset = page - 1;
+        }
+        Page<Product> products = productService.getAll(offset, 9);
+        model.addAttribute("products", products);
+
+        Page<Product> featuredProducts = productService.getFeatured(0, 5);
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        return "products";
+    }
+
+    @RequestMapping(value={"san-pham-noi-bat"})
+    public String featuredProduct(Model model,
+                                  @RequestParam(value = "page", required = false) Integer page,
+                                  @RequestParam(value = "sort", required = false) String sortBy){
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("breadcrumb", "Sản phẩm nổi bật");
+        model.addAttribute("mapConfig", mapConfig);
+
+        Page<Product> featuredProducts = productService.getFeatured(0, 5);
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        Page<Product> products = productService.getFeatured(0, 9);
+        model.addAttribute("products", products);
+        return "products";
+    }
+
+    @RequestMapping(value={"san-pham-ua-chuong"})
+    public String popularProduct(Model model,
+                                 @RequestParam(value = "page", required = false) Integer page,
+                                 @RequestParam(value = "sort", required = false) String sortBy){
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("breadcrumb", "Sản phẩm ưa chuộng");
+        model.addAttribute("mapConfig", mapConfig);
+
+        int offset = 0;
+        if(page != null) {
+            offset = page - 1;
+        }
+
+        Page<Product> featuredProducts = productService.getFeatured(0, 5);
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        Page<Product> products = productService.getPopular(offset, 9);
+        model.addAttribute("products", products);
+        return "products";
+    }
+
+    @RequestMapping(value={"san-pham-moi"})
+    public String newProduct(Model model,
+                             @RequestParam(value = "page", required = false) Integer page,
+                             @RequestParam(value = "sort", required = false) String sortBy){
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("breadcrumb", "Sản phẩm mới");
+        model.addAttribute("mapConfig", mapConfig);
+
+        Page<Product> featuredProducts = productService.getFeatured(0, 5);
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        int offset = 0;
+        if(page != null) {
+            offset = page - 1;
+        }
+        Page<Product> products = productService.getLastProduct(offset, 9);
+        model.addAttribute("products", products);
         return "products";
     }
 

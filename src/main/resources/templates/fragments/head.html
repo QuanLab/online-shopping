@@ -13,7 +13,7 @@
     <meta name='revisit-after' content='1 days'/>
 
     <!-- ================= Favicon ================== -->
-    <link rel="icon" href="assets/favicon.png" type="image/x-icon"/>
+    <link rel="icon" th:href="@{/assets/favicon.png}" type="image/x-icon"/>
 
     <!-- ================= Google Fonts ================== -->
     <!-- Facebook Open Graph meta tags -->
@@ -35,13 +35,13 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Plugin CSS -->
-    <link href="css/plugin.scss.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/plugin.scss.css}" rel="stylesheet" type="text/css"/>
 
     <!-- Build Main CSS -->
-    <link href="css/base.scss.css" rel="stylesheet" type="text/css"/>
-    <link href="css/style.scss.css" rel="stylesheet" type="text/css"/>
-    <link href="css/module.scss.css" rel="stylesheet" type="text/css"/>
-    <link href="css/responsive.scss.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/base.scss.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/style.scss.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/module.scss.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/responsive.scss.css}" rel="stylesheet" type="text/css"/>
     <script>
         var template = 'index';
     </script>

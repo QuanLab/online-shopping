@@ -3,8 +3,10 @@ package com.quanpv.service;
 import com.quanpv.dao.ProductRepository;
 import com.quanpv.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,8 +15,8 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    public Iterable<Product> getAll(int offset, int limit){
-        Pageable pageable = new PageRequest(offset, limit);
+    public Page<Product> getAll(int offset, int limit){
+        Pageable pageable = PageRequest.of(offset, limit);
         return repository.findAll(pageable);
     }
 
@@ -42,8 +44,43 @@ public class ProductService {
         repository.deleteById(id);
     }
 
+    /**
+     *
+     * @return
+     */
+    public Page<Product> getLastProduct(Integer offset, Integer limit) {
+        Sort sort = new Sort(
+                new Sort.Order(Sort.Direction.DESC, "id")
+        );
+        Pageable pageable = PageRequest.of(offset, limit, sort);
+        return repository.findAll(pageable);
+    }
+
+
+    /**
+     *
+     * @return
+     */
     public Iterable<Product> getLastProduct() {
         return repository.findTop4ByOrderByIdDesc();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Page<Product> getFeatured(Integer offset, Integer limit) {
+        Pageable pageable = PageRequest.of(offset, limit);
+        return repository.findByIsFeatureIsTrue(pageable);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Page<Product> getPopular(Integer offset, Integer limit) {
+        Pageable pageable = PageRequest.of(offset, limit);
+        return repository.findByIsPopularIsTrue(pageable);
     }
 
 }

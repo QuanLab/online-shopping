@@ -1,1 +1,75 @@
-{"id":13049190,"name":"Strawberry Cake","alias":"strawberry-cake","vendor":null,"product_type":"Cake","price":450000.0000,"price_max":500000.0000,"price_min":450000.0000,"price_varies":true,"compare_at_price_max":519000.0000,"compare_at_price_min":469000.0000,"compare_at_price_varies":true,"tags":[],"summary":null,"content":"<p>Ở Bắc Mỹ, người ta gọi giống dâu này là Chiloensis trong khi người châu Âu gọi nó là Ananaserdbeere.</p>\n<p>Bạn có thể ăn tráng miệng dâu tây trắng hoặc ăn kèm với sữa chua. Có thể làm salad hoa quả hoặc sinh tố. Ngoài ra có thể thái nhỏ để bày lên bánh nướng.</p>\n<p>Dâu tây trắng rất giàu chất chống oxy hóa. Nó giúp làm giảm stress trong cơ thể và ngăn ngừa chất oxy hóa tiến triển thành ung thư hay bệnh tim mạch. Ăn một bát dâu tây mỗi ngày sẽ tăng cường chất chống oxy hóa cho cơ thể. Ngoài ra, dâu tây trắng còn giúp cải thiện sức khỏe tổng thể, ngăn ngừa bệnh tật.</p>","featured_image":"//bizweb.dktcdn.net/100/332/765/products/try4-jpeg.jpg?v=1541043991477","images":["//bizweb.dktcdn.net/100/332/765/products/try4-jpeg.jpg?v=1541043991477"],"options":[{"name":"Kích thước","position":1}],"variants":[{"id":21561831,"barcode":null,"sku":null,"price":450000.0000,"compare_at_price":469000.0000,"options":["25cm"],"option1":"25cm","option2":null,"option3":null,"title":"25cm","inventory_management":"bizweb","inventory_policy":"deny","inventory_quantity":2,"weight":0.0,"weight_unit":"kg","featured_image":null,"available":true},{"id":21750288,"barcode":null,"sku":"SP6_02","price":500000.0000,"compare_at_price":519000.0000,"options":["30cm"],"option1":"30cm","option2":null,"option3":null,"title":"30cm","inventory_management":"bizweb","inventory_policy":"continue","inventory_quantity":1,"weight":0.0,"weight_unit":"kg","featured_image":null,"available":true}],"available":true,"url":"/strawberry-cake"}
+{
+    "id":13049190,
+    "name":"Strawberry Cake",
+    "alias":"strawberry-cake",
+    "vendor":null,
+    "product_type":"Cake",
+    "price":450000.0000,
+    "price_max":500000.0000,
+    "price_min":450000.0000,
+    "price_varies":true,
+    "compare_at_price_max":519000.0000,
+    "compare_at_price_min":469000.0000,
+    "compare_at_price_varies":true,
+    "tags":[
+
+    ],
+    "summary":null,
+    "content":"<p>Ở Bắc Mỹ, người ta gọi giống dâu này là Chiloensis trong khi người châu Âu gọi nó là Ananaserdbeere.</p>\n<p>Bạn có thể ăn tráng miệng dâu tây trắng hoặc ăn kèm với sữa chua. Có thể làm salad hoa quả hoặc sinh tố. Ngoài ra có thể thái nhỏ để bày lên bánh nướng.</p>\n<p>Dâu tây trắng rất giàu chất chống oxy hóa. Nó giúp làm giảm stress trong cơ thể và ngăn ngừa chất oxy hóa tiến triển thành ung thư hay bệnh tim mạch. Ăn một bát dâu tây mỗi ngày sẽ tăng cường chất chống oxy hóa cho cơ thể. Ngoài ra, dâu tây trắng còn giúp cải thiện sức khỏe tổng thể, ngăn ngừa bệnh tật.</p>",
+    "featured_image":"//bizweb.dktcdn.net/100/332/765/products/try4-jpeg.jpg?v=1541043991477",
+    "images":[
+    "//bizweb.dktcdn.net/100/332/765/products/try4-jpeg.jpg?v=1541043991477"
+    ],
+    "options":[
+    {
+        "name":"Kích thước",
+        "position":1
+    }
+]   ,
+    "variants":[
+    {
+        "id":21561831,
+        "barcode":null,
+        "sku":null,
+        "price":450000.0000,
+        "compare_at_price":469000.0000,
+        "options":[
+            "25cm"
+        ],
+        "option1":"25cm",
+        "option2":null,
+        "option3":null,
+        "title":"25cm",
+        "inventory_management":"bizweb",
+        "inventory_policy":"deny",
+        "inventory_quantity":2,
+        "weight":0.0,
+        "weight_unit":"kg",
+        "featured_image":null,
+        "available":true
+    },
+    {
+        "id":21750288,
+        "barcode":null,
+        "sku":"SP6_02",
+        "price":500000.0000,
+        "compare_at_price":519000.0000,
+        "options":[
+            "30cm"
+        ],
+        "option1":"30cm",
+        "option2":null,
+        "option3":null,
+        "title":"30cm",
+        "inventory_management":"bizweb",
+        "inventory_policy":"continue",
+        "inventory_quantity":1,
+        "weight":0.0,
+        "weight_unit":"kg",
+        "featured_image":null,
+        "available":true
+    }
+],
+    "available":true,
+    "url":"/strawberry-cake"
+}

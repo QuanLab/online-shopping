@@ -143,7 +143,7 @@
                             jQuery(pageCartCheckout).appendTo(table.children('.cart'));
                         } else {
                             jQuery('<p class="hidden-xs-down ">Không có sản phẩm nào. Quay lại ' +
-                                '<a href="/collections/all" style="color:;">cửa hàng</a> để tiếp tục mua sắm.</p>'
+                                '<a href="/collections" style="color:;">cửa hàng</a> để tiếp tục mua sắm.</p>'
                             ).appendTo(table);
                             jQuery('.cart_desktop_page').css('min-height', 'auto');
                         }
@@ -245,10 +245,10 @@
                             jQuery('<div class="header-cart-price" style=""><div class="title-cart a-center"><span class="total_mobile a-center">Tổng tiền: <span class=" totals_price_mobile">' + Bizweb.formatMoney(cart.total_price, "{{amount_no_decimals_with_comma_separator}}₫") + '</span><span></div>'
                                 + '<div class="checkout"><button class="btn-proceed-checkout-mobile" title="Tiến hành thanh toán" type="button" onclick="window.location.href=\'/checkout\'">'
                                 + '<span>Tiến hành thanh toán</span></button>'
-                                + '<button class="btn btn-white contin" title="Tiếp tục mua hàng" type="button" onclick="window.location.href=\'/collections/all\'"><span>Tiếp tục mua hàng</span></button>'
+                                + '<button class="btn btn-white contin" title="Tiếp tục mua hàng" type="button" onclick="window.location.href=\'/san-pham\'"><span>Tiếp tục mua hàng</span></button>'
                                 + '</div></div>').appendTo(table);
                         } else {
-                            jQuery('<p class="hidden-xs-down col-xs-12">Không có sản phẩm nào. Quay lại <a href="/collections/all" style="color:;">cửa hàng</a> để tiếp tục mua sắm.</p>').appendTo(table);
+                            jQuery('<p class="hidden-xs-down col-xs-12">Không có sản phẩm nào. Quay lại <a href="/san-pham" style="color:;">cửa hàng</a> để tiếp tục mua sắm.</p>').appendTo(table);
                             jQuery('.cart_desktop_page').css('min-height', 'auto');
                         }
 

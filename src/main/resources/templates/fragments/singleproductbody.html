@@ -1,0 +1,1182 @@
+<div class="container" th:fragment="singleproductbody">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-12 products">
+            <div class="details-product">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 details-product-image">
+                    <div class="row row-width"><!--trong form bat buoc co 3 gia tri: gia, so luong, them gio hang-->
+                        <form enctype="multipart/form-data" id="add-to-cart-form" action="/cart/add" method="post"
+                              class="row form-width form-inline">
+                            <div class="product-detail-left product-images col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                                <div class="rows">
+                                    <div class="col_large_default large-image">
+
+
+                                        <a href="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
+                                           class="large_image_url checkurl" data-rel="prettyPhoto[product-gallery]">
+
+                                            <img id="img_01" class="img-responsive" alt="Chocolate Iced"
+                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
+                                                 data-zoom-image="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try21-jpeg.jpg?v=1541047539703"/>
+                                        </a>
+
+                                        <div class="hidden"><!--chi co tac dung khi bam light box-->
+                                            <div class="item">
+                                                <a href="//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
+                                                   data-image="//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
+                                                   data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
+                                                   data-rel="prettyPhoto[product-gallery]">
+                                                </a>
+                                            </div>
+
+
+                                            <div class="item">
+                                                <a href="//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
+                                                   data-image="//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
+                                                   data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
+                                                   data-rel="prettyPhoto[product-gallery]">
+                                                </a>
+                                            </div>
+
+
+                                            <div class="item">
+                                                <a href="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
+                                                   data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
+                                                   data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
+                                                   data-rel="prettyPhoto[product-gallery]">
+                                                </a>
+                                            </div>
+
+
+                                            <div class="item">
+                                                <a href="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
+                                                   data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
+                                                   data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
+                                                   data-rel="prettyPhoto[product-gallery]">
+                                                </a>
+                                            </div>
+
+
+                                            <div class="item">
+                                                <a href="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
+                                                   data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
+                                                   data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
+                                                   data-rel="prettyPhoto[product-gallery]">
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div id="gallery_02"
+                                         class="owl_width no-padding owl-carousel owl-theme thumbnail-product thumb_product_details not-dqowl"
+                                         data-loop="false" data-lg-items="4" data-md-items="4" data-sm-items="4"
+                                         data-xs-items="2" data-margin="10">
+
+                                        <div class="item">
+                                            <a class="item_image" href="#"
+                                               data-image="//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
+                                               data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/try21-jpeg.jpg?v=1541047539703">
+                                                <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
+                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
+                                                     alt="Chocolate Iced">
+                                            </a>
+                                        </div>
+
+                                        <div class="item">
+                                            <a class="item_image" href="#"
+                                               data-image="//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
+                                               data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947">
+                                                <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
+                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
+                                                     alt="Chocolate Iced">
+                                            </a>
+                                        </div>
+
+                                        <div class="item">
+                                            <a class="item_image" href="#"
+                                               data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
+                                               data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947">
+                                                <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
+                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
+                                                     alt="Chocolate Iced">
+                                            </a>
+                                        </div>
+
+                                        <div class="item">
+                                            <a class="item_image" href="#"
+                                               data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
+                                               data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390">
+                                                <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
+                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
+                                                     alt="Chocolate Iced">
+                                            </a>
+                                        </div>
+
+                                        <div class="item">
+                                            <a class="item_image" href="#"
+                                               data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
+                                               data-zoom-image="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353">
+                                                <img data-img="//bizweb.dktcdn.net/thumb/1024x1024/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
+                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
+                                                     alt="Chocolate Iced">
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 details-pro">
+                                <h1 class="title-product" itemprop="name">Chocolate Iced</h1>
+                                <div class="fw" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                    <div class="group-status">
+
+											<span class="variant-sku">SP21_01
+											</span>
+                                        <span class="first_status"><span class="a_name">Tình trạng:</span>
+
+
+												<span class="status_name availabel hasvariant">
+
+													<span class="status_name availabel">
+														<link itemprop="availability" href="http://schema.org/InStock"/>
+														Còn hàng
+													</span>
+
+												</span>
+
+
+											</span>
+                                    </div>
+
+                                    <div class="price-box">
+
+											<span class="special-price"><span
+                                                    class="price product-price">100.000₫</span>
+												<meta itemprop="price" content="100000">
+												<meta itemprop="priceCurrency" content="VND">
+											</span> <!-- Giá Khuyến mại -->
+                                        <span class="old-price" itemprop="priceSpecification" itemscope
+                                              itemtype="http://schema.org/priceSpecification">
+												<del class="price product-price-old">
+
+													120.000₫
+
+												</del>
+												<meta itemprop="price" content="120000">
+												<meta itemprop="priceCurrency" content="VND">
+											</span> <!-- Giá gốc -->
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-product col-sm-12">
+
+
+                                    <div class=" swatch clearfix" data-option-index="0">
+                                        <div class="header">Kích thước</div>
+
+
+                                        <div data-value="15cm" class="swatch-element 15cm available">
+
+
+                                            <input id="swatch-0-15cm" type="radio" name="option-0" value="15cm"
+                                                   checked/>
+
+                                            <label for="swatch-0-15cm">
+                                                15cm
+                                            </label>
+
+                                        </div>
+
+
+                                        <div data-value="20cm" class="swatch-element 20cm available">
+
+
+                                            <input id="swatch-0-20cm" type="radio" name="option-0" value="20cm"/>
+
+                                            <label for="swatch-0-20cm">
+                                                20cm
+                                            </label>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="swatch-color swatch clearfix" data-option-index="1">
+                                        <div class="header">Màu sắc</div>
+
+
+                                        <div data-value="Cam" class="swatch-element color Cam available">
+
+
+                                            <div class="tooltip">Cam</div>
+
+
+                                            <input id="swatch-1-Cam" type="radio" name="option-1" value="Cam" checked/>
+
+
+                                            <label for="swatch-1-Cam" style="background-color: #fc9905;">
+                                            </label>
+
+
+                                        </div>
+
+
+                                        <div data-value="N&#226;u" class="swatch-element color Nâu available">
+
+
+                                            <div class="tooltip">Nâu</div>
+
+
+                                            <input id="swatch-1-Nâu" type="radio" name="option-1" value="N&#226;u"/>
+
+
+                                            <label for="swatch-1-Nâu" style="background-color: #594f4f;">
+                                            </label>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="box-variant clearfix  hidden ">
+                                        <!--luon phai co, du dung swatch hay ko-->
+
+                                        <fieldset class="form-group">
+                                            <select id="product-selectors" class="form-control form-control-lg"
+                                                    name="variantId" style="display:none">
+
+                                                <option selected="selected" value="21563056">15cm / Cam - 100.000₫
+                                                </option>
+
+                                                <option value="21749517">20cm / Nâu - 250.000₫</option>
+
+                                                <option value="21749668">15cm / Nâu - 170.000₫</option>
+
+                                                <option value="21749693">20cm / Cam - 160.000₫</option>
+
+                                            </select>
+                                        </fieldset>
+
+                                    </div>
+
+
+                                    <div class="form-group form_button_details ">
+                                        <div class="option-type quantity-option show">
+                                            <header class="not_bg">Số lượng:</header>
+                                            <div class="custom input_number_product custom-btn-number form-control">
+                                                <button class="btn_num num_2 button button_qty"
+                                                        onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;return false;"
+                                                        type="button">+
+                                                </button>
+                                                <button class="btn_num num_1 button button_qty"
+                                                        onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro ) &amp;&amp; qtypro &gt; 1 ) result.value--;return false;"
+                                                        type="button">-
+                                                </button>
+                                                <input type="text" id="qtym" name="quantity" value="1"
+                                                       class="form-control prd_quantity"
+                                                       onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;"
+                                                       onchange="if(this.value == 0)this.value=1;">
+                                            </div>
+                                        </div>
+                                        <div class="option-group form_button_details ">
+                                            <div class="add-to-cart">
+                                                <div class="button-add">
+
+                                                    <button type="submit"
+                                                            class="btn btn-lg btn-cart button_cart_buy_enable add_to_cart btn_buy">
+                                                        <span class="buy-btn">Thêm vào giỏ hàng</span>
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="product-guide">
+                                    <div class="phone">
+                                        <div class="icon">
+                                            <img src="//bizweb.dktcdn.net/thumb/icon/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
+                                                 data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/phone.png?1553482554643"
+                                                 alt="phone">
+                                        </div>
+                                        <p>Đặt mua qua điện thoại (8h - 22h)
+                                            <a href="tel:18006750">1800 6750
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="guide_shop">
+                                        <div class="icon">
+                                            <img src="//bizweb.dktcdn.net/thumb/icon/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
+                                                 data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/guide.png?1553482554643"
+                                                 alt="guide">
+                                        </div>
+                                        <p><a href="/huong-dan">Hướng dẫn mua hàng</a></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="social-sharing">
+                                    <div class="addthis_inline_share_toolbox share_add">
+                                        <script type="text/javascript"
+                                                src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58589c2252fc2da4"></script>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Tab -->
+                <div class="tab_width_full">
+                    <div class="row xs-margin-top-15">
+
+                        <div id="tab_ord" class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                            <!-- Nav tabs -->
+                            <div class="product-tab e-tabs not-dqtab">
+                                <span class="border-dashed-tab"></span>
+                                <ul class="tabs tabs-title clearfix">
+
+                                    <li class="tab-link" data-tab="tab-1">
+                                        <h3><span>Chi tiết sản phẩm</span></h3>
+                                    </li>
+
+
+                                    <li class="tab-link" data-tab="tab-3" id="tab-review">
+                                        <h3><span>Bình luận sản phẩm</span></h3>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-float">
+
+                                    <div id="tab-1" class="tab-content content_extab">
+                                        <div class="rte">
+
+                                            <p><span style="font-size:14px;"><span
+                                                    style="font-family:Arial,Helvetica,sans-serif;">Doughnut&nbsp;(hay gọi là&nbsp;donut&nbsp;trong tiếng Mỹ) là một loại bánh ngọt&nbsp;rán hoặc nướng để ăn tráng miệng hoặc ăn vặt. Đây là loại bánh rất nổi tiếng và phổ biến ở nhiều đất nước phương Tây, có thể được mua trong cửa hàng hoặc tự làm ở nhà. Thường bánh có dạng hình vòng, nhưng cũng có thể có hình tròn nhỏ nhồi nhân bên trong. Bánh thường được phủ nhiều loại kem, socola và hạt đường trang trí.</span></span>
+                                            </p>
+                                            <p><span style="font-size:14px;"><span
+                                                    style="font-family:Arial,Helvetica,sans-serif;">Hai loại donut thường thấy là donut hình vòng và donut tròn nhồi nhân mứt, thạch, kem trứng, sô cô la&nbsp;bên trong. Hầu hết các bánh donut thường được trang trí đường bông tuyết, kem, sô cô la, dừa vụn hoặc thậm chí áo đường hay dừa vụn lên toàn bộ bánh.</span></span>
+                                            </p>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div id="tab-3" class="tab-content content_extab tab-review-c">
+                                        <div class="rte">
+                                            <div id="bizweb-product-reviews" class="bizweb-product-reviews"
+                                                 data-id="13049772">
+
+                                                <div class="title-bl">
+                                                    <h3>Đánh giá sản phẩm</h3>
+                                                </div>
+                                                <div id="bizweb-product-reviews-sub" style="width:100%">
+                                                    <div class="bizweb-product-reviews-summary"
+                                                         id="bizweb-product-reviews-summary">
+                                                        <div itemscope itemtype="http://schema.org/Product">
+                                                            <meta itemprop="name" content="Chocolate Iced"/>
+                                                            <div class="bpr-summary" itemprop="aggregateRating"
+                                                                 itemscope itemtype="http://schema.org/AggregateRating">
+                                                                <meta content="0" itemprop="ratingValue"/>
+                                                                <meta content="5" itemprop="bestRating"/>
+                                                                <meta content="1" itemprop="worstRating"/>
+                                                                <meta content="0" itemprop="ratingCount"/>
+
+                                                                <span class="bpr-summary-average">0</span>
+                                                                <div id="bizweb-prv-summary-star"
+                                                                     class="bizweb-product-reviews-star" data-score="0"
+                                                                     data-number="5"></div>
+                                                                <div class="bpr-summary-caption"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="product-reviews-summary-actions">
+            </span>
+                                                    <div class="bizweb-product-reviews-form" id="bpr-form_13049772"
+                                                         style="display:none;">
+                                                    </div>
+                                                    <div style="display:none;" id="bpr-thanks"
+                                                         class="bizweb-product-reviews-form">
+                                                    </div>
+                                                    <div id="bpr-list" class="bizweb-product-reviews-list">
+                                                    </div>
+                                                    <div id="bpr-more-reviews">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Endtab -->
+
+            </div>
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 related_module">
+                <div class="row">
+
+                    <div class="icon-banh">
+                        <a href="/" class="icon-banh-wrapper ">
+                            <img src="//bizweb.dktcdn.net/thumb/thumb/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
+                                 data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/icon-banh.png?1553482554643"
+                                 alt="icon-banh">
+                        </a>
+                    </div>
+
+                    <div class="title_module_main title_module_child a-center margin-bottom-20">
+                        <h2>
+                            <a href="/nuoc-ep" title="Món ăn cùng loại">Món ăn cùng loại</a>
+                        </h2>
+                    </div>
+                    <div class="wrap_owl margin-bottom-0">
+
+                        <div class="owl-carousel owl-related"
+                             data-nav="true"
+                             data-dot="true"
+                             data-lg-items="3"
+                             data-md-items="3"
+                             data-height="true"
+                             data-xs-items="2"
+                             data-sm-items="3"
+                             data-margin="30">
+
+
+                            <div class="item_product_main">
+
+
+                                <div class="items">
+
+                                    <div class="image">
+                                        <a class="image_product" href="/cream-puff" title="Cream Puff">
+
+                                            <img class="img-responsive"
+                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try18-jpeg.jpg?v=1541047476027"
+                                                 alt="cream-puff">
+
+                                        </a>
+                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
+                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
+                                                  data-id="product-actions-13049751" enctype="multipart/form-data">
+                                                <div>
+
+                                                    <a data-toggle="tooltip" title="Xem nhanh" href="/cream-puff"
+                                                       data-handle="cream-puff"
+                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+
+
+                                                    <input type="hidden" name="variantId" value="21563033"/>
+                                                    <button class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart "
+                                                            title="Thêm vào giỏ hàng">
+                                                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                                    </button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="infor">
+                                        <h3 class="title"><a href="/cream-puff" title="Cream Puff">Cream Puff</a></h3>
+                                        <div class="box-price">
+
+
+			<span class="special-price">
+				<span class="price product-price">70.000₫</span>
+			</span>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="item_product_main">
+
+
+                                <div class="sale-box">
+	<span>-
+10%
+</span>
+                                </div>
+
+                                <div class="items">
+
+                                    <div class="image">
+                                        <a class="image_product" href="/honey-wheat" title="Honey Wheat">
+
+                                            <img class="img-responsive"
+                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try17-jpeg.jpg?v=1541047432060"
+                                                 alt="honey-wheat">
+
+                                        </a>
+                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
+                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
+                                                  data-id="product-actions-13049729" enctype="multipart/form-data">
+                                                <div>
+
+                                                    <a data-toggle="tooltip" title="Xem nhanh" href="/honey-wheat"
+                                                       data-handle="honey-wheat"
+                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+
+
+                                                    <input class="hidden" type="hidden" name="variantId"
+                                                           value="21562972"/>
+                                                    <button class="button_action btn btn-cart btn btn-circle left-to"
+                                                            title="Chọn sản phẩm" type="button"
+                                                            onclick="window.location.href='/honey-wheat'">
+                                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                                    </button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="infor">
+                                        <h3 class="title"><a href="/honey-wheat" title="Honey Wheat">Honey Wheat</a>
+                                        </h3>
+                                        <div class="box-price">
+
+
+			<span class="special-price">
+				<span class="price product-price">45.000₫</span>
+			</span>
+
+                                            <span class="product-item-price-sale old-price">&nbsp;&nbsp;
+				<span class="compare-price price product-price-old hidden-xs">50.000₫</span>
+			</span>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="item_product_main">
+
+
+                                <div class="items">
+
+                                    <div class="image">
+                                        <a class="image_product" href="/strawberry-frappuccino"
+                                           title="Strawberry Frappuccino">
+
+                                            <img class="img-responsive"
+                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try16-jpeg.jpg?v=1541047399773"
+                                                 alt="strawberry-frappuccino">
+
+                                        </a>
+                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
+                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
+                                                  data-id="product-actions-13049726" enctype="multipart/form-data">
+                                                <div>
+
+                                                    <a data-toggle="tooltip" title="Xem nhanh"
+                                                       href="/strawberry-frappuccino"
+                                                       data-handle="strawberry-frappuccino"
+                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+
+
+                                                    <input type="hidden" name="variantId" value="21562969"/>
+                                                    <button class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart "
+                                                            title="Thêm vào giỏ hàng">
+                                                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                                    </button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="infor">
+                                        <h3 class="title"><a href="/strawberry-frappuccino"
+                                                             title="Strawberry Frappuccino">Strawberry Frappuccino</a>
+                                        </h3>
+                                        <div class="box-price">
+
+
+			<span class="special-price">
+				<span class="price product-price">150.000₫</span>
+			</span>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="item_product_main">
+
+
+                                <div class="items">
+
+                                    <div class="image">
+                                        <a class="image_product" href="/lemon-juice" title="Lemon juice">
+
+                                            <img class="img-responsive"
+                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try14-jpeg.jpg?v=1541044297257"
+                                                 alt="lemon-juice">
+
+                                        </a>
+                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
+                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
+                                                  data-id="product-actions-13049224" enctype="multipart/form-data">
+                                                <div>
+
+                                                    <a data-toggle="tooltip" title="Xem nhanh" href="/lemon-juice"
+                                                       data-handle="lemon-juice"
+                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+
+
+                                                    <button class="button_action btn btn-circle btn-cart left-to  hidden"
+                                                            title="Hết hàng" disabled>
+                                                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                                    </button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="infor">
+                                        <h3 class="title"><a href="/lemon-juice" title="Lemon juice">Lemon juice</a>
+                                        </h3>
+                                        <div class="box-price">
+
+			<span class="special-price">
+				<span class="price product-price">Liên hệ</span>
+			</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="item_product_main">
+
+
+                                <div class="sale-box">
+	<span>-
+8%
+</span>
+                                </div>
+
+                                <div class="items">
+
+                                    <div class="image">
+                                        <a class="image_product" href="/donut-cake" title="Donut Cake">
+
+                                            <img class="img-responsive"
+                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try7-jpeg.jpg?v=1541044098940"
+                                                 alt="donut-cake">
+
+                                        </a>
+                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
+                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
+                                                  data-id="product-actions-13049201" enctype="multipart/form-data">
+                                                <div>
+
+                                                    <a data-toggle="tooltip" title="Xem nhanh" href="/donut-cake"
+                                                       data-handle="donut-cake"
+                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+
+
+                                                    <input class="hidden" type="hidden" name="variantId"
+                                                           value="21561860"/>
+                                                    <button class="button_action btn btn-cart btn btn-circle left-to"
+                                                            title="Chọn sản phẩm" type="button"
+                                                            onclick="window.location.href='/donut-cake'">
+                                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                                    </button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="infor">
+                                        <h3 class="title"><a href="/donut-cake" title="Donut Cake">Donut Cake</a></h3>
+                                        <div class="box-price">
+
+
+			<span class="special-price">
+				<span class="price product-price">35.000₫</span>
+			</span>
+
+                                            <span class="product-item-price-sale old-price">&nbsp;&nbsp;
+				<span class="compare-price price product-price-old hidden-xs">38.000₫</span>
+			</span>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <aside class="left-content col-xs-12 col-sm-12 col-lg-3 col-md-3">
+            <div class="aside-item aside-product aside-vanchuyen margin-bottom-30">
+                <div class="aside-content">
+                    <div class="vanchuyen">
+                        <div>
+                            <div class="icon">
+                                <img src="//bizweb.dktcdn.net/thumb/icon/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
+                                     data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/service_1.png?1553482554643"
+                                     alt="alt">
+                            </div>
+                            Vận chuyển miễn phí
+                        </div>
+                        <p><span>- Nội thành Hà Nội:</span> với đơn hàng trên <b>300.000đ</b></p>
+                        <p><span> - Toàn quốc:</span> với đơn hàng trên <b>1.000.000đ</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="aside-item aside-product border-none aside-policy margin-bottom-0">
+                <div class="icon">
+                    <img src="//bizweb.dktcdn.net/thumb/icon/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
+                         data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/service_2.png?1553482554643"
+                         alt="alt">
+                </div>
+                <p>Giao hàng tận nơi và nhanh chóng</p>
+            </div>
+            <div class="aside-item aside-product aside-policy margin-bottom-30">
+                <div class="icon">
+                    <img src="//bizweb.dktcdn.net/thumb/icon/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
+                         data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/service_3.png?1553482554643"
+                         alt="alt">
+                </div>
+                <p>Thu tiền tại nhà, đảm bảo an toàn</p>
+            </div>
+            <div class="sidebar_extra">
+                <div class="sidebar_title">
+                    <div class="title">
+                        <h2 class="margin-top-0 title_sidebar">
+                            <a href="san-pham-noi-bat" title="Món ăn nổi bật">Món ăn nổi bật</a>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="cover_item_sidebar">
+
+
+                    <div class="item_sidebar">
+                        <div class="wrap-img">
+                            <a class="image_sidebar" href="/lamington" title="Chocolate Iced">
+
+                                <img class="img-responsive"
+                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try2-jpeg.jpg?v=1541043582000"
+                                     alt="lamington">
+
+                            </a>
+                        </div>
+                        <div class="infor">
+                            <h3><a href="/lamington" title="Chocolate Iced">Lamington</a></h3>
+                            <div class="box-price">
+
+
+					<span class="special-price">
+						<span class="price product-price">300.000₫</span>
+					</span>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="item_sidebar">
+                        <div class="wrap-img">
+                            <a class="image_sidebar" href="/strawberry-cake" title="Chocolate Iced">
+
+                                <img class="img-responsive"
+                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try4-jpeg.jpg?v=1541043991477"
+                                     alt="strawberry-cake">
+
+                            </a>
+                        </div>
+                        <div class="infor">
+                            <h3><a href="/strawberry-cake" title="Chocolate Iced">Strawberry Cake</a></h3>
+                            <div class="box-price">
+
+
+					<span class="special-price">
+						<span class="price product-price">450.000₫</span>
+					</span>
+
+                                <span class="product-item-price-sale old-price">
+						<span class="compare-price price product-price-old">469.000₫</span>
+					</span>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="item_sidebar">
+                        <div class="wrap-img">
+                            <a class="image_sidebar" href="/sweet-potato-tart" title="Chocolate Iced">
+
+                                <img class="img-responsive"
+                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try12-jpeg.jpg?v=1542253163927"
+                                     alt="sweet-potato-tart">
+
+                            </a>
+                        </div>
+                        <div class="infor">
+                            <h3><a href="/sweet-potato-tart" title="Chocolate Iced">Sweet Potato Tart</a></h3>
+                            <div class="box-price">
+
+					<span class="special-price">
+						<span class="price product-price">Liên hệ</span>
+					</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="item_sidebar">
+                        <div class="wrap-img">
+                            <a class="image_sidebar" href="/fruit-cream-puff" title="Chocolate Iced">
+
+                                <img class="img-responsive"
+                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try13.jpg?v=1541044259573"
+                                     alt="fruit-cream-puff">
+
+                            </a>
+                        </div>
+                        <div class="infor">
+                            <h3><a href="/fruit-cream-puff" title="Chocolate Iced">Fruit Cream Puff</a></h3>
+                            <div class="box-price">
+
+
+					<span class="special-price">
+						<span class="price product-price">150.000₫</span>
+					</span>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="item_sidebar">
+                        <div class="wrap-img">
+                            <a class="image_sidebar" href="/espresso-con-panna" title="Chocolate Iced">
+
+                                <img class="img-responsive"
+                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
+                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try15-jpeg.jpg?v=1541047354220"
+                                     alt="espresso-con-panna">
+
+                            </a>
+                        </div>
+                        <div class="infor">
+                            <h3><a href="/espresso-con-panna" title="Chocolate Iced">Espresso Con Panna</a></h3>
+                            <div class="box-price">
+
+
+					<span class="special-price">
+						<span class="price product-price">150.000₫</span>
+					</span>
+
+                                <span class="product-item-price-sale old-price">
+						<span class="compare-price price product-price-old">165.000₫</span>
+					</span>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+</section>
+
+<div id="aweCallback">
+    <script>
+        var productJson = {
+            "id": 13049772,
+            "name": "Chocolate Iced",
+            "alias": "chocolate-iced",
+            "vendor": "Han Bakery",
+            "type": "Doughnut",
+            "price": 100000.0000,
+            "price_max": 250000.0000,
+            "price_min": 100000.0000,
+            "price_varies": true,
+            "compare_at_price_max": 300000.0000,
+            "compare_at_price_min": 120000.0000,
+            "compare_at_price_varies": true,
+            "template_layout": null,
+            "tags": null,
+            "meta_title": null,
+            "meta_description": null,
+            "summary": null,
+            "featured_image": {
+                "alt": "",
+                "id": 29114516,
+                "product_id": 13049772,
+                "position": "1",
+                "src": "//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703",
+                "attached_to_variant": false,
+                "variant_ids": [21749517],
+                "width": 971,
+                "height": 800
+            },
+            "images": [{
+                "alt": "",
+                "id": 29114516,
+                "product_id": 13049772,
+                "position": "1",
+                "src": "//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703",
+                "attached_to_variant": true,
+                "variant_ids": [21749517],
+                "width": 971,
+                "height": 800
+            }, {
+                "alt": "",
+                "id": 29116474,
+                "product_id": 13049772,
+                "position": "2",
+                "src": "//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947",
+                "attached_to_variant": true,
+                "variant_ids": [21563056],
+                "width": 971,
+                "height": 800
+            }, {
+                "alt": "",
+                "id": 29116534,
+                "product_id": 13049772,
+                "position": "3",
+                "src": "//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947",
+                "attached_to_variant": true,
+                "variant_ids": [21749668],
+                "width": 971,
+                "height": 800
+            }, {
+                "alt": "",
+                "id": 29116650,
+                "product_id": 13049772,
+                "position": "4",
+                "src": "//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390",
+                "attached_to_variant": true,
+                "variant_ids": [21749693],
+                "width": 971,
+                "height": 800
+            }, {
+                "alt": "",
+                "id": 29294871,
+                "product_id": 13049772,
+                "position": "5",
+                "src": "//bizweb.dktcdn.net/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353",
+                "attached_to_variant": false,
+                "variant_ids": [],
+                "width": 971,
+                "height": 800
+            }],
+            "options": ["Kích thước", "Màu sắc"],
+            "variants": [{
+                "id": 21563056,
+                "barcode": null,
+                "sku": "SP21_01",
+                "price": 100000.0000,
+                "compare_at_price": 120000.0000,
+                "options": ["15cm", "Cam"],
+                "option1": "15cm",
+                "option2": "Cam",
+                "option3": null,
+                "title": "15cm / Cam",
+                "taxable": false,
+                "inventory_management": "",
+                "inventory_policy": "deny",
+                "inventory_quantity": 1,
+                "weight": 0.0,
+                "weight_unit": "kg",
+                "image": {
+                    "alt": "",
+                    "id": 29116474,
+                    "product_id": 13049772,
+                    "position": "2",
+                    "src": "//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947",
+                    "attached_to_variant": true,
+                    "variant_ids": [21563056],
+                    "width": 971,
+                    "height": 800
+                },
+                "requires_shipping": true,
+                "selected": false,
+                "url": "/chocolate-iced?variantid=21563056",
+                "available": true
+            }, {
+                "id": 21749517,
+                "barcode": null,
+                "sku": "SP21_02",
+                "price": 250000.0000,
+                "compare_at_price": 300000.0000,
+                "options": ["20cm", "Nâu"],
+                "option1": "20cm",
+                "option2": "Nâu",
+                "option3": null,
+                "title": "20cm / Nâu",
+                "taxable": false,
+                "inventory_management": "bizweb",
+                "inventory_policy": "deny",
+                "inventory_quantity": 2,
+                "weight": 0.0,
+                "weight_unit": "kg",
+                "image": {
+                    "alt": "",
+                    "id": 29114516,
+                    "product_id": 13049772,
+                    "position": "1",
+                    "src": "//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703",
+                    "attached_to_variant": true,
+                    "variant_ids": [21749517],
+                    "width": 971,
+                    "height": 800
+                },
+                "requires_shipping": true,
+                "selected": false,
+                "url": "/chocolate-iced?variantid=21749517",
+                "available": true
+            }, {
+                "id": 21749668,
+                "barcode": null,
+                "sku": "SP21_03",
+                "price": 170000.0000,
+                "compare_at_price": 189999.0000,
+                "options": ["15cm", "Nâu"],
+                "option1": "15cm",
+                "option2": "Nâu",
+                "option3": null,
+                "title": "15cm / Nâu",
+                "taxable": false,
+                "inventory_management": "bizweb",
+                "inventory_policy": "deny",
+                "inventory_quantity": 0,
+                "weight": 0.0,
+                "weight_unit": "kg",
+                "image": {
+                    "alt": "",
+                    "id": 29116534,
+                    "product_id": 13049772,
+                    "position": "3",
+                    "src": "//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947",
+                    "attached_to_variant": true,
+                    "variant_ids": [21749668],
+                    "width": 971,
+                    "height": 800
+                },
+                "requires_shipping": true,
+                "selected": false,
+                "url": "/chocolate-iced?variantid=21749668",
+                "available": false
+            }, {
+                "id": 21749693,
+                "barcode": null,
+                "sku": null,
+                "price": 160000.0000,
+                "compare_at_price": 170000.0000,
+                "options": ["20cm", "Cam"],
+                "option1": "20cm",
+                "option2": "Cam",
+                "option3": null,
+                "title": "20cm / Cam",
+                "taxable": false,
+                "inventory_management": "bizweb",
+                "inventory_policy": "deny",
+                "inventory_quantity": 1,
+                "weight": 0.0,
+                "weight_unit": "kg",
+                "image": {
+                    "alt": "",
+                    "id": 29116650,
+                    "product_id": 13049772,
+                    "position": "4",
+                    "src": "//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390",
+                    "attached_to_variant": true,
+                    "variant_ids": [21749693],
+                    "width": 971,
+                    "height": 800
+                },
+                "requires_shipping": true,
+                "selected": false,
+                "url": "/chocolate-iced?variantid=21749693",
+                "available": true
+            }],
+            "selected_variant": null,
+            "available": true,
+            "content": "\u003cp\u003e\u003cspan style=\u0022font-size:14px;\u0022\u003e\u003cspan style=\u0022font-family:Arial,Helvetica,sans-serif;\u0022\u003eDoughnut\u0026nbsp;(hay gọi là\u0026nbsp;donut\u0026nbsp;trong tiếng Mỹ) là một loại bánh ngọt\u0026nbsp;rán hoặc nướng để ăn tráng miệng hoặc ăn vặt. Đây là loại bánh rất nổi tiếng và phổ biến ở nhiều đất nước phương Tây, có thể được mua trong cửa hàng hoặc tự làm ở nhà. Thường bánh có dạng hình vòng, nhưng cũng có thể có hình tròn nhỏ nhồi nhân bên trong. Bánh thường được phủ nhiều loại kem, socola và hạt đường trang trí.\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\u0022font-size:14px;\u0022\u003e\u003cspan style=\u0022font-family:Arial,Helvetica,sans-serif;\u0022\u003eHai loại donut thường thấy là donut hình vòng và donut tròn nhồi nhân mứt, thạch, kem trứng, sô cô la\u0026nbsp;bên trong. Hầu hết các bánh donut thường được trang trí đường bông tuyết, kem, sô cô la, dừa vụn hoặc thậm chí áo đường hay dừa vụn lên toàn bộ bánh.\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+            "summary_or_content": "\u003cp\u003e\u003cspan style=\u0022font-size:14px;\u0022\u003e\u003cspan style=\u0022font-family:Arial,Helvetica,sans-serif;\u0022\u003eDoughnut\u0026nbsp;(hay gọi là\u0026nbsp;donut\u0026nbsp;trong tiếng Mỹ) là một loại bánh ngọt\u0026nbsp;rán hoặc nướng để ăn tráng miệng hoặc ăn vặt. Đây là loại bánh rất nổi tiếng và phổ biến ở nhiều đất nước phương Tây, có thể được mua trong cửa hàng hoặc tự làm ở nhà. Thường bánh có dạng hình vòng, nhưng cũng có thể có hình tròn nhỏ nhồi nhân bên trong. Bánh thường được phủ nhiều loại kem, socola và hạt đường trang trí.\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\n\u003cp\u003e\u003cspan style=\u0022font-size:14px;\u0022\u003e\u003cspan style=\u0022font-family:Arial,Helvetica,sans-serif;\u0022\u003eHai loại donut thường thấy là donut hình vòng và donut tròn nhồi nhân mứt, thạch, kem trứng, sô cô la\u0026nbsp;bên trong. Hầu hết các bánh donut thường được trang trí đường bông tuyết, kem, sô cô la, dừa vụn hoặc thậm chí áo đường hay dừa vụn lên toàn bộ bánh.\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+            "created_on": "2018-11-01T11:45:38Z",
+            "published_on": "2018-11-01T11:45:00Z",
+            "object_type": null
+        };
+
+        var variantsize = true;
+
+        var alias = 'chocolate-iced';
+
+        var productOptionsSize = 0;
+
+
+        var cdefault = 0;
+
+    </script>
+</div>
+

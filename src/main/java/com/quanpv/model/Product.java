@@ -29,7 +29,8 @@ public class Product {
     private Date createdDate;
     private Date updatedDate;
     private boolean isPopular;
-    private boolean isHighlighted;
+    @Column(name = "IS_FEATURE")
+    private boolean isFeature;
     private boolean isDraft;
 
     @ManyToOne
@@ -175,12 +176,12 @@ public class Product {
         isPopular = popular;
     }
 
-    public boolean isHighlighted() {
-        return isHighlighted;
+    public boolean isFeature() {
+        return isFeature;
     }
 
-    public void setHighlighted(boolean highlighted) {
-        isHighlighted = highlighted;
+    public void setFeature(boolean feature) {
+        isFeature = feature;
     }
 
     public Category getCategory() {
@@ -220,7 +221,7 @@ public class Product {
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
                 ", isPopular=" + isPopular +
-                ", isHighlighted=" + isHighlighted +
+                ", isHighlighted=" + isFeature +
                 ", category=" + category +
                 '}';
     }

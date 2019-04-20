@@ -9,7 +9,7 @@
 					<span class="view_full_size">
 						<a class="img-product" title="" href="">
 							<img id="product-featured-image-quickview"
-                                 class="img-responsive product-featured-image-quickview" src="assets/logo.jpg"
+                                 class="img-responsive product-featured-image-quickview" th:src="@{/assets/logo.jpg}"
                                  alt="quickview"/>
 						</a>
 					</span>
@@ -75,7 +75,7 @@
                 </form>
                 <div class="phone">
                     <div class="icon">
-                        <img src="assets/phone.png" alt="phone">
+                        <img th:src="@{/assets/phone.png}" alt="phone">
                     </div>
                     <p>Đặt mua qua điện thoại (8h - 22h)
                         <br><a th:href="@{'tel:' + ${mapConfig.phone}}" th:text="${mapConfig.phone}"></a>

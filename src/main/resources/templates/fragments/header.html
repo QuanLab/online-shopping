@@ -18,11 +18,9 @@
                 </div>
                 <div class="hidden-xs col-sm-6 col-md-2 col-lg-2 f-right">
                     <ul class="list-unstyled top_right">
-
-                        <li><a href="/account/login">Đăng nhập</a></li>
+                        <li><a href="/login">Đăng nhập</a></li>
                         <li><a>&</a></li>
-                        <li><a href="/account/register">Đăng ký</a></li>
-
+                        <li><a href="/register">Đăng ký</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +39,7 @@
                         <div class="logo_image">
 
                             <a href="/" class="logo-wrapper ">
-                                <img src="assets/logo.jpg" alt="logo Delicious" title="logo Delicious">
+                                <img th:src="@{/assets/logo.jpg}" alt="logo Delicious" th:title="${mapConfig.title}">
                             </a>
 
                         </div>
@@ -49,37 +47,22 @@
                     <div class="hidden-xs hidden-sm colmenu">
                         <div class="main-menu">
                             <ul class="list-unstyled main_menu">
-
-
                                 <li class=" nav-item nav-items active ">
-                                    <a class="nav-link" href="/">
-
-                                        <i class="fa fa-home"></i>
-
-                                        Trang chủ
-
-                                    </a>
+                                    <a class="nav-link" href="/"><i class="fa fa-home"></i>Trang chủ</a>
                                 </li>
-
-
                                 <li class="menu_hover nav-item nav-items ">
-                                    <a href="/collections" class="nav-link">
-
-                                        <i class="fa fa-birthday-cake"></i>
-
-                                        Sản phẩm
-                                    </a>
+                                    <a href="/san-pham" class="nav-link"><i class="fa fa-birthday-cake"></i>Sản phẩm</a>
                                     <ul class="list-unstyled menu_child_1">
-
-
-                                        <li><a href="/san-pham-noi-bat">Món ăn nổi bật</a></li>
-
+                                        <li>
+                                            <a th:href="${mapConfig.featured_product_url}" th:text="${mapConfig.featured_product}"></a>
+                                        </li>
 
                                         <li>
-                                            <a href="/mon-an-ua-chuong">Món ăn ưa chuộng</a>
+                                            <a th:href="${mapConfig.popular_product_url}" th:text="${mapConfig.popular_product}">
+                                            </a>
                                             <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                            <ul class="list-unstyled menu_child_2">
 
+                                            <ul class="list-unstyled menu_child_2">
                                                 <li>
                                                     <a href="/tra">Trà</a>
                                                 </li>
@@ -102,48 +85,21 @@
 
                                             </ul>
                                         </li>
-
-
-                                        <li><a href="/mon-an-moi">Món ăn mới</a></li>
-
-
+                                        <li><a th:href="${mapConfig.new_product_url}" th:text="${mapConfig.new_product}"></a></li>
                                     </ul>
                                 </li>
 
-
                                 <li class=" nav-item nav-items ">
                                     <a class="nav-link" href="/gioi-thieu">
-
-                                        <i class="fa fa-info-circle"></i>
-
-                                        Giới thiệu
-
+                                        <i class="fa fa-info-circle"></i>Giới thiệu
                                     </a>
                                 </li>
-
-
                                 <li class=" nav-item nav-items ">
-                                    <a class="nav-link" href="/tin-tuc">
-
-                                        <i class="fa fa-pencil-square-o"></i>
-
-                                        Blog
-
-                                    </a>
+                                    <a class="nav-link" href="/tin-tuc"><i class="fa fa-pencil-square-o"></i>Blog</a>
                                 </li>
-
-
                                 <li class=" nav-item nav-items ">
-                                    <a class="nav-link" href="/lien-he">
-
-                                        <i class="fa fa-phone"></i>
-
-                                        Liên hệ
-
-                                    </a>
+                                    <a class="nav-link" href="/lien-he"><i class="fa fa-phone"></i>Liên hệ</a>
                                 </li>
-
-
                             </ul>
                         </div>
                     </div>

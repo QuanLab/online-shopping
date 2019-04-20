@@ -5,6 +5,8 @@ import com.quanpv.model.Item;
 import com.quanpv.model.Product;
 import com.quanpv.service.*;
 import com.quanpv.utils.Constant;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  *
  */
 @Controller
-@RequestMapping("/san-pham/")
+@RequestMapping("/san-pham")
 public class ProductController {
+
+    private static final Logger logger = LogManager.getLogger();
 
     @Autowired
     private ProductService productService;
@@ -33,10 +38,11 @@ public class ProductController {
     private ItemService itemService;
     @Autowired
     private CartDTOService cartDTOService;
+    @Autowired
+    private WebConfigService webConfigService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getAllProducts(@RequestParam(value = "q", defaultValue = "") String query, Model model){
-
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
 
@@ -52,10 +58,18 @@ public class ProductController {
         return "products";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getProduct(@PathVariable("id") int id,  Model model){
+    @RequestMapping(value = "/{slug}", method = RequestMethod.GET)
+    public String getProduct(@PathVariable("slug") String slug,  Model model){
+        logger.info(slug);
+        Integer id = Integer.valueOf(slug.substring(slug.lastIndexOf(".")  +1, slug.length()));
 
         Product product = productService.getById(id);
+        logger.info(product);
+
+
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("breadcrumb", product.getName());
+        model.addAttribute("mapConfig", mapConfig);
 
         Iterable<Product> relatedProduct = productService.getTop3ByCategory_Id(
                 product.getCategory().getId());
