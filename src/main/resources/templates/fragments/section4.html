@@ -29,7 +29,7 @@
                                     <div class="product-box-news-detail">
 
                                         <div class="product-thumbnail-update-news f-left">
-                                            <a class="image_product" th:href="@{ '/' + ${product.slug}}" th:title="${product.name}">
+                                            <a class="image_product" th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug + '/'}}" th:title="${product.name}">
                                                 <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                                      th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                             </a>
@@ -37,7 +37,7 @@
 
                                         <div class="product-info-news f-left">
                                             <h3 class="product-name">
-                                                <a th:href="@{ '/' + ${product.slug}}"  th:title="${product.name}"
+                                                <a  th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug + '/'}}"  th:title="${product.name}"
                                                    th:text="${product.name}"></a>
                                             </h3>
 

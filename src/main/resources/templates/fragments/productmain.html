@@ -31,24 +31,6 @@
                                         <li class="dropdown-submenu nav-item lv2">
                                             <a class="nav-link" th:href="${mapConfig.popular_product_url}"
                                                th:text="${mapConfig.popular_product}"></a>
-                                            <i class="fa fa-angle-right"></i>
-                                            <ul class="dropdown-menu">
-                                                <li class="nav-item lv3">
-                                                    <a class="nav-link" href="/tra">Trà</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a class="nav-link" href="/banh">Bánh</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a class="nav-link" href="/kem-tuoi">Kem tươi</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a class="nav-link" href="/ca-phe">Cà phê</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a class="nav-link" href="/nuoc-ep">Nước ép</a>
-                                                </li>
-                                            </ul>
                                         </li>
                                         <li class="nav-item lv2">
                                             <a class="nav-link" th:href="${mapConfig.new_product_url}"
@@ -85,14 +67,14 @@
 
                         <div th:each="product : ${featuredProducts.content}" class="item_sidebar">
                             <div class="wrap-img">
-                                <a class="image_sidebar" th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
+                                <a class="image_sidebar" th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
                                     <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                          th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                 </a>
                             </div>
                             <div class="infor">
                                 <h3 class="title">
-                                    <a th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}"
+                                    <a th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}"
                                        th:text="${product.name}"></a>
                                 </h3>
                                 <div class="box-price">
