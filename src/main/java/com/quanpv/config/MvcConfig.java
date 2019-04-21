@@ -11,7 +11,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/san-pham/*").setViewName("product");
+        registry.addViewController("/san-pham").setViewName("product");
         registry.addViewController("/blog/*").setViewName("blog");
         registry.addViewController("/cart").setViewName("cart");
         registry.addViewController("/checkout").setViewName("checkout");

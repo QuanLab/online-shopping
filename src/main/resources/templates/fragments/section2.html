@@ -22,7 +22,7 @@
                             <div th:each="product : ${featuredProducts.content}" class="item_product_main margin-bottom-30">
                                 <div class="items">
                                     <div class="image">
-                                        <a class="image_product" th:href="@{ '/' + ${product.slug}}" th:title="${product.name}">
+                                        <a class="image_product" th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
                                             <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                                  th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                         </a>
@@ -48,8 +48,12 @@
                                         </h3>
                                         <div class="box-price">
                                             <span class="special-price">
-                                                <span class="price product-price" th:if="${product.price > 0}" th:text="${product.price}"></span>
-                                                <span class="price product-price" th:if="${product.price == 0}">Liên hệ</span>
+                                                <span class="price product-price" th:if="${product.price > 0 and product.salePrice > 0 }" th:text="${#numbers.formatDecimal(product.salePrice, 0, 0) + ' ₫'}"></span>
+                                                <span class="price product-price" th:if="${product.price > 0 and product.salePrice == 0 }" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                                <span class="product-item-price-sale old-price">&nbsp;&nbsp;
+				                                    <span class="compare-price price product-price-old hidden-xs" th:if="${product.salePrice > 0}" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+			                                    </span>
+                                                <span th:if="${product.price == 0}" class="price product-price">Liên hệ</span>
                                             </span>
                                         </div>
                                     </div>

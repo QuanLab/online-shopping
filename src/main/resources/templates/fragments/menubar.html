@@ -2,13 +2,11 @@
     <div class="acction">
 
         <div class="log">
-            <img src="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/user.png?1553482554643"
+            <img th:src="@{/assets/user.png}"
                  alt="Tạo tài khoản hoặc đăng nhập">
             <div class="linkacc">
-
                 <a href="/account/login">Đăng nhập</a>
                 <a href="/account/register">Đăng ký</a>
-
             </div>
         </div>
         <div class="search">
@@ -42,11 +40,11 @@
             <ul class="level0 " style="display:none;">
 
                 <li class="level1 ">
-                    <a href="/san-pham-noi-bat"><span>Món ăn nổi bật</span> </a>
+                    <a th:href="${mapConfig.featured_product_url}" th:text="${mapConfig.featured_product}"><span></span> </a>
                 </li>
 
                 <li class="level1 ">
-                    <a href="/mon-an-ua-chuong"> <span>Món ăn ưa chuộng</span> </a><i class="fa fa-angle-down"></i>
+                    <a th:href="${mapConfig.featured_product_url}"> <span th:text="${mapConfig.popular_product}"></span> </a><i class="fa fa-angle-down"></i>
                     <ul class="level1" style="display:none;">
                         <li class="level2 ">
                             <a href="/tra"><span>Trà</span></a>

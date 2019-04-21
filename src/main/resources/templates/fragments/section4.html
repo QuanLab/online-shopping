@@ -6,15 +6,15 @@
 
                     <div class="icon-banh">
                         <a href="/" class="icon-banh-wrapper ">
-                            <img src="//bizweb.dktcdn.net/thumb/thumb/100/332/765/themes/713219/assets/load-image.gif?1553482554643"
-                                 data-lazyload="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/icon-banh.png?1553482554643"
-                                 alt="icon-banh">
+                            <img th:src="@{/assets/load-image.gif}" th:data-lazyload="@{/assets/icon-banh.png}" alt="icon-banh">
                         </a>
                     </div>
 
                     <div class="title_module_main a-center">
                         <h2>
-                            <a href="san-pham-noi-bat" title="Món ăn mới" class="title">Món ăn mới</a>
+                            <a th:href="${mapConfig.new_product_url}" th:title="${mapConfig.new_product}" class="title"
+                               th:text="${mapConfig.new_product}">
+                            </a>
                         </h2>
                     </div>
                 </div>
@@ -24,170 +24,43 @@
                         <div class="product_news_wrap row">
 
 
-                            <div class="item_product_news col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-
+                            <div  th:each="product : ${newProducts.content}" class="item_product_news col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="product-box-news">
                                     <div class="product-box-news-detail">
+
                                         <div class="product-thumbnail-update-news f-left">
-                                            <a class="image_product" href="/lamington" title="Lamington">
-
-                                                <img class="img-responsive"
-                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                     data-lazyload="//bizweb.dktcdn.net/thumb/large/100/332/765/products/try2-jpeg.jpg?v=1541043582000"
-                                                     alt="lamington">
-
+                                            <a class="image_product" th:href="@{ '/' + ${product.slug}}" th:title="${product.name}">
+                                                <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
+                                                     th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                             </a>
                                         </div>
+
                                         <div class="product-info-news f-left">
                                             <h3 class="product-name">
-                                                <a href="/lamington" title="Lamington">Lamington</a>
+                                                <a th:href="@{ '/' + ${product.slug}}"  th:title="${product.name}"
+                                                   th:text="${product.name}"></a>
                                             </h3>
-
 
                                             <div class="price-box-news clearfix">
                                                 <div class="special-price-news f-left">
-                                                    <span class="price product-price-news">300.000₫</span>
+                                                    <span class="special-price">
+                                                        <span class="price product-price" th:if="${product.price > 0 and product.salePrice > 0 }" th:text="${#numbers.formatDecimal(product.salePrice, 0, 0) + ' ₫'}"></span>
+                                                        <span class="price product-price" th:if="${product.price > 0 and product.salePrice == 0 }" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                                        <span class="product-item-price-sale old-price">&nbsp;&nbsp;
+                                                            <span class="compare-price price product-price-old hidden-xs" th:if="${product.salePrice > 0}" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                                        </span>
+                                                        <span th:if="${product.price == 0}" class="price product-price">Liên hệ</span>
+                                                    </span>
                                                 </div>
                                             </div>
 
-
                                             <div class="product-summary-news">
-
-                                                <span class="text2line">   Bánh sinh nhật hay bánh gatô là một loại món ăn thường có ý nghĩa quan trọng và đặc...</span>
-
+                                                <span class="text2line" th:text="${product.description}"></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="item_product_news col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-
-                                <div class="product-box-news">
-                                    <div class="product-box-news-detail">
-                                        <div class="product-thumbnail-update-news f-left">
-                                            <a class="image_product" href="/strawberry-cake"
-                                               title="Strawberry Cake">
-
-                                                <img class="img-responsive"
-                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                     data-lazyload="//bizweb.dktcdn.net/thumb/large/100/332/765/products/try4-jpeg.jpg?v=1541043991477"
-                                                     alt="strawberry-cake">
-
-                                            </a>
-                                        </div>
-                                        <div class="product-info-news f-left">
-                                            <h3 class="product-name">
-                                                <a href="/strawberry-cake" title="Strawberry Cake">Strawberry
-                                                    Cake</a>
-                                            </h3>
-
-
-                                            <div class="price-box-news clearfix">
-                                                <div class="special-price-news f-left">
-                                                    <span class="price product-price-news">450.000₫</span>&nbsp;&nbsp;
-                                                </div>
-
-                                                <div class="old-price-news hidden-xs">
-					<span class="price product-price-old-news">
-						469.000₫
-					</span>
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="product-summary-news">
-
-				<span class="text2line"> Ở Bắc Mỹ, người ta gọi giống dâu này là Chiloensis trong khi người châu Âu gọi nó là Ananaserdbeere.
- Bạn...</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item_product_news col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-
-                                <div class="product-box-news">
-                                    <div class="product-box-news-detail">
-                                        <div class="product-thumbnail-update-news f-left">
-                                            <a class="image_product" href="/sweet-potato-tart"
-                                               title="Sweet Potato Tart">
-
-                                                <img class="img-responsive"
-                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                     data-lazyload="//bizweb.dktcdn.net/thumb/large/100/332/765/products/try12-jpeg.jpg?v=1542253163927"
-                                                     alt="sweet-potato-tart">
-
-                                            </a>
-                                        </div>
-                                        <div class="product-info-news f-left">
-                                            <h3 class="product-name">
-                                                <a href="/sweet-potato-tart" title="Sweet Potato Tart">Sweet Potato
-                                                    Tart</a>
-                                            </h3>
-
-                                            <div class="price-box-news clearfix">
-                                                <div class="special-price-news clearfix">
-                                                    <span class="price product-price-news">Liên hệ</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="product-summary-news">
-
-                                                <span class="text2line"> Mùi hương vanilla thơm lừng từ những chiếc bánh cookies thật sự làm giảm sự căng thẳng, xoa dịu thần...</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item_product_news col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-
-                                <div class="product-box-news">
-                                    <div class="product-box-news-detail">
-                                        <div class="product-thumbnail-update-news f-left">
-                                            <a class="image_product" href="/fruit-cream-puff"
-                                               title="Fruit Cream Puff">
-
-                                                <img class="img-responsive"
-                                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                     data-lazyload="//bizweb.dktcdn.net/thumb/large/100/332/765/products/try13.jpg?v=1541044259573"
-                                                     alt="fruit-cream-puff">
-
-                                            </a>
-                                        </div>
-                                        <div class="product-info-news f-left">
-                                            <h3 class="product-name">
-                                                <a href="/fruit-cream-puff" title="Fruit Cream Puff">Fruit Cream
-                                                    Puff</a>
-                                            </h3>
-
-
-                                            <div class="price-box-news clearfix">
-                                                <div class="special-price-news f-left">
-                                                    <span class="price product-price-news">150.000₫</span>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="product-summary-news">
-
-                                                <span class="text2line"> Bổ sung trái cây vào chế độ ăn uống hàng ngày sẽ đem lại những lợi ích sức khỏe tuyệt...</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
 
                         </div>
                     </div>

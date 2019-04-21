@@ -41,7 +41,7 @@ public class ProductController {
     @Autowired
     private WebConfigService webConfigService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String getAllProducts(@RequestParam(value = "q", defaultValue = "") String query, Model model){
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));

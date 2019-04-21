@@ -35,6 +35,7 @@ public class Application implements CommandLineRunner {
 		Product product = new Product("", "Áo phông nam", "Sản phẩm mới về", "/images/products/try2-jpeg.jpg", "", 120000, 12 );
 		product.setSalePrice(115000);
 		product.setFeature(true);
+		product.setPopular(true);
 		Product product2 = new Product("", "Váy ngắn", "Sản phẩm mới về", "/images/products/try13.jpg", "", 110000, 25);
 		product2.setFeature(true);
 		Product product3 = new Product("", "Quần Jean nam", "Sản phẩm mới về", "/images/products/try4-jpeg.jpg",  "", 150000, 25);
@@ -54,6 +55,7 @@ public class Application implements CommandLineRunner {
 		product8.setFeature(true);
 		Product product9 = new Product("", "Váy ngắn", "Sản phẩm mới về", "/images/products/try13.jpg", "", 110000, 25);
 		product9.setFeature(true);
+		product9.setPopular(true);
 		Product product10 = new Product("", "Quần Jean nam", "Sản phẩm mới về", "/images/products/try4-jpeg.jpg",  "", 150000, 25);
 		product10.setFeature(true);
 		Product product11 = new Product("", "Quần âu nam", "Sản phẩm mới về","/images/products/try12-jpeg.jpg", "", 280000, 35);

@@ -48,6 +48,9 @@ public class HomeController {
         Page<Product> popularProducts = productService.getPopular(0, 6);
         model.addAttribute("popularProducts", popularProducts);
 
+        Page<Product> newProducts = productService.getLastProduct(0, 4);
+        model.addAttribute("newProducts", newProducts);
+
         model.addAttribute("categories", categoryService.getAll());
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
@@ -100,6 +103,7 @@ public class HomeController {
                                  @RequestParam(value = "sort", required = false) String sortBy){
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm ưa chuộng");
+        mapConfig.put("isFeatured", "1");
         model.addAttribute("mapConfig", mapConfig);
 
         int offset = 0;
