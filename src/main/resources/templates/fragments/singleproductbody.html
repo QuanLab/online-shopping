@@ -129,46 +129,35 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 details-pro">
-                                <h1 class="title-product" itemprop="name">Chocolate Iced</h1>
+                                <h1 class="title-product" itemprop="name" th:text="${productItem.name}"></h1>
                                 <div class="fw" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                     <div class="group-status">
 
-											<span class="variant-sku">SP21_01
+											<span class="variant-sku" th:text="${productItem.isdn}">
 											</span>
                                         <span class="first_status"><span class="a_name">Tình trạng:</span>
-
-
 												<span class="status_name availabel hasvariant">
-
 													<span class="status_name availabel">
 														<link itemprop="availability" href="http://schema.org/InStock"/>
 														Còn hàng
 													</span>
-
 												</span>
-
-
-											</span>
+                                        </span>
                                     </div>
 
-                                    <div class="price-box">
-
-											<span class="special-price"><span
-                                                    class="price product-price">100.000₫</span>
-												<meta itemprop="price" content="100000">
-												<meta itemprop="priceCurrency" content="VND">
-											</span> <!-- Giá Khuyến mại -->
-                                        <span class="old-price" itemprop="priceSpecification" itemscope
-                                              itemtype="http://schema.org/priceSpecification">
-												<del class="price product-price-old">
-
-													120.000₫
-
-												</del>
-												<meta itemprop="price" content="120000">
-												<meta itemprop="priceCurrency" content="VND">
-											</span> <!-- Giá gốc -->
-
+                                    <div class="box-price">
+                                        <span class="special-price">
+                                            <span class="price product-price" th:if="${productItem.price > 0 and productItem.salePrice > 0 }" th:text="${#numbers.formatDecimal(productItem.salePrice, 0, 0) + ' ₫'}"></span>
+                                            <span class="price product-price" th:if="${productItem.price > 0 and productItem.salePrice == 0 }" th:text="${#numbers.formatDecimal(productItem.price, 0, 0) + ' ₫'}"></span>
+                                            <span class="price product-price-old sale">&nbsp;&nbsp;
+                                            <span class="compare-price price product-price-old hidden-xs" th:if="${productItem.salePrice > 0}" th:text="${#numbers.formatDecimal(productItem.price, 0, 0) + ' ₫'}"></span>
+                                                <span class="old-price" itemprop="priceSpecification" itemscope="" itemtype="http://schema.org/priceSpecification">
+                                                <del th:if="${productItem.salePrice > 0}" class="price product-price-old sale"></del>
+                                                <meta itemprop="price" th:content="${productItem.price}">
+                                                <meta itemprop="priceCurrency" content="VND">
+                                                </span>
+                                            <span th:if="${productItem.price == 0}" class="price product-price">Liên hệ</span>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -361,18 +350,10 @@
                                 <div class="tab-float">
 
                                     <div id="tab-1" class="tab-content content_extab">
-                                        <div class="rte">
-
-                                            <p><span style="font-size:14px;"><span
-                                                    style="font-family:Arial,Helvetica,sans-serif;">Doughnut&nbsp;(hay gọi là&nbsp;donut&nbsp;trong tiếng Mỹ) là một loại bánh ngọt&nbsp;rán hoặc nướng để ăn tráng miệng hoặc ăn vặt. Đây là loại bánh rất nổi tiếng và phổ biến ở nhiều đất nước phương Tây, có thể được mua trong cửa hàng hoặc tự làm ở nhà. Thường bánh có dạng hình vòng, nhưng cũng có thể có hình tròn nhỏ nhồi nhân bên trong. Bánh thường được phủ nhiều loại kem, socola và hạt đường trang trí.</span></span>
-                                            </p>
-                                            <p><span style="font-size:14px;"><span
-                                                    style="font-family:Arial,Helvetica,sans-serif;">Hai loại donut thường thấy là donut hình vòng và donut tròn nhồi nhân mứt, thạch, kem trứng, sô cô la&nbsp;bên trong. Hầu hết các bánh donut thường được trang trí đường bông tuyết, kem, sô cô la, dừa vụn hoặc thậm chí áo đường hay dừa vụn lên toàn bộ bánh.</span></span>
-                                            </p>
+                                        <div class="rte" th:utext="${productItem.description}">
 
                                         </div>
                                     </div>
-
 
                                     <div id="tab-3" class="tab-content content_extab tab-review-c">
                                         <div class="rte">
@@ -444,7 +425,7 @@
 
                     <div class="title_module_main title_module_child a-center margin-bottom-20">
                         <h2>
-                            <a href="/nuoc-ep" title="Món ăn cùng loại">Món ăn cùng loại</a>
+                            <a href="#" title="Món ăn cùng loại">Sản phẩm cùng loại</a>
                         </h2>
                     </div>
                     <div class="wrap_owl margin-bottom-0">
@@ -460,297 +441,49 @@
                              data-margin="30">
 
 
-                            <div class="item_product_main">
-
+                            <div th:each="product : ${ relatedProducts.content }" class="item_product_main">
 
                                 <div class="items">
-
                                     <div class="image">
-                                        <a class="image_product" href="/cream-puff" title="Cream Puff">
-
-                                            <img class="img-responsive"
-                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try18-jpeg.jpg?v=1541047476027"
-                                                 alt="cream-puff">
-
+                                        <a class="image_product" th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
+                                            <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
+                                                 th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                         </a>
                                         <div class="icon-action hidden-xs hidden-sm hidden-md">
-                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
-                                                  data-id="product-actions-13049751" enctype="multipart/form-data">
+                                            <form action="/cart/add" method="post" class="variants form-nut-grid" data-id="product-actions-13049130" enctype="multipart/form-data">
                                                 <div>
-
-                                                    <a data-toggle="tooltip" title="Xem nhanh" href="/cream-puff"
-                                                       data-handle="cream-puff"
+                                                    <a data-toggle="tooltip" title="Xem nhanh" th:href="@{ '/' + ${product.slug}}" data-handle="lamington"
                                                        class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-
-
-                                                    <input type="hidden" name="variantId" value="21563033"/>
-                                                    <button class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart "
-                                                            title="Thêm vào giỏ hàng">
+                                                    <input type="hidden" name="variantId" value="21561723" />
+                                                    <button th:if="${product.price > 0}" title="Thêm vào giỏ hàng"
+                                                            class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart">
                                                         <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                                     </button>
-
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
 
                                     <div class="infor">
-                                        <h3 class="title"><a href="/cream-puff" title="Cream Puff">Cream Puff</a></h3>
-                                        <div class="box-price">
-
-
-			<span class="special-price">
-				<span class="price product-price">70.000₫</span>
-			</span>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="item_product_main">
-
-
-                                <div class="sale-box">
-	<span>-
-10%
-</span>
-                                </div>
-
-                                <div class="items">
-
-                                    <div class="image">
-                                        <a class="image_product" href="/honey-wheat" title="Honey Wheat">
-
-                                            <img class="img-responsive"
-                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try17-jpeg.jpg?v=1541047432060"
-                                                 alt="honey-wheat">
-
-                                        </a>
-                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
-                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
-                                                  data-id="product-actions-13049729" enctype="multipart/form-data">
-                                                <div>
-
-                                                    <a data-toggle="tooltip" title="Xem nhanh" href="/honey-wheat"
-                                                       data-handle="honey-wheat"
-                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-
-
-                                                    <input class="hidden" type="hidden" name="variantId"
-                                                           value="21562972"/>
-                                                    <button class="button_action btn btn-cart btn btn-circle left-to"
-                                                            title="Chọn sản phẩm" type="button"
-                                                            onclick="window.location.href='/honey-wheat'">
-                                                        <i class="fa fa-cog" aria-hidden="true"></i>
-                                                    </button>
-
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="infor">
-                                        <h3 class="title"><a href="/honey-wheat" title="Honey Wheat">Honey Wheat</a>
+                                        <h3 class="title">
+                                            <a th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}" th:text="${product.name}"></a>
                                         </h3>
                                         <div class="box-price">
-
-
-			<span class="special-price">
-				<span class="price product-price">45.000₫</span>
-			</span>
-
-                                            <span class="product-item-price-sale old-price">&nbsp;&nbsp;
-				<span class="compare-price price product-price-old hidden-xs">50.000₫</span>
-			</span>
-
-
+                                                <span class="special-price">
+                                                    <span class="price product-price" th:if="${product.price > 0 and product.salePrice > 0 }" th:text="${#numbers.formatDecimal(product.salePrice, 0, 0) + ' ₫'}"></span>
+                                                    <span class="price product-price" th:if="${product.price > 0 and product.salePrice == 0 }" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                                    <span class="product-item-price-sale old-price">&nbsp;&nbsp;
+                                                        <span class="compare-price price product-price-old hidden-xs" th:if="${product.salePrice > 0}" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                                    </span>
+                                                    <span th:if="${product.price == 0}" class="price product-price">Liên hệ</span>
+                                                </span>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-
-
-                            <div class="item_product_main">
-
-
-                                <div class="items">
-
-                                    <div class="image">
-                                        <a class="image_product" href="/strawberry-frappuccino"
-                                           title="Strawberry Frappuccino">
-
-                                            <img class="img-responsive"
-                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try16-jpeg.jpg?v=1541047399773"
-                                                 alt="strawberry-frappuccino">
-
-                                        </a>
-                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
-                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
-                                                  data-id="product-actions-13049726" enctype="multipart/form-data">
-                                                <div>
-
-                                                    <a data-toggle="tooltip" title="Xem nhanh"
-                                                       href="/strawberry-frappuccino"
-                                                       data-handle="strawberry-frappuccino"
-                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-
-
-                                                    <input type="hidden" name="variantId" value="21562969"/>
-                                                    <button class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart "
-                                                            title="Thêm vào giỏ hàng">
-                                                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                                                    </button>
-
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="infor">
-                                        <h3 class="title"><a href="/strawberry-frappuccino"
-                                                             title="Strawberry Frappuccino">Strawberry Frappuccino</a>
-                                        </h3>
-                                        <div class="box-price">
-
-
-			<span class="special-price">
-				<span class="price product-price">150.000₫</span>
-			</span>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="item_product_main">
-
-
-                                <div class="items">
-
-                                    <div class="image">
-                                        <a class="image_product" href="/lemon-juice" title="Lemon juice">
-
-                                            <img class="img-responsive"
-                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try14-jpeg.jpg?v=1541044297257"
-                                                 alt="lemon-juice">
-
-                                        </a>
-                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
-                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
-                                                  data-id="product-actions-13049224" enctype="multipart/form-data">
-                                                <div>
-
-                                                    <a data-toggle="tooltip" title="Xem nhanh" href="/lemon-juice"
-                                                       data-handle="lemon-juice"
-                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-
-
-                                                    <button class="button_action btn btn-circle btn-cart left-to  hidden"
-                                                            title="Hết hàng" disabled>
-                                                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                                                    </button>
-
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="infor">
-                                        <h3 class="title"><a href="/lemon-juice" title="Lemon juice">Lemon juice</a>
-                                        </h3>
-                                        <div class="box-price">
-
-			<span class="special-price">
-				<span class="price product-price">Liên hệ</span>
-			</span>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="item_product_main">
-
-
-                                <div class="sale-box">
-	<span>-
-8%
-</span>
-                                </div>
-
-                                <div class="items">
-
-                                    <div class="image">
-                                        <a class="image_product" href="/donut-cake" title="Donut Cake">
-
-                                            <img class="img-responsive"
-                                                 src="//bizweb.dktcdn.net/thumb/grande/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                                 data-lazyload="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try7-jpeg.jpg?v=1541044098940"
-                                                 alt="donut-cake">
-
-                                        </a>
-                                        <div class="icon-action hidden-xs hidden-sm hidden-md">
-                                            <form action="/cart/add" method="post" class="variants form-nut-grid"
-                                                  data-id="product-actions-13049201" enctype="multipart/form-data">
-                                                <div>
-
-                                                    <a data-toggle="tooltip" title="Xem nhanh" href="/donut-cake"
-                                                       data-handle="donut-cake"
-                                                       class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-
-
-                                                    <input class="hidden" type="hidden" name="variantId"
-                                                           value="21561860"/>
-                                                    <button class="button_action btn btn-cart btn btn-circle left-to"
-                                                            title="Chọn sản phẩm" type="button"
-                                                            onclick="window.location.href='/donut-cake'">
-                                                        <i class="fa fa-cog" aria-hidden="true"></i>
-                                                    </button>
-
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="infor">
-                                        <h3 class="title"><a href="/donut-cake" title="Donut Cake">Donut Cake</a></h3>
-                                        <div class="box-price">
-
-
-			<span class="special-price">
-				<span class="price product-price">35.000₫</span>
-			</span>
-
-                                            <span class="product-item-price-sale old-price">&nbsp;&nbsp;
-				<span class="compare-price price product-price-old hidden-xs">38.000₫</span>
-			</span>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
 
                         </div>
 
@@ -796,149 +529,37 @@
                 <div class="sidebar_title">
                     <div class="title">
                         <h2 class="margin-top-0 title_sidebar">
-                            <a href="san-pham-noi-bat" title="Món ăn nổi bật">Món ăn nổi bật</a>
+                            <a th:href="${mapConfig.featured_product_url}" th:text="${mapConfig.featured_product}"></a>
                         </h2>
                     </div>
                 </div>
 
                 <div class="cover_item_sidebar">
 
-
-                    <div class="item_sidebar">
+                    <div th:each="product : ${featuredProducts.content}" class="item_sidebar">
                         <div class="wrap-img">
-                            <a class="image_sidebar" href="/lamington" title="Chocolate Iced">
-
-                                <img class="img-responsive"
-                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try2-jpeg.jpg?v=1541043582000"
-                                     alt="lamington">
-
+                            <a class="image_sidebar" th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
+                                <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
+                                     th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
+                            </a>
                             </a>
                         </div>
                         <div class="infor">
-                            <h3><a href="/lamington" title="Chocolate Iced">Lamington</a></h3>
+                            <h3 class="title">
+                                <a th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}" th:text="${product.name}"></a>
+                            </h3>
                             <div class="box-price">
-
-
-					<span class="special-price">
-						<span class="price product-price">300.000₫</span>
-					</span>
-
-
+                                <span class="special-price">
+                                    <span class="price product-price" th:if="${product.price > 0 and product.salePrice > 0 }" th:text="${#numbers.formatDecimal(product.salePrice, 0, 0) + ' ₫'}"></span>
+                                    <span class="price product-price" th:if="${product.price > 0 and product.salePrice == 0 }" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                    <span class="product-item-price-sale old-price">&nbsp;&nbsp;
+                                    <span class="compare-price price product-price-old hidden-xs" th:if="${product.salePrice > 0}" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                    </span>
+                                     <span th:if="${product.price == 0}" class="price product-price">Liên hệ</span>
+                                </span>
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="item_sidebar">
-                        <div class="wrap-img">
-                            <a class="image_sidebar" href="/strawberry-cake" title="Chocolate Iced">
-
-                                <img class="img-responsive"
-                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try4-jpeg.jpg?v=1541043991477"
-                                     alt="strawberry-cake">
-
-                            </a>
-                        </div>
-                        <div class="infor">
-                            <h3><a href="/strawberry-cake" title="Chocolate Iced">Strawberry Cake</a></h3>
-                            <div class="box-price">
-
-
-					<span class="special-price">
-						<span class="price product-price">450.000₫</span>
-					</span>
-
-                                <span class="product-item-price-sale old-price">
-						<span class="compare-price price product-price-old">469.000₫</span>
-					</span>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="item_sidebar">
-                        <div class="wrap-img">
-                            <a class="image_sidebar" href="/sweet-potato-tart" title="Chocolate Iced">
-
-                                <img class="img-responsive"
-                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try12-jpeg.jpg?v=1542253163927"
-                                     alt="sweet-potato-tart">
-
-                            </a>
-                        </div>
-                        <div class="infor">
-                            <h3><a href="/sweet-potato-tart" title="Chocolate Iced">Sweet Potato Tart</a></h3>
-                            <div class="box-price">
-
-					<span class="special-price">
-						<span class="price product-price">Liên hệ</span>
-					</span>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="item_sidebar">
-                        <div class="wrap-img">
-                            <a class="image_sidebar" href="/fruit-cream-puff" title="Chocolate Iced">
-
-                                <img class="img-responsive"
-                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try13.jpg?v=1541044259573"
-                                     alt="fruit-cream-puff">
-
-                            </a>
-                        </div>
-                        <div class="infor">
-                            <h3><a href="/fruit-cream-puff" title="Chocolate Iced">Fruit Cream Puff</a></h3>
-                            <div class="box-price">
-
-
-					<span class="special-price">
-						<span class="price product-price">150.000₫</span>
-					</span>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="item_sidebar">
-                        <div class="wrap-img">
-                            <a class="image_sidebar" href="/espresso-con-panna" title="Chocolate Iced">
-
-                                <img class="img-responsive"
-                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/themes/713219/assets/no-image.jpg?1553482554643"
-                                     data-lazyload="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try15-jpeg.jpg?v=1541047354220"
-                                     alt="espresso-con-panna">
-
-                            </a>
-                        </div>
-                        <div class="infor">
-                            <h3><a href="/espresso-con-panna" title="Chocolate Iced">Espresso Con Panna</a></h3>
-                            <div class="box-price">
-
-
-					<span class="special-price">
-						<span class="price product-price">150.000₫</span>
-					</span>
-
-                                <span class="product-item-price-sale old-price">
-						<span class="compare-price price product-price-old">165.000₫</span>
-					</span>
-
-
-                            </div>
-                        </div>
-                    </div>
-
 
                 </div>
             </div>

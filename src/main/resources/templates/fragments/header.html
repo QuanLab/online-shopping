@@ -63,26 +63,9 @@
                                             <i class="fa fa-angle-right" aria-hidden="true"></i>
 
                                             <ul class="list-unstyled menu_child_2">
-                                                <li>
-                                                    <a href="/tra">Trà</a>
+                                                <li th:each="cat:${categories}">
+                                                    <a th:href="@{'/' + ${cat.slug } + '/' }" th:text="${cat.name}"></a>
                                                 </li>
-
-                                                <li>
-                                                    <a href="/banh">Bánh</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="/kem-tuoi">Kem tươi</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="/ca-phe">Cà phê</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="/nuoc-ep">Nước ép</a>
-                                                </li>
-
                                             </ul>
                                         </li>
                                         <li><a th:href="${mapConfig.new_product_url}" th:text="${mapConfig.new_product}"></a></li>

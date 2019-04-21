@@ -25,14 +25,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
      * @param id
      * @return
      */
-    Iterable<Product> findByCategory_Id(int id);
-
-    /**
-     * get top3 by category id
-     * @param id
-     * @return
-     */
-    Iterable<Product> findTop3ByCategory_Id(int id);
+    Page<Product> findByCategory_Id(int id, Pageable pageable);
 
     /**
      *
@@ -49,8 +42,22 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
     Iterable<Product> findTop4ByOrderByIdDesc();
 
 
+    /**
+     * lay san pham noi bat
+     */
     Page<Product> findByIsFeatureIsTrue(Pageable pageable);
 
 
+    /**
+     * lay san pham ua chuong
+     * @param pageable
+     * @return
+     */
     Page<Product> findByIsPopularIsTrue(Pageable pageable);
+
+
+
+    Product findFirstBySlug(String slug);
+
 }
+

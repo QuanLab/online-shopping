@@ -22,7 +22,7 @@
                             <div th:each="product : ${featuredProducts.content}" class="item_product_main margin-bottom-30">
                                 <div class="items">
                                     <div class="image">
-                                        <a class="image_product" th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
+                                        <a class="image_product" th:href="@{ ${product.category.slug} + '/' + ${product.slug}} + '/'" th:title="${product.name}">
                                             <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                                  th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                         </a>
@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="infor">
                                         <h3 class="title">
-                                            <a th:href="@{ '/' + ${product.slug}}" th:title="${product.name}" th:text="${product.name}"></a>
+                                            <a th:href="@{ ${product.category.slug} + '/' + ${product.slug} + '/'}" th:title="${product.name}" th:text="${product.name}"></a>
                                         </h3>
                                         <div class="box-price">
                                             <span class="special-price">

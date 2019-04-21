@@ -31,6 +31,8 @@ public class Application implements CommandLineRunner {
 
 		Category category = new Category("Thời trang nam", "Thoi trang danh cho nam");
 		Category category2 = new Category("Thời trang nữ", "Thoi trang danh cho nu");
+		Category category3 = new Category("Đồng hồ", "Đồng hồ cao cấp dành cho doanh nhân");
+		category3.setSlug("dong-ho");
 
 		Product product = new Product("", "Áo phông nam", "Sản phẩm mới về", "/images/products/try2-jpeg.jpg", "", 120000, 12 );
 		product.setSalePrice(115000);
@@ -49,6 +51,7 @@ public class Application implements CommandLineRunner {
 		product6.setFeature(true);
 		Product product7 = new Product("", "Áo bánh bèo", "Sản phẩm mới về", "/images/products/try12-jpeg.jpg", "", 0, 25);
 		product7.setFeature(true);
+		product7.setPopular(true);
 
 		Product product8 = new Product("", "Áo phông nam", "Sản phẩm mới về", "/images/products/try2-jpeg.jpg", "", 120000, 12 );
 		product8.setSalePrice(115000);
@@ -58,6 +61,7 @@ public class Application implements CommandLineRunner {
 		product9.setPopular(true);
 		Product product10 = new Product("", "Quần Jean nam", "Sản phẩm mới về", "/images/products/try4-jpeg.jpg",  "", 150000, 25);
 		product10.setFeature(true);
+		product10.setPopular(true);
 		Product product11 = new Product("", "Quần âu nam", "Sản phẩm mới về","/images/products/try12-jpeg.jpg", "", 280000, 35);
 		product11.setFeature(true);
 
@@ -70,14 +74,15 @@ public class Application implements CommandLineRunner {
 		product5.setCategory(category2);
 		product6.setCategory(category2);
 		product7.setCategory(category);
-		product8.setCategory(category);
+		product8.setCategory(category3);
 		product9.setCategory(category);
-		product10.setCategory(category);
+		product10.setCategory(category3);
 		product11.setCategory(category);
-		product12.setCategory(category);
+		product12.setCategory(category3);
 
 		categoryService.save(category);
 		categoryService.save(category2);
+		categoryService.save(category3);
 
 		productService.save(product);
 		productService.save(product2);

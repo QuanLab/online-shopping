@@ -5,7 +5,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="icon-banh">
                         <a href="/" class="icon-banh-wrapper ">
-                            <img src="assets/load-image.gif" th:data-lazyload="@{/assets/icon-banh.png}"
+                            <img th:src="@{/assets/load-image.gif}" th:data-lazyload="@{/assets/icon-banh.png}"
                                  alt="icon-banh">
                         </a>
                     </div>
@@ -18,20 +18,14 @@
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="wrap_tab_uachuong">
-                        <ul class="tabs hidden-xs">
-                            <li class="tab-link current" data-tab="tab_1"><a href="javascript:;">Bánh</a></li>
-                            <li class="tab-link " data-tab="tab_2"><a href="javascript:;">Trà</a></li>
-                            <li class="tab-link " data-tab="tab_3"><a href="javascript:;">Kem tươi</a></li>
-                            <li class="tab-link " data-tab="tab_4"><a href="javascript:;">Cà phê</a></li>
-                            <li class="tab-link " data-tab="tab_5"><a href="javascript:;">Nước ép</a></li>
+                        <ul th:each="cat : ${categories}" class="tabs hidden-xs">
+                            <li class="tab-link" data-tab="tab_1">
+                                <a href="javascript:;" th:text="${cat.name}"></a>
+                            </li>
                         </ul>
                         <div class="select-container hidden-lg hidden-md hidden-sm">
-                            <select class="select" name="items" id="items">
-                                <option value="1">Bánh</option>
-                                <option value="2">Trà</option>
-                                <option value="3">Kem tươi</option>
-                                <option value="4">Cà phê</option>
-                                <option value="5">Nước ép</option>
+                            <select th:each="cat : ${ categories }" class="select" name="items" id="items">
+                                <option value="1" th:text="${cat.name}"></option>
                             </select>
                         </div>
                         <div class="wrap_content">
@@ -39,46 +33,43 @@
                             <div id="tab_1" class="tab_1 tab-content current" data-category="1">
                                 <div class="content_tab5_inner row">
 
-                                    <div class="item_product_main col-lg-3 col-md-3 col-sm-6 col-xs-6 margin-bottom-30">
+                                    <div th:each="product : ${popularProducts.content}" class="item_product_main col-lg-3 col-md-3 col-sm-6 col-xs-6 margin-bottom-30">
                                         <div class="items">
                                             <div class="image">
-                                                <a class="image_product" href="/lamington" title="Lamington">
+                                                <a class="image_product" th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
                                                     <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
-                                                         data-lazyload="/images/products/try2-jpeg.jpg" alt="lamington">
+                                                         th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                                 </a>
                                                 <div class="icon-action hidden-xs hidden-sm hidden-md">
-                                                    <form action="/cart/add" method="post"
-                                                          class="variants form-nut-grid"
-                                                          data-id="product-actions-13049130"
-                                                          enctype="multipart/form-data">
+                                                    <form action="/cart/add" method="post" class="variants form-nut-grid" data-id="product-actions-13049130" enctype="multipart/form-data">
                                                         <div>
-
-                                                            <a data-toggle="tooltip" title="Xem nhanh"
-                                                               href="/lamington" data-handle="lamington"
+                                                            <a data-toggle="tooltip" title="Xem nhanh" th:href="@{ '/' + ${product.slug}}" data-handle="lamington"
                                                                class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
-
-
-                                                            <input type="hidden" name="variantId" value="21561723"/>
-                                                            <button class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart "
-                                                                    title="Thêm vào giỏ hàng">
-                                                                <i class="fa fa-shopping-bag"
-                                                                   aria-hidden="true"></i>
+                                                            <input type="hidden" name="variantId" value="21561723" />
+                                                            <button th:if="${product.price > 0}" title="Thêm vào giỏ hàng"
+                                                                    class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart">
+                                                                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                                             </button>
-
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
 
                                             <div class="infor">
-                                                <h3 class="title"><a href="/lamington" title="Lamington">Lamington</a>
+                                                <h3 class="title">
+                                                    <a th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}" th:text="${product.name}"></a>
                                                 </h3>
                                                 <div class="box-price">
-			                                        <span class="special-price">
-				                                        <span class="price product-price">300.000₫</span>
-			                                        </span>
+                                                <span class="special-price">
+                                                    <span class="price product-price" th:if="${product.price > 0 and product.salePrice > 0 }" th:text="${#numbers.formatDecimal(product.salePrice, 0, 0) + ' ₫'}"></span>
+                                                    <span class="price product-price" th:if="${product.price > 0 and product.salePrice == 0 }" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                                    <span class="product-item-price-sale old-price">&nbsp;&nbsp;
+                                                        <span class="compare-price price product-price-old hidden-xs" th:if="${product.salePrice > 0}" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                                    </span>
+                                                    <span th:if="${product.price == 0}" class="price product-price">Liên hệ</span>
+                                                </span>
                                                 </div>
                                             </div>
                                         </div>

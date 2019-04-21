@@ -22,8 +22,8 @@ import java.util.Map;
 /**
  *
  */
-@Controller
-@RequestMapping("/san-pham")
+//@Controller
+//@RequestMapping("/san-pham")
 public class ProductController {
 
     private static final Logger logger = LogManager.getLogger();
@@ -58,31 +58,6 @@ public class ProductController {
         return "products";
     }
 
-    @RequestMapping(value = "/{slug}", method = RequestMethod.GET)
-    public String getProduct(@PathVariable("slug") String slug,  Model model){
-        logger.info(slug);
-        Integer id = Integer.valueOf(slug.substring(slug.lastIndexOf(".")  +1, slug.length()));
-
-        Product product = productService.getById(id);
-        logger.info(product);
-
-
-        Map<String, String> mapConfig = webConfigService.getAll();
-        mapConfig.put("breadcrumb", product.getName());
-        model.addAttribute("mapConfig", mapConfig);
-
-        Iterable<Product> relatedProduct = productService.getTop3ByCategory_Id(
-                product.getCategory().getId());
-
-        model.addAttribute("product", productService.getById(id));
-        model.addAttribute("products", relatedProduct);
-        model.addAttribute("categories", categoryService.getAll());
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
-
-        return "singleProduct";
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String addToCart(@PathVariable("id") int id, Model model){
 
@@ -112,7 +87,7 @@ public class ProductController {
         }
 
         model.addAttribute("product", productService.getById(id));
-        model.addAttribute("products", productService.getTop3ByCategory_Id(id));
+        model.addAttribute("products", productService.getByCategory_Id(id, 0, 9));
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
 
@@ -122,7 +97,7 @@ public class ProductController {
     @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
     public String getProductByCategory(@PathVariable("id") int id, Model model){
 
-        Iterable<Product> products = productService.getByCategoryId(id);
+        Iterable<Product> products = productService.getByCategory_Id(id, 0, 9);
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("products", products);
 

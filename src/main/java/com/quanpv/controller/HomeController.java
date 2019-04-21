@@ -52,19 +52,40 @@ public class HomeController {
         model.addAttribute("newProducts", newProducts);
 
         model.addAttribute("categories", categoryService.getAll());
+        logger.info(categoryService.getAll());
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
         return "index";
     }
 
-    @RequestMapping(value={"login"})
-    public String login(){
-        return "login";
+
+    @RequestMapping(value={"/{category}/{product}/"})
+    public String productDetail(Model model,
+                                @PathVariable("category") String categoryUrl,
+                                @PathVariable("product") String productUrl){
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("breadcrumb", "Tất cả sản phẩm");
+        model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("categories", categoryService.getAll());
+        logger.info(categoryUrl + "\t" +productUrl);
+
+        Product productItem = productService.findFirstBySlug(productUrl);
+        logger.info(productItem.toString());
+        model.addAttribute("productItem", productItem);
+
+        Page<Product> featuredProducts = productService.getFeatured(0, 6);
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        Page<Product> relatedProducts = productService.getByCategory_Id(productItem.getCategory().getId(), 0, 6);
+        model.addAttribute("relatedProducts", relatedProducts);
+//
+        return "singleProduct";
     }
 
     @RequestMapping(value={"san-pham"})
     public String collectionAll(Model model, @RequestParam(value = "page", required = false) Integer page,
                                 @RequestParam(value = "sort", required = false) String sortBy){
+        model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Tất cả sản phẩm");
         model.addAttribute("mapConfig", mapConfig);
@@ -85,6 +106,7 @@ public class HomeController {
     public String featuredProduct(Model model,
                                   @RequestParam(value = "page", required = false) Integer page,
                                   @RequestParam(value = "sort", required = false) String sortBy){
+        model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm nổi bật");
         model.addAttribute("mapConfig", mapConfig);
@@ -101,6 +123,8 @@ public class HomeController {
     public String popularProduct(Model model,
                                  @RequestParam(value = "page", required = false) Integer page,
                                  @RequestParam(value = "sort", required = false) String sortBy){
+        model.addAttribute("categories", categoryService.getAll());
+
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm ưa chuộng");
         mapConfig.put("isFeatured", "1");
@@ -123,6 +147,7 @@ public class HomeController {
     public String newProduct(Model model,
                              @RequestParam(value = "page", required = false) Integer page,
                              @RequestParam(value = "sort", required = false) String sortBy){
+        model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm mới");
         model.addAttribute("mapConfig", mapConfig);
@@ -141,6 +166,7 @@ public class HomeController {
 
     @RequestMapping(value={"lien-he"}, method = RequestMethod.GET)
     public String contact(Model model){
+        model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Liên hệ");
         model.addAttribute("mapConfig", mapConfig);
@@ -158,6 +184,7 @@ public class HomeController {
 
     @RequestMapping(value={"gioi-thieu"})
     public String about(Model model){
+        model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Giới thiệu Hoàng Anh Food");
         mapConfig.put("breadcrumb", "Giới thiệu");
@@ -167,6 +194,7 @@ public class HomeController {
 
     @RequestMapping(value={"tin-tuc"})
     public String news (Model model){
+        model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Blog Hoang Anh Food");
         mapConfig.put("breadcrumb", "Blog");
@@ -182,7 +210,7 @@ public class HomeController {
 
     @RequestMapping(value="/cart")
     public String cart(@RequestParam(value = "id", required = false) Integer id, Model model){
-
+        model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Giỏ hàng của tôi");
         mapConfig.put("breadcrumb", "Giỏ hàng");
@@ -198,12 +226,19 @@ public class HomeController {
         return "shoppingCart";
     }
 
+
+    @RequestMapping(value={"login"})
+    public String login(){
+        return "login";
+    }
+
+
     @RequestMapping(value="/cart", method = RequestMethod.POST)
     public String cartUpdate(@RequestParam(value = "quantity", required = false) List<Integer> quantityList,
                              Model model ){
 
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-
+        model.addAttribute("categories", categoryService.getAll());
         if(quantityList!=null) {
 
             List<Item> items = itemService.getByCart_IdCustomAndCart_Status(sessionID, Constant.STATUS_NEW);
@@ -222,7 +257,7 @@ public class HomeController {
 
     @RequestMapping(value="/checkout", method = RequestMethod.GET)
     public String checkOut(Model model){
-
+        model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Giỏ hàng của tôi");
         mapConfig.put("breadcrumb", "Giỏ hàng");
@@ -238,6 +273,8 @@ public class HomeController {
                                  @RequestParam(value = "address", required = false, defaultValue = "") String address,
                                  @RequestParam(value = "phone", required = false, defaultValue = "") String phone,
                                  Model model){
+        model.addAttribute("categories", categoryService.getAll());
+
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
 
         if(name.equals("")|| address.equals("")||phone.equals("")) {

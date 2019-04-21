@@ -24,16 +24,13 @@ public class ProductService {
         return repository.findById(id).orElse(null);
     }
 
-    public Iterable<Product> getByCategoryId(int id){
-        return repository.findByCategory_Id(id);
-    }
-
     public Iterable<Product> getByNameContaining(String name){
         return repository.findByNameContaining(name);
     }
 
-    public Iterable<Product> getTop3ByCategory_Id(int id){
-        return repository.findTop3ByCategory_Id(id);
+    public Page<Product> getByCategory_Id(Integer id, Integer offset, Integer limit) {
+        Pageable pageable = PageRequest.of(offset, limit);
+        return repository.findByCategory_Id(id, pageable);
     }
 
     public void save(Product product){
@@ -56,15 +53,6 @@ public class ProductService {
         return repository.findAll(pageable);
     }
 
-
-    /**
-     *
-     * @return
-     */
-    public Iterable<Product> getLastProduct() {
-        return repository.findTop4ByOrderByIdDesc();
-    }
-
     /**
      *
      * @return
@@ -81,6 +69,14 @@ public class ProductService {
     public Page<Product> getPopular(Integer offset, Integer limit) {
         Pageable pageable = PageRequest.of(offset, limit);
         return repository.findByIsPopularIsTrue(pageable);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Product findFirstBySlug(String slug) {
+        return repository.findFirstBySlug(slug);
     }
 
 }
