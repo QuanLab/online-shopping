@@ -9,10 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -53,48 +50,49 @@ public class AdminController {
     public String dashboardProducts(Model model){
 
         model.addAttribute("products", productService.getAll(0, 12));
-        return "dashboardProducts";
+        return "adminProducts";
     }
 
 
-    @RequestMapping(value="products/new", method = RequestMethod.GET)
-    public String dashboardProductCreate(Model model){
-
-        model.addAttribute("product", productService.getById(1));
+    @RequestMapping(value="product", method = RequestMethod.GET)
+    public String dashboardProductCreate(Model model, @RequestParam(value = "id", required = false) Integer id,
+                                         @RequestParam(value = "create", required = false) Integer create){
         model.addAttribute("categories", categoryService.getAll());
-        return "dashboardProductNew";
+        if (create!= null && create == 1) {
+            model.addAttribute("create", 1);
+            model.addAttribute("product", null);
+            return "adminProductEditor";
+        }
+        model.addAttribute("product", productService.getById(id));
+        return "adminProductEditor";
     }
 
-    @RequestMapping(value="products/new", method = RequestMethod.POST)
-    public String dashboardProductCreateSave(@RequestParam(value = "name", required = false, defaultValue = "") String name,
-                                             @RequestParam(value = "description", required = false, defaultValue = "") String description,
-                                             @RequestParam(value = "price", required = false, defaultValue = "") Float price,
-                                             @RequestParam(value = "category.id", required = false, defaultValue = "") Integer categoryId,
-                                             @RequestParam(value = "quantity", required = false, defaultValue = "") Integer quantity,
-                                             @RequestParam("file") MultipartFile file, Model model){
+    @RequestMapping(value="product", method = RequestMethod.POST)
+    public String dashboardProductCreate(@ModelAttribute("product") Product product,
+//                                             @RequestParam(value = "file", required = false, defaultValue = "") MultipartFile file,
+                                         Model model){
 
-        Product product = new Product("", name, description, "", "", price, quantity);
         logger.info("create new product: " + product.toString());
 
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                Path path = Paths.get(Constant.FOLDER_UPLOAD + file.getOriginalFilename());
-                Files.write(path, bytes);
-                String fileName = file.getOriginalFilename();
-                product.setFeatureImage(fileName);
+//        if (!file.isEmpty()) {
+//            try {
+//                byte[] bytes = file.getBytes();
+//                Path path = Paths.get(Constant.FOLDER_UPLOAD + file.getOriginalFilename());
+//                Files.write(path, bytes);
+//                String fileName = file.getOriginalFilename();
+//                product.setFeatureImage(fileName);
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        Category category = categoryService.getById(categoryId);
-        product.setCategory(category);
+//        Category category = categoryService.getById(categoryId);
+//        product.setCategory(category);
         productService.save(product);
 
         model.addAttribute("products", productService.getAll(0, 12));
-        return "dashboardProducts";
+        return "adminProducts";
     }
 
 
@@ -104,7 +102,7 @@ public class AdminController {
 
         model.addAttribute("product", productService.getById(id));
         model.addAttribute("categories", categoryService.getAll());
-        return "dashboardProduct";
+        return "adminProducts";
     }
 
     @RequestMapping(value="products/{id}", method = RequestMethod.POST)
@@ -151,10 +149,10 @@ public class AdminController {
         if(delete!=null) {
             productService.delete(id);
             model.addAttribute("products", productService.getAll(0, 12));
-            return "dashboardProducts";
+            return "adminProducts";
         }
 
-        return "dashboardProduct";
+        return "adminProducts";
     }
 
 
