@@ -85,8 +85,6 @@ public class HomeController {
         return "products";
     }
 
-
-
     @RequestMapping(value={"/{category}/{product}/"})
     public String productDetail(Model model,
                                 @PathVariable("category") String categoryUrl,
@@ -264,13 +262,11 @@ public class HomeController {
     @RequestMapping(value="/cart", method = RequestMethod.POST)
     public String cartUpdate(@RequestParam(value = "quantity", required = false) List<Integer> quantityList,
                              Model model ){
-
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("categories", categoryService.getAll());
+
         if(quantityList!=null) {
-
             List<Item> items = itemService.getByCart_IdCustomAndCart_Status(sessionID, Constant.STATUS_NEW);
-
             for(int i=0; i <items.size(); i++) {
                 Item item = items.get(i);
                 item.setQuantity(quantityList.get(i));
@@ -302,11 +298,9 @@ public class HomeController {
                                  @RequestParam(value = "phone", required = false, defaultValue = "") String phone,
                                  Model model){
         model.addAttribute("categories", categoryService.getAll());
-
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
 
         if(name.equals("")|| address.equals("")||phone.equals("")) {
-
             model.addAttribute("invalid", "Thông tin không hợp lệ");
 
         } else {
@@ -323,7 +317,6 @@ public class HomeController {
                 model.addAttribute("success", "Đặt hàng thành công");
             }
         }
-
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
         return "checkout";
     }

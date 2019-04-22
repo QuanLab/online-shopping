@@ -25,7 +25,7 @@ import java.nio.file.Paths;
  *
  */
 @Controller
-@RequestMapping(value="/dashboard")
+@RequestMapping(value="/admin")
 public class AdminController {
 
     private static final Logger logger = LogManager.getLogger();
@@ -45,7 +45,7 @@ public class AdminController {
     public String dashboard(Model model){
 
         model.addAttribute("products", productService.getAll(0, 12));
-        return "admin";
+        return "dashboard";
     }
 
 
