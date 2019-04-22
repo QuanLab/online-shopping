@@ -68,7 +68,7 @@ public class HomeController {
         logger.info(category.toString());
 
         Map<String, String> mapConfig = webConfigService.getAll();
-        mapConfig.put("breadcrumb", "");
+        mapConfig.put("breadcrumb", category.getName());
         mapConfig.put("isFeatured", "1");
         model.addAttribute("mapConfig", mapConfig);
 
@@ -92,22 +92,22 @@ public class HomeController {
                                 @PathVariable("category") String categoryUrl,
                                 @PathVariable("product") String productUrl){
         Map<String, String> mapConfig = webConfigService.getAll();
-        mapConfig.put("breadcrumb", "Tất cả sản phẩm");
         model.addAttribute("mapConfig", mapConfig);
         model.addAttribute("categories", categoryService.getAll());
+
         logger.info(categoryUrl + "\t" +productUrl);
 
         Product productItem = productService.findFirstBySlug(productUrl);
         logger.info(productItem.toString());
         model.addAttribute("productItem", productItem);
-
+        mapConfig.put("breadcrumb", productItem.getName());
         Page<Product> featuredProducts = productService.getFeatured(0, 6);
         model.addAttribute("featuredProducts", featuredProducts);
 
         Page<Product> relatedProducts = productService.getByCategory_Id(productItem.getCategory().getId(), 0, 6);
         model.addAttribute("relatedProducts", relatedProducts);
 
-        return "products";
+        return "singleProduct";
     }
 
     @RequestMapping(value={"san-pham"})

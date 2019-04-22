@@ -159,7 +159,7 @@
 
                                     <div class="items">
                                         <div class="image">
-                                            <a class="image_product" th:href="@{ ${product.category.slug} + '/' + ${product.slug} + '/'}"
+                                            <a class="image_product" th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}"
                                                th:title="${product.name}">
                                                 <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                                      th:data-lazyload="${product.featureImage}"
@@ -171,7 +171,7 @@
                                                     <div>
                                                         <a data-toggle="tooltip" title="Xem nhanh"
                                                            th:href="${product.slug}"
-                                                           th:data-handle="@{ ${product.category.slug} + '/' + ${product.slug} + '/'}"
+                                                           th:data-handle="@{'/' + ${product.category.slug} + '/' + ${product.slug} + '/'}"
                                                            class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
@@ -188,7 +188,7 @@
 
                                         <div class="infor">
                                             <h3 class="title">
-                                                <a th:href="@{ ${product.category.slug} + '/' + ${product.slug} + '/'}" th:title="${product.name}"
+                                                <a th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}" th:title="${product.name}"
                                                    th:text="${product.name}"></a>
                                             </h3>
                                             <div class="box-price">

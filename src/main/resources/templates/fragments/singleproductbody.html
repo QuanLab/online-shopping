@@ -539,7 +539,7 @@
 
                     <div th:each="product : ${featuredProducts.content}" class="item_sidebar">
                         <div class="wrap-img">
-                            <a class="image_sidebar" th:href="@{ ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
+                            <a class="image_sidebar" th:href="@{'/' + ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
                                 <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                      th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                             </a>
