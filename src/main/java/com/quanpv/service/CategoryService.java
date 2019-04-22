@@ -20,6 +20,11 @@ public class CategoryService {
         return repository.findById(id).orElse(null);
     }
 
+    public Category getBySlug(String slug){
+        return repository.findTop1BySlug(slug);
+    }
+
+
     public void save(Category product){
         repository.save(product);
     }

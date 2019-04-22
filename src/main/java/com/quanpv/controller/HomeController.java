@@ -1,9 +1,6 @@
 package com.quanpv.controller;
 
-import com.quanpv.model.Cart;
-import com.quanpv.model.Customer;
-import com.quanpv.model.Item;
-import com.quanpv.model.Product;
+import com.quanpv.model.*;
 import com.quanpv.service.*;
 import com.quanpv.utils.Constant;
 import org.apache.logging.log4j.LogManager;
@@ -59,6 +56,37 @@ public class HomeController {
     }
 
 
+    @RequestMapping(value={"/{category}/"})
+    public String category(Model model, @PathVariable("category") String categoryUrl,
+                                 @RequestParam(value = "page", required = false) Integer page,
+                                 @RequestParam(value = "sort", required = false) String sortBy){
+        model.addAttribute("categories", categoryService.getAll());
+
+        logger.info(categoryUrl);
+        Category category = categoryService.getBySlug(categoryUrl);
+
+        logger.info(category.toString());
+
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("breadcrumb", "");
+        mapConfig.put("isFeatured", "1");
+        model.addAttribute("mapConfig", mapConfig);
+
+        int offset = 0;
+        if(page != null) {
+            offset = page - 1;
+        }
+
+        Page<Product> featuredProducts = productService.getFeatured(0, 5);
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        Page<Product> products = productService.getPopular(offset, 9);
+        model.addAttribute("products", products);
+        return "products";
+    }
+
+
+
     @RequestMapping(value={"/{category}/{product}/"})
     public String productDetail(Model model,
                                 @PathVariable("category") String categoryUrl,
@@ -78,8 +106,8 @@ public class HomeController {
 
         Page<Product> relatedProducts = productService.getByCategory_Id(productItem.getCategory().getId(), 0, 6);
         model.addAttribute("relatedProducts", relatedProducts);
-//
-        return "singleProduct";
+
+        return "products";
     }
 
     @RequestMapping(value={"san-pham"})

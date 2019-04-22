@@ -45,7 +45,7 @@ public class AdminController {
     public String dashboard(Model model){
 
         model.addAttribute("products", productService.getAll(0, 12));
-        return "dashboard";
+        return "admin";
     }
 
 
