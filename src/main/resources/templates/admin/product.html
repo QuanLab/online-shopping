@@ -3,39 +3,39 @@
         <h3 th:if="${ create != 1 && product == null }">Sản phẩm không tồn tại</h3>
 
         <div class="card-body">
-            <form th:if="${product != null}" class="forms-sample" th:action="@{/admin/product}" th:object="${product}" method="post">
+            <form th:if="${product != null}" class="forms-sample">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group row hidden">
-                        <label for="name">Tên sản phẩm</label>
-                        <input type="text" class="form-control hidden" id="id" th:field="*{id}" th:value="${product.id}">
+                        <label for="id">Mã sản phẩm</label>
+                        <input type="text" class="form-control hidden" id="id" th:value="${product.id}">
                     </div>
                     <div class="form-group row">
                         <label for="name">Tên sản phẩm</label>
-                        <input type="text" class="form-control" id="name" th:field="*{name}" th:value="${product.name}">
+                        <input type="text" class="form-control" id="name" th:value="${product.name}">
                     </div>
                     <div class="form-group row">
                         <label for="slug">Url sản phẩm (slug)</label>
-                        <input type="text" class="form-control" id="slug" th:field="*{slug}" th:value="${product.slug}">
+                        <input type="text" class="form-control" id="slug" th:value="${product.slug}">
                     </div>
                     <div class="form-group row">
                         <label for="slug">Màu săc</label>
-                        <input type="text" class="form-control" id="color" th:field="*{color}" th:value="${product.color}">
+                        <input type="text" class="form-control" id="color" th:value="${product.color}">
                     </div>
                     <div class="form-group row">
                         <label for="slug">Kích thước</label>
-                        <input type="text" class="form-control" id="size"  th:field="*{size}" th:value="${product.size}">
+                        <input type="text" class="form-control" id="size" th:value="${product.size}">
                     </div>
                     <div class="form-group row">
                         <label for="price">Giá</label>
-                        <input type="number" class="form-control" id="price" th:field="*{price}" th:value="${ #numbers.formatDecimal(product.price, 0, 0) }">
+                        <input type="number" class="form-control" id="price" th:value="${ #numbers.formatDecimal(product.price, 0, 0) }">
                     </div>
                     <div class="form-group row">
                         <label for="quantity">Số lượng</label>
-                        <input type="number" class="form-control" id="quantity"  th:field="*{quantity}" th:value="${product.quantity}">
+                        <input type="number" class="form-control" id="quantity" th:value="${product.quantity}">
                     </div>
                     <div class="form-group row">
                         <label for="category">Danh mục</label>
-                        <select class="form-control" id="category"  th:field="*{category}">
+                        <select class="form-control" id="category">
                             <option th:if="${cat.id != product.category.id}" th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
                             <option th:if="${cat.id == product.category.id}" selected th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
                         </select>
@@ -49,10 +49,10 @@
 
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-success mr-2">Lưu lại</button>
-                <button class="btn btn-light">Bỏ qua</button>
             </form>
+
+            <button id="btnSaveProduct" type="submit" class="btn-success mr-2">Lưu lại</button>
+            <button class="btn btn-light">Bỏ qua</button>
         </div>
     </div>
 </div>

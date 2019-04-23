@@ -28,6 +28,7 @@
 </a>
 
 
+<div th:replace="admin/modalConfirm :: modalConfirm"></div>
 <div th:replace="admin/logoutModal :: logoutModal"></div>
 <!-- Bootstrap core JavaScript-->
 
@@ -115,8 +116,30 @@
 </script>
 <script>
     $("#btnSaveProduct").on( "click", function () {
+        var id = $('#id').val();
         var name = $('#name').val();
-        console.log(name)
+        var slug = $('#slug').val();
+        var color = $('#color').val();
+        var size = $('#size').val();
+        var price = $('#price').val();
+        var quantity = $('#price').val();
+        var createdDate = $('#createDate').val();
+        var category = $("#category option:selected").val();
+        var description = $("#document-full").html();
+        var data = {"id" : id, "name" : name, "slug": slug, "color" :color, "size" : size}
+        $.ajax({
+            url: '/admin/product',
+            dataType: 'text',
+            type: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            data: data,
+            success: function( data, textStatus, jQxhr ){
+                $('#modalConfirm').show();
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+                console.log( errorThrown );
+            }
+        });
     })
 </script>
 </body>
