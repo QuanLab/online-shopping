@@ -18,6 +18,8 @@ public class Product {
     private String isdn;
     private String name;
     private String slug;
+
+    @Column(length = 1000)
     private String description;
     private String featureImage;
     private String imageList;
@@ -26,10 +28,12 @@ public class Product {
     private float price;
     private float salePrice;
     private int quantity ;
+
     @Column(updatable = false)
     private Date createdDate;
     private Date updatedDate;
     private boolean isPopular;
+
     @Column(name = "IS_FEATURE")
     private boolean isFeature;
     private boolean isDraft;

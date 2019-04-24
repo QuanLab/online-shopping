@@ -1,0 +1,36 @@
+<div th:fragment="categories" class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered col-lg-6 left" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"> Chọn tất cả</th>
+                            <th>Tên danh mục</th>
+                            <th>Đường dẫn</th>
+                            <th>Mô tả</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr class="rowClick" th:each="cat : ${categories}">
+                            <td>
+                                <input type="checkbox" class="checkbox item-cb" th:id="${cat.id}">
+                            </td>
+                            <td><a th:text="${cat.name}"></a></td>
+                            <td th:text="${cat.slug}"></td>
+                            <td th:text="${cat.description}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button id="btnDeleteAll" class="btn btn-danger" >Xóa tất cả</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="updateStatus" style="color: green;">
+
+        </div>
+    </div>
+</div>

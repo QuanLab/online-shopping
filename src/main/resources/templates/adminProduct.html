@@ -10,10 +10,13 @@
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
-        <div id="content">
+        <div th:if="${ product == null }">
             <nav th:replace="admin/toolbar :: toolbar"></nav>
-            <nav th:replace="admin/product :: product"></nav>
-
+            <nav th:replace="admin/createProduct :: createProduct"></nav>
+        </div>
+        <div th:if="${ product != null }">
+            <nav th:replace="admin/toolbar :: toolbar"></nav>
+            <nav th:if="${product != null}" th:replace="admin/editProduct :: editProduct"></nav>
         </div>
         <!-- End of Main Content -->
         <div th:replace="admin/footer :: footer"></div>
@@ -28,7 +31,6 @@
 </a>
 
 
-<div th:replace="admin/modalConfirm :: modalConfirm"></div>
 <div th:replace="admin/logoutModal :: logoutModal"></div>
 <!-- Bootstrap core JavaScript-->
 
@@ -116,25 +118,29 @@
 </script>
 <script>
     $("#btnSaveProduct").on( "click", function () {
-        var id = $('#id').val();
-        var name = $('#name').val();
-        var slug = $('#slug').val();
-        var color = $('#color').val();
-        var size = $('#size').val();
-        var price = $('#price').val();
-        var quantity = $('#price').val();
-        var createdDate = $('#createDate').val();
+        var id = $("#id").val();
+        var name = $("#name").val();
+        var slug = $("#slug").val();
+        var color = $("#color").val();
+        var size = $("#size").val();
+        var price = $("#price").val();
+        var quantity = $("#quantity").val();
+        var createdDate = $("#createDate").val();
         var category = $("#category option:selected").val();
-        var description = $("#document-full").html();
-        var data = {"id" : id, "name" : name, "slug": slug, "color" :color, "size" : size}
+        var description = $("#document-full").children().first().html();
+        var data = {"id" : id, "name" : name, "slug": slug, "color" :color, "size" : size, "price": price,
+            "quantity" : quantity, "createdDate" : createdDate, "category": {"id" : category}, "description": description};
+        // save product to database
         $.ajax({
-            url: '/admin/product',
-            dataType: 'text',
-            type: 'post',
-            contentType: 'application/x-www-form-urlencoded',
-            data: data,
+            url: '/api/v1/product',
+            dataType: 'json',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
             success: function( data, textStatus, jQxhr ){
-                $('#modalConfirm').show();
+                var updateStatus = $("#updateStatus");
+                updateStatus.empty()
+                updateStatus.append("<span>Lưu thành công</span>")
             },
             error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );

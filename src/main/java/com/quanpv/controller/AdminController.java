@@ -1,6 +1,5 @@
 package com.quanpv.controller;
 
-import com.quanpv.model.Product;
 import com.quanpv.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * @author quanpv
@@ -39,55 +39,30 @@ public class AdminController {
 
 
     @RequestMapping(value="products", method = RequestMethod.GET)
-    public String dashboardProducts(Model model){
+    public String adminProducts(Model model){
 
         model.addAttribute("products", productService.getAll(0, 12));
         return "adminProducts";
     }
 
-
     @RequestMapping(value="product", method = RequestMethod.GET)
-    public String dashboardProductCreate(Model model, @RequestParam(value = "id", required = false) Integer id,
+    public String createProduct(Model model, @RequestParam(value = "id", required = false) Integer id,
                                          @RequestParam(value = "create", required = false) Integer create){
         model.addAttribute("categories", categoryService.getAll());
         if (create!= null && create == 1) {
-            model.addAttribute("create", 1);
             model.addAttribute("product", null);
-            return "adminProductEditor";
+        } else {
+            model.addAttribute("product", productService.getById(id));
         }
-        model.addAttribute("product", productService.getById(id));
-        return "adminProductEditor";
+        return "adminProduct";
     }
 
-    @RequestMapping(value="product", method = RequestMethod.POST)
-    public String dashboardProductCreate(@ModelAttribute("product") Product product,
-//                                             @RequestParam(value = "file", required = false, defaultValue = "") MultipartFile file,
-                                         Model model){
+    @RequestMapping(value="categories", method = RequestMethod.GET)
+    public String adminCategory(Model model){
 
-        logger.info("create new product: " + product.toString());
-
-//        if (!file.isEmpty()) {
-//            try {
-//                byte[] bytes = file.getBytes();
-//                Path path = Paths.get(Constant.FOLDER_UPLOAD + file.getOriginalFilename());
-//                Files.write(path, bytes);
-//                String fileName = file.getOriginalFilename();
-//                product.setFeatureImage(fileName);
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-//        Category category = categoryService.getById(categoryId);
-//        product.setCategory(category);
-        productService.save(product);
-
-        model.addAttribute("products", productService.getAll(0, 12));
-        return "adminProducts";
+        model.addAttribute("categories", categoryService.getAll());
+        return "adminCategories";
     }
-
-
 
     @RequestMapping(value="blog/", method = RequestMethod.GET)
     public String adminBlog(Model model){
