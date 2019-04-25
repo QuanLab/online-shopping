@@ -61,7 +61,7 @@ public class AdminController {
     public String adminCategory(Model model){
 
         model.addAttribute("categories", categoryService.getAll());
-        return "adminCategories";
+        return "adminCategory";
     }
 
     @RequestMapping(value="blog/", method = RequestMethod.GET)

@@ -119,11 +119,12 @@ public class Application implements CommandLineRunner {
 		webConfigService.save(new WebConfig("facebook", "https://facebook.com/{{your-page-facebook-id}}"));
 		webConfigService.save(new WebConfig("youtube", "https://youtube.com/{{your-channel-id}}"));
 
-		webConfigService.save(new WebConfig("footer1", "CHUYỂN PHÁT NHANH"));
 		webConfigService.save(new WebConfig("home_introduction", "Được khởi xướng và vận hành bởi một nhóm người trẻ năng động, " +
 				"cửa hàng bánh ngọt và đồ uống DELICIOUS đang dần khẳng định chỗ đứng trong thị trường đồ ăn giải " +
 				"khát phong phú và đa dạng ở Hà Nội. Hướng tới đối tượng khách hàng là các bạn trẻ năng động, " +
 				"chúng tôi quan tâm tới chất lượng và hình ảnh của sản phẩm."));
+
+		webConfigService.save(new WebConfig("footer1", "CHUYỂN PHÁT NHANH"));
 
 		webConfigService.save(new WebConfig("footer1_content", "Chúng tôi miễn phí với đơn hàng trên " +
 				"<span> 350.000đ</span> tại Hà Nội và free ship toàn quốc với đơn hàng <span>700.000đ</span>"));

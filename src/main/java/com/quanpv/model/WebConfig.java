@@ -8,10 +8,7 @@ import javax.persistence.*;
 public class WebConfig {
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
+    @Column(name = "NAME")
     private String name;
 
     @Column(length = 1000)
@@ -26,13 +23,6 @@ public class WebConfig {
         this.value = value;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -53,7 +43,6 @@ public class WebConfig {
     @Override
     public String toString() {
         return "WebConfig{" +
-                "id=" + id +
                 ", name='" + name + '\'' +
                 ", value='" + value + '\'' +
                 '}';

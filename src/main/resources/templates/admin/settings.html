@@ -1,0 +1,86 @@
+<div th:fragment="settings" class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-body">
+            <form class="forms-sample">
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group row hidden">
+                        <label for="domain">Tên miền</label>
+                        <input type="text" class="form-control hidden" id="domain">
+                    </div>
+                    <div class="form-group row">
+                        <label for="title">Tiêu đề</label>
+                        <input type="text" class="form-control" id="title">
+                    </div>
+                    <div class="form-group row">
+                        <label for="keywords">Từ khóa</label>
+                        <input type="text" class="form-control" id="keywords">
+                    </div>
+                    <div class="form-group row">
+                        <label for="description">Mô tả</label>
+                        <textarea class="form-control" id="description"></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <label for="contact">Email liên hệ</label>
+                        <input type="text" class="form-control" id="contact">
+                    </div>
+                    <div class="form-group row">
+                        <label for="email">Email(private)</label>
+                        <input type="text" class="form-control" id="email">
+                    </div>
+                    <div class="form-group row">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="text" class="form-control" id="phone">
+                    </div>
+                    <div class="form-group row">
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address">
+                    </div>
+                    <div class="form-group row">
+                        <label for="facebook">Facebook</label>
+                        <input type="text" class="form-control" id="facebook">
+                    </div>
+                    <div class="form-group row">
+                        <label for="youtube">Youtube</label>
+                        <input type="text" class="form-control" id="youtube">
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="footer1">Tiêu đề footer 1</label>
+                        <input type="text" class="form-control" id="footer1">
+                    </div>
+                    <div class="form-group row">
+                        <label for="footer1_content">Nội dung footer 1</label>
+                        <textarea class="form-control" id="footer1_content"></textarea>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="footer2">Tiêu đề footer 2</label>
+                        <input type="text" class="form-control" id="footer2">
+                    </div>
+                    <div class="form-group row">
+                        <label for="footer2_content">Nội dung footer 2</label>
+                        <textarea class="form-control" id="footer2_content"></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <label for="footer3">Tiêu đề footer 3</label>
+                        <input type="text" class="form-control" id="footer3">
+                    </div>
+                    <div class="form-group row">
+                        <label for="footer3_content">Nội dung footer 3</label>
+                        <textarea class="form-control" id="footer3_content"></textarea>
+                    </div>
+
+                </div>
+            </form>
+            <button id="btnSaveProduct" type="submit" class="btn-success mr-2">Lưu lại</button>
+            <button class="btn btn-light">Bỏ qua</button>
+            <div id="updateStatus" style="color: green;">
+
+            </div>
+        </div>
+    </div>
+</div>
