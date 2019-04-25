@@ -12,7 +12,7 @@
 		<!-- Main Content -->
 		<div id="content">
 			<nav th:replace="admin/toolbar :: toolbar"></nav>
-			<nav th:replace="admin/categories :: categories"></nav>
+			<nav th:replace="admin/category/categories :: categories"></nav>
 		</div>
 		<!-- End of Main Content -->
 		<div th:replace="admin/footer :: footer"></div>
@@ -68,9 +68,6 @@
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify({'list' : selected}),
                     success: function( data, textStatus, jQxhr ){
-                        var updateStatus = $("#updateStatus");
-                        updateStatus.empty()
-                        updateStatus.append("<span>Xóa thành công</span>")
                         window.location.reload();
                     },
                     error: function( jqXhr, textStatus, errorThrown ){
