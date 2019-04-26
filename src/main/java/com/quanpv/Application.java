@@ -3,6 +3,7 @@ package com.quanpv;
 import com.quanpv.model.*;
 import com.quanpv.service.*;
 import com.quanpv.storage.StorageProperties;
+import com.quanpv.utils.Slug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +27,8 @@ public class Application implements CommandLineRunner {
 
 	@Autowired
 	private WebConfigService webConfigService;
+	@Autowired
+	private PostService postService;
 
 	@Override
 	public void run(String... strings) {
@@ -100,7 +103,24 @@ public class Application implements CommandLineRunner {
 		productService.save(product11);
 		productService.save(product12);
 
-	}
+		Post post = new Post();
+		post.setTitle("Những lợi ích tuyệt vời của dâu tây mà không phải ai cũng biết");
+		post.setContent("<p>Xin chao cac ban, day laf bai viet mau</p><p><Xuong dong cai nao/p>");
+		post.setFeaturedImage("/images/products/pexels-photo.jpeg");
+		post.setTags("tag mau 2");
+		postService.save(post);
+
+		Post post2 = new Post();
+		post2.setTitle("Trà hoa cúc chuẩn vị thưởng thức vào mỗi sáng mai");
+		post2.setContent("Thơm ngon và ngọt ngào, dâu tây giàu chất dinh dưỡng tự nhiên có lượng đường thấp, ít calo và mang lại nhiều lợi ích cho sức khỏe.\n" +
+				"\n" +
+				"Dâu tây giúp làm giảm triệu chứng của cảm lạnh và tăng cường hệ miễn dịch: Dâu tây rất giàu vitamin C, một vitamin đóng một vai trò quan trọng trong việc hỗ trợ một hệ miễn dịch khỏe mạnh. Mặc dù cơ thể của chúng ta không thể sản sinh ra vitamin C, chúng ta có thể bổ sung nó bằng cách ăn các thực phẩm như dâu tây. Ăn 8 quả dâu tây mỗi ngày cung cấp nhiều vitamin C hơn cả cam.\n" +
+				"\n" +
+				"Dâu tây giúp kiểm soát cân nặng: Theo một nghiên cứu gần đây, ăn dâu tây có thể giúp ngăn ngừa tăng cân và là một trong nhiều trái cây nếu ăn hàng ngày có thể giúp giảm cân. Nghiên cứu ghi nhận rằng flavonoid trong dâu tây có thể ngăn ngừa sự tăng cân do tuổi tác bằng cách kích thích sự trao đổi chất và làm giảm sự thèm ăn. Do đó, dâu tây có thể giúp bạn giảm cân.");
+		post2.setFeaturedImage("/images/products/pexels-photo.jpeg");
+		post2.setTags("tag mau");
+		postService.save(post2);
+		}
 
 	/**
 	 * setup default config for web
@@ -144,5 +164,13 @@ public class Application implements CommandLineRunner {
 
 		webConfigService.save(new WebConfig("new_product", "Sản phẩm mới"));
 		webConfigService.save(new WebConfig("new_product_url", "/san-pham-moi"));
+		String about = "<p><span style=\"font-size:14px;\"><span style=\"font-family:Arial,Helvetica,sans-serif;\"><strong>Delicious CAKE &amp;&nbsp;DRINK</strong>&nbsp; được biết đến là một thương hiệu bánh ngọt và nước uống hấp dẫn cho mọi đối tượng người Việt.&nbsp;</span></span></p>\n" +
+				"                        <p><span style=\"font-size:14px;\"><span style=\"font-family:Arial,Helvetica,sans-serif;\">Trước tiên là sự thay đổi về thiết kế đã đem lại sự trẻ trung và sống động cho&nbsp;<strong>Delicious CAKE &amp;&nbsp;DRINK</strong>. Toàn bộ chuỗi&nbsp;cửa hàng <strong>Delicious CAKE &amp;&nbsp;DRINK</strong> trở nên bắt mắt hơn với trần nhà màu trắng và hệ thống đèn chiếu sáng hiện đại. Các cụm đèn màu cam và trắng gắn trên trần cũng đem lại cảm giác năng động nhưng không kém phần gần gũi cho những thực khách đặt chân đến với nơi này. Những sắc màu trẻ trung và họa tiết trên các tủ bánh cũng đem lại cảm giác thích thú khi khách hàng nhìn ngắm và lựa chọn từng chiếc bánh thật ngon mang tên <strong>Delicious</strong>.</span></span></p>\n" +
+				"                        <p><span style=\"font-size:14px;\"><span style=\"font-family:Arial,Helvetica,sans-serif;\">Thay đổi thứ hai chính là sự bắt kịp với xu hướng thời đại của thương hiệu <strong>Delicious CAKE &amp;&nbsp;DRINK</strong>. 20 chi nhánh hiện nay đang phát triển theo mô hình kết hợp giữa bánh ngọt và nước uống, tạo không gian mua sắm tiện nghi, nơi thư giãn thoải mái cho tất cả mọi người. Các nhóm bạn hoặc đại gia đình có thể chọn <strong>Delicious CAKE &amp;&nbsp;DRINK</strong> làm điểm hẹn lý thú vào thời gian rảnh rỗi. Trong một không gian sang trọng và ấm cúng, mọi người ngồi quây quần bên nhau nhâm nhi những chiếc bánh ngọt ngon miệng cùng với tách café, trà nóng hoặc ly trà sữa thơm ngon, để cảm nhận hết những giá trị tuyệt vời mà <strong>Delicious CAKE &amp;&nbsp;DRINK</strong> đem lại.</span></span></p>\n" +
+				"                        <p><span style=\"font-size:14px;\"><span style=\"font-family:Arial,Helvetica,sans-serif;\">Những sản phẩm bánh mới nhất của thương hiệu <strong>Delicious CAKE &amp;&nbsp;DRINK</strong> như Bánh kem Chocolate nghệ thuật, bánh kem Black Forest, Milky Bun, Blubberry Polo thơm lừng, bánh phô mai, bánh kem Chocolate cao cấp, bánh Tiramisu đẳng cấp… Về nước uống phục vụ quý khách, chuỗi cửa hàng <strong>Delicious CAKE &amp;&nbsp;DRINK</strong> hân hạnh giới thiệu thực đơn là các loại café, trà nóng, các loại trà sữa thích hợp cho giới trẻ,… Thật tuyệt vời khi vị ngọt ngào tinh tế của bánh ngọt hòa quyện vào vị thơm lừng của các loại thức uống ở <strong>Delicious CAKE &amp;&nbsp;DRINK</strong>.</span></span></p>\n" +
+				"                        <p><span style=\"font-size:14px;\"><span style=\"font-family:Arial,Helvetica,sans-serif;\">Sự sành điệu thuộc về những người biết lựa chọn đúng gu thưởng thức ẩm thực của chính mình.</span></span></p>\n" +
+				"                        <p><span style=\"font-size:14px;\"><span style=\"font-family:Arial,Helvetica,sans-serif;\">Cảm ơn vì sự tin yêu dành cho&nbsp;<strong>Delicious CAKE &amp;&nbsp;DRINK!</strong></span></span></p>";
+
+		webConfigService.save(new WebConfig("about", about));
 	}
 }

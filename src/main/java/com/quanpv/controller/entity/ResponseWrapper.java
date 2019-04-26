@@ -1,4 +1,4 @@
-package com.quanpv.controller.rest;
+package com.quanpv.controller.entity;
 
 public class ResponseWrapper {
 

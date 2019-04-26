@@ -37,12 +37,6 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 
 
     /**
-     * find top 4 newest product
-     */
-    Iterable<Product> findTop4ByOrderByIdDesc();
-
-
-    /**
      * lay san pham noi bat
      */
     Page<Product> findByIsFeatureIsTrue(Pageable pageable);

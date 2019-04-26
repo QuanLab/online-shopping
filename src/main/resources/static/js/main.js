@@ -42,7 +42,8 @@ function awe_lazyloadImage() {
 			accY: 120
 		}, "easeInCubic");
 	});
-} window.awe_lazyloadImage=awe_lazyloadImage;
+}
+window.awe_lazyloadImage=awe_lazyloadImage;
 
 /********************************************************
 # SHOW NOITICE

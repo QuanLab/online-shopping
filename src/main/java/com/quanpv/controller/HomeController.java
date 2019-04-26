@@ -34,6 +34,8 @@ public class HomeController {
     private CartDTOService cartDTOService;
     @Autowired
     private WebConfigService webConfigService;
+    @Autowired
+    private PostService postService;
 
     @RequestMapping(value={""})
     public String home(Model model){
@@ -225,7 +227,29 @@ public class HomeController {
         mapConfig.put("title", "Blog Hoang Anh Food");
         mapConfig.put("breadcrumb", "Blog");
         model.addAttribute("mapConfig", mapConfig);
+
+        Page<Post> newPosts = postService.getLast(0, 6);
+        model.addAttribute("newPosts", newPosts);
+
+        Page<Post> posts = postService.getLast(0, 12);
+        model.addAttribute("posts", posts);
         return "blog";
+    }
+
+
+    @RequestMapping(value={"blog/{slug}/"})
+    public String blogPost (Model model, @PathVariable("slug") String slug){
+        model.addAttribute("categories", categoryService.getAll());
+        Map<String, String> mapConfig = webConfigService.getAll();
+        mapConfig.put("title", "Blog Hoang Anh Food");
+        mapConfig.put("breadcrumb", "Blog");
+        model.addAttribute("mapConfig", mapConfig);
+        Page<Post> posts = postService.getLast(0, 5);
+        model.addAttribute("posts", posts);
+
+        Post post = postService.findBySlug(slug);
+        model.addAttribute("post", post);
+        return "blogPost";
     }
 
 

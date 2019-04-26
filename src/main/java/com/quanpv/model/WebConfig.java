@@ -11,7 +11,7 @@ public class WebConfig {
     @Column(name = "NAME")
     private String name;
 
-    @Column(length = 1000)
+    @Column(length = 10000)
     private String value;
 
 

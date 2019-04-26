@@ -14,9 +14,119 @@
     <script th:src="@{js/jquery-2.2.3.min.js}" type="text/javascript"></script>
     <h1 class="hidden">Thực phẩm Hoàng ANh</h1>
 
-
     <section th:replace="fragments/breadcrumb :: breadcrumb"></section>
-    <section th:replace="fragments/blogbody :: blogbody"></section>
+    <div class="blogmain">
+        <div class="container">
+            <div class="wrap_background_aside">
+                <div class="row">
+                    <div class="wrap_blog">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+                            <div class="list_blog">
+                                <div th:if="${posts.totalElements > 0 }" class="row">
+
+                                    <div th:each="post : ${posts.content}" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 blog_part">
+                                        <div class="item_blog">
+                                            <div class="thumb">
+                                                <a th:href="@{'/blog/' + ${post.slug } + '/' }">
+                                                    <picture>
+                                                        <source media="(max-width: 480px)" th:srcset="${ post.featuredImage }">
+                                                        <source media="(min-width: 481px) and (max-width: 767px)" th:srcset="${post.featuredImage}">
+                                                        <source media="(min-width: 768px) and (max-width: 1023px)" th:srcset="${post.featuredImage}">
+                                                        <source media="(min-width: 1024px) and (max-width: 1199px)" th:srcset="${post.featuredImage}">
+                                                        <source media="(min-width: 1200px)" th:srcset="${post.featuredImage}">
+                                                        <img th:src="${post.featuredImage}" th:data-lazyload="${post.featuredImage}"
+                                                             style="max-width:100%;" class="img-responsive" th:alt="${post.title}">
+                                                    </picture>
+                                                </a>
+                                            </div>
+
+                                            <div class="tags_chain">
+                                                <span th:text="${post.tags}"></span>
+                                            </div>
+
+                                            <div class="article-title">
+                                                <h3>
+                                                    <a th:href="@{'/blog/' + ${post.slug } + '/' }" th:title="${post.title}" th:text="${post.title}"></a>
+                                                </h3>
+                                                <a th:href="@{'/blog/' + ${post.slug} + '/' }" class="blog-detail">Xem chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-xs-left f-right col-lg-12 col-sm-12 col-xs-12 col-md-12">
+                                        <nav>
+                                            <ul class="pagination clearfix">
+                                                <li class="page-item" th:if="${posts.number > 0}">
+                                                    <a class="page-link hidden-xs" th:href="@{'/tin-tuc?page=' + ${posts.number} }">
+                                                        <i class="fa fa-angle-left" aria-hidden="true"></i>Quay lại
+                                                    </a>
+                                                </li>
+                                                <li class="page-item disabled" th:if="${posts.number == 0}">
+                                                    <a class="page-link hidden-xs" th:href="@{'/tin-tuc?page=' + ${posts.number} }">
+                                                        <i class="fa fa-angle-left" aria-hidden="true"></i>Quay lại
+                                                    </a>
+                                                </li>
+                                                <li class="active page-item">
+                                                    <a class="page-link" href="#" style="pointer-events:none"
+                                                       th:text="${posts.number + 1}"></a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" th:if="${posts.totalPages -1 > posts.number}"
+                                                       th:href="@{'/tin-tuc?page=' + ${posts.number + 2} }"
+                                                       th:text="${posts.number + 2}">
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link hidden-xs" th:if="${posts.totalPages -1 > posts.number}"
+                                                       th:href="@{'/tin-tuc?page=' + ${posts.number + 2} }" title="2">Xem tiếp
+                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 part_right">
+                            <div>
+                                <h2><a href="tin-tuc" title="Bài viết xem nhiều">Bài viết mới nhất</a></h2>
+                            </div>
+
+                            <div th:each="post : ${newPosts.content}" class="item_blog_dif">
+                                <div class="thumb">
+                                    <a th:href="@{'/blog/' + ${post.slug } + '/' }">
+                                        <picture>
+                                            <source media="(max-width: 480px)" th:srcset="${ post.featuredImage }">
+                                            <source media="(min-width: 481px) and (max-width: 767px)" th:srcset="${post.featuredImage}">
+                                            <source media="(min-width: 768px) and (max-width: 1023px)" th:srcset="${post.featuredImage}">
+                                            <source media="(min-width: 1024px) and (max-width: 1199px)" th:srcset="${post.featuredImage}">
+                                            <source media="(min-width: 1200px)" th:srcset="${post.featuredImage}">
+                                            <img th:src="${post.featuredImage}" th:data-lazyload="${post.featuredImage}"
+                                                 style="max-width:100%;" class="img-responsive" th:alt="${post.title}">
+                                        </picture>
+                                    </a>
+                                </div>
+
+                                <div class="content">
+                                    <h3>
+                                        <a th:href="@{'/blog/' + ${post.slug } + '/' }" th:title="${post.title}" th:text="${post.title}"></a>
+                                    </h3>
+                                    <p th:text="${post.createdDate }"></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <link th:href="@{css/bpr-products-module.css}" rel="stylesheet" type="text/css"/>

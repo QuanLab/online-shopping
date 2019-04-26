@@ -15,7 +15,21 @@
     <h1 class="hidden">Thực phẩm Hoàng ANh</h1>
 
     <section th:replace="fragments/breadcrumb :: breadcrumb"></section>
-    <section th:replace="fragments/aboutbody :: aboutbody"></section>
+
+    <section class="page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="page-title category-title">
+                        <h1 class="title-head"><a href="#">Giới thiệu</a></h1>
+                    </div>
+                    <div th:utext="${mapConfig.get('about')}" class="content-page rte">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <link th:href="@{/css/bpr-products-module.css}" rel="stylesheet" type="text/css"/>
     <div class="bizweb-product-reviews-module"></div>

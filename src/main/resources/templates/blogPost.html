@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/head :: head"></head>
+<body>
+<div class="page-body">
+    <div class="hidden-md hidden-lg opacity_menu"></div>
+    <div class="opacity_filter"></div>
+    <div class="body_opactiy"></div>
+    <div class="op_login"></div>
+
+    <header th:replace="fragments/header :: header"></header>
+    <div th:replace="fragments/menubar :: menubar"></div>
+    <!-- Header JS -->
+    <script th:src="@{js/jquery-2.2.3.min.js}" type="text/javascript"></script>
+    <h1 class="hidden">Thực phẩm Hoàng ANh</h1>
+
+    <section th:replace="fragments/breadcrumb :: breadcrumb"></section>
+
+    <section class="blog_page_section margin-bottom-0">
+        <div class="container article-wraper">
+            <div class="row row_article">
+                <section id="b" class="right-content col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <article class="article-main" itemscope itemtype="http://schema.org/Article">
+                        <meta itemprop="mainEntityOfPage" content="/nhung-loi-ich-tuyet-voi-cua-dau-tay-ma-khong-phai-ai-cung-biet">
+                        <meta itemprop="description" content="">
+                        <meta itemprop="author" content="Awesome Team">
+                        <meta itemprop="headline" content="">
+                        <meta itemprop="image" content="https://bizweb.dktcdn.net/100/332/765/articles/pexels-photo-904941.jpeg?v=1542260725817">
+                        <meta itemprop="datePublished" content="15-11-2018">
+                        <meta itemprop="dateModified" content="15-11-2018">
+                        <div class="hidden" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                                <img src="//bizweb.dktcdn.net/100/332/765/themes/713219/assets/logo.jpg?1553482554643" alt="Delicious" />
+                                <meta itemprop="url" content="https://bizweb.dktcdn.net/100/332/765/themes/713219/assets/logo.jpg?1553482554643">
+                                <meta itemprop="width" content="133">
+                                <meta itemprop="height" content="25">
+                            </div>
+                            <meta itemprop="name" content="Hoang Anh Food">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content_ar">
+                                <h1 class="title-head-article"><span itemprop="name" th:text="${post.title}"></span></h1>
+                                <div class="time_author_share">
+                                    <div class="tags_share hidden-xs hiddem-ms hidden-md">
+                                        <div class="share_row">
+                                            <div class="addthis_inline_share_toolbox share_add">
+                                                <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58589c2252fc2da4"></script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="article-details">
+                                    <div class="rte">
+                                        <div class="article-content" th:utext="${post.content}">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tags_share_click">
+                                    <div class="blog-click hidden-xs hidden-ms">
+                                        <img th:src="@{/assets/blog-click.png}" alt="blog-click">
+                                    </div>
+                                    <div class="addthis_inline_share_toolbox share_add new">
+                                        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58589c2252fc2da4"></script>
+                                    </div>
+                                </div>
+                                <div class="tags_blog">
+                                    <div class="tag_article col-lg-12 col-md-12 col-sm-12 col-xs-12 a-left">
+                                        <div class="wrap_tags">
+                                            <p class="bold"><i class="fa fa-tags"></i> &nbsp;Tags:</p>
+                                            <a th:title="${post.tags}" th:href="${'/blogs/all/tagged/' + ${post.tags} }" th:text="${post.tags}"></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </article>
+                </section>
+                <aside id="a" class="part_right left left-content col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div>
+                        <h2><a href="tin-tuc" title="Bài viết xem nhiều">Bài viết mới</a></h2>
+                    </div>
+                    <div th:each="post : ${posts.content}" class="item_blog_dif">
+                        <div class="thumb">
+                            <a th:href="@{ '/blog/' + post.slug  + '/'}">
+                                <picture>
+                                    <source media="(max-width: 480px)" th:srcset="${ post.featuredImage }">
+                                    <source media="(min-width: 481px) and (max-width: 767px)" th:srcset="${post.featuredImage}">
+                                    <source media="(min-width: 768px) and (max-width: 1023px)" th:srcset="${post.featuredImage}">
+                                    <source media="(min-width: 1024px) and (max-width: 1199px)" th:srcset="${post.featuredImage}">
+                                    <source media="(min-width: 1200px)" th:srcset="${post.featuredImage}">
+                                    <img th:src="${post.featuredImage}" th:data-lazyload="${post.featuredImage}"
+                                         style="max-width:100%;" class="img-responsive" th:alt="${post.title}">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="content">
+                            <h3><a th:href="@{ '/blog/' + post.slug  + '/'}" th:title="${post.title}" th:text="${post.title}"></a></h3>
+                            <p>15/11/2018</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <link th:href="@{/css/bpr-products-module.css}" rel="stylesheet" type="text/css"/>
+
+    <div class="bizweb-product-reviews-module"></div>
+
+    <footer th:replace="fragments/footer :: footer"></footer>
+    <!-- Add to cart -->
+
+    <div th:replace="fragments/quickview:: quickview"></div>
+    <script th:replace="fragments/scriptquickview:: scriptquickview"></script>
+
+    <div class="ajax-load">
+	<span class="loading-icon">
+		<svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+			<rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+			</rect>
+			<rect x="8" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+			</rect>
+			<rect x="16" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+			</rect>
+		</svg>
+	</span>
+    </div>
+
+    <div class="loading awe-popup">
+        <div class="overlay"></div>
+        <div class="loader" title="2">
+            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+			<rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+			</rect>
+			<rect x="8" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+			</rect>
+			<rect x="16" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+				<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+			</rect>
+		</svg>
+        </div>
+
+    </div>
+
+
+    <div class="error-popup awe-popup">
+        <div class="overlay no-background"></div>
+        <div class="popup-inner content">
+            <div class="error-message"></div>
+        </div>
+    </div>
+
+    <script th:replace="fragments/popupcart :: popupcart"></script>
+    <div id="myModal" class="modal fade" role="dialog">
+    </div>
+
+    <!-- Bizweb javascript -->
+    <script th:src="@{/js/option-selectors.js}" type="text/javascript"></script>
+    <script th:src="@{/js/api.jquery.js}" type="text/javascript"></script>
+
+    <!-- Plugin JS -->
+    <script th:src="@{/js/plugin.js}" type="text/javascript"></script>
+    <script th:src="@{/js/cs.script.js}" type="text/javascript"></script>
+
+    <script th:replace="fragments/scriptcart :: scriptcart"></script>
+
+    <script th:src="@{/js/main.js}" type="text/javascript"></script>
+    <!-- Quick view -->
+    <script th:src="@{/js/quickview.js}" type="text/javascript"></script>
+    <!-- Product detail JS,CSS -->
+</div>
+
+</body>
+</html>
