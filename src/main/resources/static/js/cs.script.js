@@ -96,7 +96,7 @@ function addToCartSuccess (jqXHR, textStatus, errorThrown){
 	
 	$.ajax({
 		type: 'GET',
-		url: '/cart.js',
+		url: '/cart.json',
 		async: false,
 		cache: false,
 		dataType: 'json',

@@ -94,16 +94,4 @@ public class ProductController {
         return "singleProduct";
     }
 
-    @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
-    public String getProductByCategory(@PathVariable("id") int id, Model model){
-
-        Iterable<Product> products = productService.getByCategory_Id(id, 0, 9);
-        model.addAttribute("categories", categoryService.getAll());
-        model.addAttribute("products", products);
-
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
-        return "products";
-    }
-
 }

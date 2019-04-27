@@ -119,7 +119,7 @@ Bizweb.money_format = "${{amount}}", Bizweb.onError = function (XMLHttpRequest, 
     };
     jQuery.ajax(e)
 }, Bizweb.getCart = function (t) {
-    jQuery.getJSON("/cart.js", function (r) {
+    jQuery.getJSON("/cart.json", function (r) {
         "function" == typeof t ? t(r) : Bizweb.onCartUpdate(r)
     })
 }, Bizweb.pollForCartShippingRatesForDestination = function (t, r, e) {
@@ -153,7 +153,7 @@ Bizweb.money_format = "${{amount}}", Bizweb.onError = function (XMLHttpRequest, 
 }, Bizweb.changeItem = function (t, r, e) {
     var o = {
         type: "POST",
-        url: "/cart/change.js",
+        url: "/cart/change",
         data: "quantity=" + r + "&variantId=" + t,
         dataType: "json",
         success: function (t) {
@@ -167,7 +167,7 @@ Bizweb.money_format = "${{amount}}", Bizweb.onError = function (XMLHttpRequest, 
 }, Bizweb.removeItem = function (t, r) {
     var e = {
         type: "POST",
-        url: "/cart/change.js",
+        url: "/cart/change",
         data: "quantity=0&variantId=" + t,
         dataType: "json",
         success: function (t) {

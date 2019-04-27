@@ -15,7 +15,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String isdn;
+    private String sku;
     private String name;
     private String slug;
 
@@ -46,9 +46,9 @@ public class Product {
 
     }
 
-    public Product(String isdn, String name, String description, String featureImage, String imageList, float price,
+    public Product(String sku, String name, String description, String featureImage, String imageList, float price,
                    int quantity) {
-        this.isdn = isdn;
+        this.sku = sku;
         this.name = name;
         this.description = description;
         this.featureImage = featureImage;
@@ -68,12 +68,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getIsdn() {
-        return isdn;
+    public String getSku() {
+        return sku;
     }
 
-    public void setIsdn(String isdn) {
-        this.isdn = isdn;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public String getName() {
@@ -213,7 +213,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", isdn='" + isdn + '\'' +
+                ", sku='" + sku + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", image='" + featureImage + '\'' +

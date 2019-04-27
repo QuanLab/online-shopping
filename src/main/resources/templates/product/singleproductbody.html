@@ -3,7 +3,7 @@
         <div class="col-lg-9 col-md-9 col-sm-12 products">
             <div class="details-product">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 details-product-image">
-                    <div class="row row-width"><!--trong form bat buoc co 3 gia tri: gia, so luong, them gio hang-->
+                    <div class="row row-width">
                         <form enctype="multipart/form-data" id="add-to-cart-form" action="/cart/add" method="post"
                               class="row form-width form-inline">
                             <div class="product-detail-left product-images col-xs-12 col-sm-5 col-md-5 col-lg-5">
@@ -133,7 +133,7 @@
                                 <div class="fw" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                     <div class="group-status">
 
-											<span class="variant-sku" th:text="${productItem.isdn}">
+											<span class="variant-sku" th:text="${productItem.sku}">
 											</span>
                                         <span class="first_status"><span class="a_name">Tình trạng:</span>
 												<span class="status_name availabel hasvariant">

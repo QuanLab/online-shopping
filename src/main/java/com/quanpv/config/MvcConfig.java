@@ -9,6 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
+    private final String[] RESOURCE_ALLOWED = new String[]{
+            "file:///home/quanpv/workspace/online-shopping/src/main/resources/", "file:///root/"
+    };
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/san-pham").setViewName("product");
@@ -23,7 +27,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/static/**")
-                .addResourceLocations("file:///home/quanpv/workspace/online-shopping/src/main/resources/");
+                .addResourceLocations(RESOURCE_ALLOWED);
     }
 
 }

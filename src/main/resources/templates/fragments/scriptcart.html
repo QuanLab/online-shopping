@@ -30,7 +30,8 @@
                                     + '<h3 class="product-name"> <a href="' + item.url + '" title="' + item.name + '">' + item.name + '</a></h3></div>'
                                     + '<div class="product-details-bottom"><span class="price pricechange">' + Bizweb.formatMoney(item.price, "{{amount_no_decimals_with_comma_separator}}₫") + '</span><span class="hidden quaty item_quanty_count"> x ' + item.quantity + '</span>'
                                     + '<div class="quantity-select qty_drop_cart"><input class="variantID" type="hidden" name="variantId" value="' + item.variant_id + '"><button onClick="var result = document.getElementById(\'qty' + item.variant_id + '\'); var qty' + item.variant_id + ' = result.value; if( !isNaN( qty' + item.variant_id + ' ) &amp;&amp; qty' + item.variant_id + ' &gt; 1 ) result.value--;return false;" class="btn_reduced reduced items-count btn-minus" ' + buttonQty + ' type="button">–</button><input type="text" maxlength="12" readonly class="input-text number-sidebar qty' + item.variant_id + '" id="qty' + item.variant_id + '" name="Lines" id="updates_' + item.variant_id + '" size="4" value="' + item.quantity + '"><button onClick="var result = document.getElementById(\'qty' + item.variant_id + '\'); var qty' + item.variant_id + ' = result.value; if( !isNaN( qty' + item.variant_id + ' )) result.value++;return false;" class="btn_increase increase items-count btn-plus" type="button">+</button></div>'
-                                    + '</div></div><div class="border"></div></li>').appendTo(table.children('.list-item-cart'));
+                                    + '</div></div><div class="border"></div></li>')
+                                    .appendTo(table.children('.list-item-cart'));
                             });
                             jQuery('<div class="wrap_total"><div class="top-subtotal hidden">Phí vận chuyển: <span class="pricex">Tính khi thanh toán</span></div><div class="top-subtotal">Thành tiền: <span class="price">' + Bizweb.formatMoney(cart.total_price, "{{amount_no_decimals_with_comma_separator}}₫") + '</span></div></div>').appendTo(table);
                             jQuery('<div class="wrap_button"><div class="actions"><a href="/cart" class="btn btn-gray btn-cart-page pink"><span>Giỏ hàng</span></a> <a href="/checkout" class="btn btn-gray btn-checkout pink"><span>Thanh toán</span></a> </div></div>').appendTo(table);
@@ -74,10 +75,22 @@
                         var table = jQuery(cart_summary_id);
                         if (value.length) {
 
-                            var pageCart = '<div class="cart page_cart hidden-xs">'
-                                + '<form action="/cart" method="post" novalidate class="margin-bottom-0"><div class="bg-scroll"><div class="cart-thead">'
-                                + '<div style="width: 18%" class="a-center">Ảnh sản phẩm</div><div style="width: 32%" class="a-center">Tên sản phẩm</div><div style="width: 17%" class="a-center"><span class="nobr">Đơn giá</span></div><div style="width: 14%" class="a-center">Số lượng</div><div style="width: 14%" class="a-center">Thành tiền</div><div style="width: 5%" class="a-center">Xoá</div></div>'
-                                + '<div class="cart-tbody"></div></div></form></div>';
+                            var pageCart = '<div class="cart page_cart hidden-xs">' +
+                                '<form action="/cart" method="post" novalidate class="margin-bottom-0">' +
+                                    '<div class="bg-scroll">' +
+                                        '<div class="cart-thead">' +
+                                            '<div style="width: 18%" class="a-center">Ảnh sản phẩm</div>' +
+                                            '<div style="width: 32%" class="a-center">Tên sản phẩm</div>' +
+                                            '<div style="width: 17%" class="a-center"><span class="nobr">Đơn giá</span></div>' +
+                                            '<div style="width: 14%" class="a-center">Số lượng</div>' +
+                                            '<div style="width: 14%" class="a-center">Thành tiền</div>' +
+                                            '<div style="width: 5%" class="a-center">Xoá</div>' +
+                                        '</div>' +
+                                            '<div class="cart-tbody">' +
+                                            '</div>' +
+                                        '</div>' +
+                                '</form>' +
+                                '</div>';
                             var pageCartCheckout = '<div class="row margin-top-20  margin-bottom-40"><div class="col-lg-7 col-md-7"><div class="form-cart-button"><div class=""><a href="/" class="form-cart-continue">Tiếp tục mua hàng</a></div></div></div>'
                                 + '<div class="col-lg-5 col-md-5 bg_cart shopping-cart-table-total"><div class="table-total"><table class="table ">'
                                 + '<tr class="hidden"><td>Tiền vận chuyển</td><td class="txt-right a-right">Tính khi thanh toán</td></tr>'
@@ -339,7 +352,7 @@
     $(window).ready(function () {
         $.ajax({
             type: 'GET',
-            url: '/cart.js',
+            url: '/cart.json',
             async: false,
             cache: false,
             dataType: 'json',

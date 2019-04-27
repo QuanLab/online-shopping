@@ -849,7 +849,7 @@ theme.Product = (function() {
             type: 'post',
             data: $addToCartForm.serialize(),
             success: function(lineItem) {
-              $.getJSON('/cart.js', function(cart) {
+              $.getJSON('/cart.json', function(cart) {
                 theme.cache.$cartCount.text(cart.item_count);
               });
               $addToCartBtn.prop('disabled', false);

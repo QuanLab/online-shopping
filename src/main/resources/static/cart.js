@@ -1,1 +1,0 @@
-{"token":null,"items":[],"note":null,"free_shipping":false,"total_price":0.0,"total_weight":0,"item_count":0,"requires_shipping":false,"sub_total_price":0.0,"total_line_item_price":0.0,"discount":0.0,"shipping_fee":0.0,"attributes":null,"referring_site":null,"reference":null,"landing_site":null,"landing_site_ref":null}
