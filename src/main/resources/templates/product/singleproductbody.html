@@ -11,61 +11,12 @@
 
                                     <div class="rows">
                                         <div class="col_large_default large-image">
-
-                                            <a href="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
-                                               class="large_image_url checkurl" data-rel="prettyPhoto[product-gallery]">
-
-                                                <img id="img_01" class="img-responsive" alt="Chocolate Iced"
-                                                     src="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
-                                                     data-zoom-image="//bizweb.dktcdn.net/thumb/grande/100/332/765/products/try21-jpeg.jpg?v=1541047539703"/>
+                                            <a th:href="${productItem.featureImage}" class="large_image_url checkurl"
+                                               data-rel="prettyPhoto[product-gallery]">
+                                                <img id="img_01" class="img-responsive" th:alt="${productItem.name}"
+                                                     th:src="${productItem.featureImage}"
+                                                     th:data-zoom-image="${productItem.featureImage}"/>
                                             </a>
-
-                                            <div class="hidden"><!--chi co tac dung khi bam light box-->
-                                                <div class="item">
-                                                    <a href="//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
-                                                       data-image="//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
-                                                       data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/try21-jpeg.jpg?v=1541047539703"
-                                                       data-rel="prettyPhoto[product-gallery]">
-                                                    </a>
-                                                </div>
-
-
-                                                <div class="item">
-                                                    <a href="//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
-                                                       data-image="//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
-                                                       data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/food-light-spring-dessert.jpg?v=1541057968947"
-                                                       data-rel="prettyPhoto[product-gallery]">
-                                                    </a>
-                                                </div>
-
-
-                                                <div class="item">
-                                                    <a href="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
-                                                       data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
-                                                       data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-973238-jpeg.jpg?v=1541057968947"
-                                                       data-rel="prettyPhoto[product-gallery]">
-                                                    </a>
-                                                </div>
-
-
-                                                <div class="item">
-                                                    <a href="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
-                                                       data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
-                                                       data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-768041-jpeg.jpg?v=1541057998390"
-                                                       data-rel="prettyPhoto[product-gallery]">
-                                                    </a>
-                                                </div>
-
-
-                                                <div class="item">
-                                                    <a href="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
-                                                       data-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
-                                                       data-zoom-image="//bizweb.dktcdn.net/100/332/765/products/pexels-photo-1407346-jpeg.jpg?v=1542254062353"
-                                                       data-rel="prettyPhoto[product-gallery]">
-                                                    </a>
-                                                </div>
-
-                                            </div>
                                         </div>
 
                                         <div id="gallery_02" class="owl_width no-padding owl-carousel owl-theme thumbnail-product thumb_product_details not-dqowl"
