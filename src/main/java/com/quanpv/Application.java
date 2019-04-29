@@ -3,7 +3,6 @@ package com.quanpv;
 import com.quanpv.model.*;
 import com.quanpv.service.*;
 import com.quanpv.storage.StorageProperties;
-import com.quanpv.utils.Slug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,10 +20,8 @@ public class Application implements CommandLineRunner {
 
 	@Autowired
 	private ProductService productService;
-
 	@Autowired
 	private CategoryService categoryService;
-
 	@Autowired
 	private WebConfigService webConfigService;
 	@Autowired
@@ -40,7 +37,8 @@ public class Application implements CommandLineRunner {
 		Category category3 = new Category("Đồng hồ", "Đồng hồ cao cấp dành cho doanh nhân");
 		category3.setSlug("dong-ho");
 
-		Product product = new Product("", "Áo phông nam", "Sản phẩm mới về", "/images/products/try2-jpeg.jpg", "", 120000, 12 );
+		String imageList = "/images/products/try2-jpeg.jpg|/images/products/try4-jpeg.jpg";
+		Product product = new Product("", "Áo phông nam", "Sản phẩm mới về", "/images/products/try2-jpeg.jpg", imageList, 120000, 12 );
 		product.setSalePrice(115000);
 		product.setFeature(true);
 		product.setPopular(true);
@@ -120,7 +118,7 @@ public class Application implements CommandLineRunner {
 		post2.setFeaturedImage("/images/products/pexels-photo.jpeg");
 		post2.setTags("tag mau");
 		postService.save(post2);
-		}
+	}
 
 	/**
 	 * setup default config for web
