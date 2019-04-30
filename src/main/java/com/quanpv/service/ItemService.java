@@ -46,8 +46,8 @@ public class ItemService {
         repository.save(item);
     }
 
-    public void save(Item item){
-        repository.save(item);
+    public Item save(Item item){
+        return repository.save(item);
     }
 
     public void delete(Integer id) {

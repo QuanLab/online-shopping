@@ -29,9 +29,7 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) {
-
 		setupDefaultConfig();
-
 		Category category = new Category("Thời trang nam", "Thoi trang danh cho nam");
 		Category category2 = new Category("Thời trang nữ", "Thoi trang danh cho nu");
 		Category category3 = new Category("Đồng hồ", "Đồng hồ cao cấp dành cho doanh nhân");

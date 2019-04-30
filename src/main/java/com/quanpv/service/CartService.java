@@ -32,8 +32,8 @@ public class CartService {
         return repository.findByStatus(Constant.STATUS_CHECKOUT);
     }
 
-    public void save(Cart cart){
-        repository.save(cart);
+    public Cart save(Cart cart){
+        return repository.save(cart);
     }
 
     public void delete(int id) {

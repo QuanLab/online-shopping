@@ -39,6 +39,7 @@ public class HomeController {
 
     @RequestMapping(value={""})
     public String home(Model model){
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
         model.addAttribute("mapConfig", webConfigService.getAll());
 
         Page<Product> featuredProducts = productService.getFeatured(0, 6);
@@ -51,7 +52,10 @@ public class HomeController {
         model.addAttribute("newProducts", newProducts);
 
         model.addAttribute("categories", categoryService.getAll());
-        logger.info(categoryService.getAll());
+
+        Page<Post> posts = postService.getLast(0, 6);
+        model.addAttribute("posts", posts);
+
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
         return "index";
@@ -63,16 +67,13 @@ public class HomeController {
                                  @RequestParam(value = "page", required = false) Integer page,
                                  @RequestParam(value = "sort", required = false) String sortBy){
         model.addAttribute("categories", categoryService.getAll());
-
-        logger.info(categoryUrl);
         Category category = categoryService.getBySlug(categoryUrl);
-
-        logger.info(category.toString());
 
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", category.getName());
         mapConfig.put("isFeatured", "1");
         model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
 
         int offset = 0;
         if(page != null) {
@@ -93,9 +94,9 @@ public class HomeController {
                                 @PathVariable("product") String productUrl){
         Map<String, String> mapConfig = webConfigService.getAll();
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("categories", categoryService.getAll());
 
-        logger.info(categoryUrl + "\t" +productUrl);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+        model.addAttribute("categories", categoryService.getAll());
 
         Product productItem = productService.findFirstBySlug(productUrl);
         logger.info(productItem.toString());
@@ -117,6 +118,8 @@ public class HomeController {
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Tất cả sản phẩm");
         model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+
         int offset = 0;
         if(page != null) {
             offset = page - 1;
@@ -138,6 +141,7 @@ public class HomeController {
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm nổi bật");
         model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
 
         Page<Product> featuredProducts = productService.getFeatured(0, 5);
         model.addAttribute("featuredProducts", featuredProducts);
@@ -157,6 +161,7 @@ public class HomeController {
         mapConfig.put("breadcrumb", "Sản phẩm ưa chuộng");
         mapConfig.put("isFeatured", "1");
         model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
 
         int offset = 0;
         if(page != null) {
@@ -179,6 +184,7 @@ public class HomeController {
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm mới");
         model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
 
         Page<Product> featuredProducts = productService.getFeatured(0, 5);
         model.addAttribute("featuredProducts", featuredProducts);
@@ -194,6 +200,7 @@ public class HomeController {
 
     @RequestMapping(value={"lien-he"}, method = RequestMethod.GET)
     public String contact(Model model){
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Liên hệ");
@@ -203,6 +210,7 @@ public class HomeController {
 
     @RequestMapping(value={"lien-he"}, method = RequestMethod.POST)
     public String contactInfo(Model model){
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
         Map<String, String> mapConfig = webConfigService.getAll();
 
         mapConfig.put("breadcrumb", "Liên hệ");
@@ -212,6 +220,7 @@ public class HomeController {
 
     @RequestMapping(value={"gioi-thieu"})
     public String about(Model model){
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Giới thiệu Hoàng Anh Food");
@@ -227,6 +236,7 @@ public class HomeController {
         mapConfig.put("title", "Blog Hoang Anh Food");
         mapConfig.put("breadcrumb", "Blog");
         model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
 
         Page<Post> newPosts = postService.getLast(0, 6);
         model.addAttribute("newPosts", newPosts);
@@ -244,6 +254,8 @@ public class HomeController {
         mapConfig.put("title", "Blog Hoang Anh Food");
         mapConfig.put("breadcrumb", "Blog");
         model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+
         Page<Post> posts = postService.getLast(0, 5);
         model.addAttribute("posts", posts);
 
@@ -265,6 +277,7 @@ public class HomeController {
         mapConfig.put("title", "Giỏ hàng của tôi");
         mapConfig.put("breadcrumb", "Giỏ hàng");
         model.addAttribute("mapConfig", mapConfig);
+        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
 
         String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
         if(id!=null) {

@@ -1,5 +1,7 @@
 package com.quanpv.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,20 +12,22 @@ public class Cart {
     @Id
     @Column(name = "CARD_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @JsonIgnore
+    private Integer id;
 
     private String idCustom;
 
-    private Date dateCreated;
+    private Date createdDate;
 
+    @JsonIgnore
     @ManyToOne
     private Customer customer;
 
     private String status;
 
-    public Cart(String idCustom, Date dateCreated, String status) {
+    public Cart(String idCustom, Date createdDate, String status) {
         this.idCustom= idCustom;
-        this.dateCreated = dateCreated;
+        this.createdDate = createdDate;
         this.status = status;
     }
 
@@ -47,12 +51,16 @@ public class Cart {
         this.idCustom = idCustom;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getStatus() {
@@ -75,7 +83,7 @@ public class Cart {
     public String toString() {
         return "Cart{" +
                 "id='" + id + '\'' +
-                ", dateCreated=" + dateCreated +
+                ", dateCreated=" + createdDate +
                 ", customer=" + customer +
                 ", status='" + status + '\'' +
                 '}';
