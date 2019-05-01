@@ -52,6 +52,7 @@ public class CartAPI {
         Integer quantity = Integer.valueOf(cartWrapper.getQuantity());
 
         ResponseWrapper responseWrapper = new ResponseWrapper(200, "SUCCESS");
+
         if(existingCart == null) {
             logger.info("Cart does not exists");
             Cart cart = new Cart(token, new Date(), Constant.STATUS_NEW);
@@ -63,6 +64,44 @@ public class CartAPI {
             Item item = itemService.getByCardIdAndStatusAndProductId(token, Constant.STATUS_NEW, id);
             if(item!=null) {
                 item.setQuantity(item.getQuantity() + quantity);
+                itemService.save(item);
+            } else {
+                item = itemService.save(new Item(existingCart, productService.getById(id), quantity));
+            }
+            responseWrapper.setObject(item.getProduct());
+        }
+        return responseWrapper;
+    }
+
+
+    @RequestMapping(value="update", method = RequestMethod.POST)
+    public ResponseWrapper updateCart(@RequestBody CartWrapper cartWrapper){
+        logger.info(cartWrapper.toString());
+        String token = cartWrapper.getToken();
+
+        Cart existingCart = cartService.getByIdCustom(token);
+        Integer id = Integer.valueOf(cartWrapper.getProductId());
+        Integer quantity = Integer.valueOf(cartWrapper.getQuantity());
+
+        ResponseWrapper responseWrapper = new ResponseWrapper(200, "SUCCESS");
+
+        if(existingCart == null) {
+            logger.info("Cart does not exists");
+            Cart cart = new Cart(token, new Date(), Constant.STATUS_NEW);
+            cartService.save(cart);
+            Item item = new Item(cart, productService.getById(id), quantity);
+            itemService.save(item);
+            responseWrapper.setObject(item.getProduct());
+        } else {
+            if (quantity == 0 ) {
+                logger.info("Delete item from cart " + id);
+                itemService.deleteByCardIdAndStatusAndProductId(existingCart.getIdCustom(),  Constant.STATUS_NEW, id);
+                return responseWrapper;
+            }
+
+            Item item = itemService.getByCardIdAndStatusAndProductId(token, Constant.STATUS_NEW, id);
+            if(item!=null) {
+                item.setQuantity(quantity);
                 itemService.save(item);
             } else {
                 item = itemService.save(new Item(existingCart, productService.getById(id), quantity));

@@ -20,6 +20,7 @@
 	<link th:href="@{/css/bpr-products-module.css}" rel="stylesheet" type="text/css"/>
 	<div class="bizweb-product-reviews-module"></div>
 
+	<footer th:replace="fragments/cart :: cart"></footer>
 	<footer th:replace="fragments/footer :: footer"></footer>
 	<!-- Add to cart -->
 	<div th:replace="fragments/quickview :: quickview"></div>
@@ -79,7 +80,6 @@
 		</div>
 	</div>
 
-	<div  id="popup-cart" class="modal fade" role="dialog"></div>
 	<div id="myModal" class="modal fade" role="dialog">
 	</div>
 </div>

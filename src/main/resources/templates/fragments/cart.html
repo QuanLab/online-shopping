@@ -15,23 +15,31 @@
                         </div>
 
                         <div class="cart-tbody">
-                            <div class="item-cart productid-21563056">
+
+                            <div th:each="item : ${cart.items}" class="item-cart productid-21563056">
                                 <div style="width: 18%" class="image">
-                                    <a class="product-image" title="Chocolate Iced - 15cm / Cam" href="/chocolate-iced">
-                                        <img width="75" height="auto" alt="Chocolate Iced - 15cm / Cam"
-                                             src="//bizweb.dktcdn.net/thumb/compact/100/332/765/products/food-light-spring-dessert.jpg">
+                                    <a class="product-image" th:title="${item.product.name}"
+                                       th:href="@{'/' + ${item.product.category.slug} + '/' + ${item.product.slug} + '/'}">
+                                        <img width="75" height="auto" th:alt="${item.product.name}" th:src="${item.product.featureImage}">
                                     </a>
                                 </div>
-                                <div style="width: 32%" class="a-center"><h3 class="product-name">
-                                    <a href="/chocolate-iced" title="Chocolate Iced - 15cm / Cam">Chocolate Iced</a>
-                                </h3><span class="variant-title">15cm / Cam</span></div>
-                                <div style="width: 17%" class="a-center"><span class="item-price"> <span
-                                        class="price pricechange">100.000₫</span></span></div>
+                                <div style="width: 32%" class="a-center">
+                                    <h3 class="product-name">
+                                        <a th:href="@{'/' + ${item.product.category.slug} + '/' + ${item.product.slug} + '/'}"
+                                           th:title="${item.product.name}" th:text="${item.product.name}">
+                                        </a>
+                                    </h3></div>
+                                <div style="width: 17%" class="a-center">
+                                    <span class="item-price">
+                                        <span class="price pricechange" th:text="${item.product.price}"></span>
+                                    </span>
+                                </div>
                                 <div style="width: 14%" class="a-center">
-                                    <div class="input_qty_pr"><input class="variantID" type="hidden" name="productId" th:value="${product.id}">
+                                    <div class="input_qty_pr">
+                                        <input class="productId" type="hidden" name="productId" th:value="${item.product.id}">
                                         <input type="text" maxlength="12" readonly="" min="0"
                                                class="check_number_here input-text number-sidebar input_pop input_pop qtyItem21563056"
-                                               id="qtyItem21563056" name="Lines" size="4" value="1">
+                                               id="qtyItem21563056" name="Lines" size="4" th:value="${ item.quantity }">
                                         <button onclick="var result = document.getElementById('qtyItem21563056'); var qtyItem21563056 = result.value; if( !isNaN( qtyItem21563056 )) result.value++;return false;"
                                                 class="increase_pop items-count btn-plus" type="button">+
                                         </button>
@@ -40,45 +48,18 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div style="width: 14%" class="a-center"><span class="cart-price"> <span class="price">100.000₫</span> </span>
-                                </div>
-                                <div style="width: 5%" class="a-center">
-                                    <a class="remove-itemx remove-item-cart" title="Xóa" href="javascript:;" data-id="21563056"><span><i
-                                        class="fa fa-trash-o"></i></span></a></div>
-                            </div>
-                            <div class="item-cart productid-21563033">
-                                <div style="width: 18%" class="image">
-                                    <a class="product-image" title="Cream Puff" href="/cream-puff">
-                                        <img width="75" height="auto" alt="Cream Puff" src="//bizweb.dktcdn.net/thumb/compact/100/332/765/products/try18-jpeg.jpg"></a>
-                                </div>
-                                <div style="width: 32%" class="a-center"><h3 class="product-name">
-                                    <a href="/cream-puff" title="Cream Puff">Cream Puff</a></h3><span class="variant-title"></span>
-                                </div>
-                                <div style="width: 17%" class="a-center"><span class="item-price">
-                                    <span class="price pricechange">70.000₫</span></span>
-                                </div>
                                 <div style="width: 14%" class="a-center">
-                                    <div class="input_qty_pr">
-                                        <input class="variantID" type="hidden" name="productId" th:value="${product.id}">
-                                        <input type="text" maxlength="12" readonly="" min="0"
-                                               class="check_number_here input-text number-sidebar input_pop input_pop qtyItem21563033"
-                                               id="qtyItem21563033" name="Lines" size="4" value="1">
-                                        <button onclick="var result = document.getElementById('qtyItem21563033'); var qtyItem21563033 = result.value; if( !isNaN( qtyItem21563033 )) result.value++;return false;"
-                                                class="increase_pop items-count btn-plus" type="button">+
-                                        </button>
-                                        <button onclick="var result = document.getElementById('qtyItem21563033'); var qtyItem21563033 = result.value; if( !isNaN( qtyItem21563033 ) &amp;&amp; qtyItem21563033 > 1 ) result.value--;return false;"
-                                                disabled="" class="reduced_pop items-count btn-minus" type="button">-
-                                        </button>
-                                    </div>
-                                </div>
-                                <div style="width: 14%" class="a-center"><span class="cart-price"> <span class="price">70.000₫</span> </span>
+                                    <span class="cart-price">
+                                        <span class="price" th:text="${item.product.price  * item.quantity }"></span>
+                                    </span>
                                 </div>
                                 <div style="width: 5%" class="a-center">
-                                    <a class="remove-itemx remove-item-cart" title="Xóa" href="javascript:;" data-id="21563033">
-                                        <span><i class="fa fa-trash-o"></i></span>
+                                    <a class="remove-itemx remove-item-cart" title="Xóa" href="javascript:;"
+                                       th:data-id="${item.product.id}"><span><i class="fa fa-trash-o"></i></span>
                                     </a>
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
@@ -99,7 +80,7 @@
                                 </tr>
                                 <tr>
                                     <td class="total-text">Tổng tiền thanh toán:</td>
-                                    <td class="txt-right totals_price price_end a-right">170.000₫</td>
+                                    <td class="txt-right totals_price price_end a-right" th:text="${cart.subtotal}"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -111,6 +92,7 @@
         </div>
 
     </div>
+
     <div class="cart-mobile hidden-md hidden-lg container">
         <form action="/cart" method="post" novalidate="" class="margin-bottom-40">
             <div class="title_cart_mobile">
@@ -149,31 +131,7 @@
                                data-id="21563056">Xoá</a>
                         </div>
                     </div>
-                    <div class="item-product item-mobile-cart item productid-21563033 ">
-                        <div class="item-product-cart-mobile"><a href="/cream-puff"> </a>
-                            <a class="product-images1" href="/cream-puff" title="Cream Puff">
-                                <img width="80" height="150" alt="Cream Puff"
-                                     src="//bizweb.dktcdn.net/thumb/small/100/332/765/products/try18-jpeg.jpg">
-                            </a></div>
-                        <div class="title-product-cart-mobile">
-                            <h3><a href="/cream-puff" title="Cream Puff">Cream Puff</a></h3>
-                            <p>Giá: <span class="pricechange">70.000₫</span></p></div>
-                        <div class="select-item-qty-mobile">
-                            <div class="txt_center in_put check_"><input class="variantID" type="hidden"
-                                                                         name="variantId" value="21563033">
-                                <button onclick="var result = document.getElementById('qtyMobile21563033'); var qtyMobile21563033 = result.value; if( !isNaN( qtyMobile21563033 ) &amp;&amp; qtyMobile21563033 > 0 ) result.value--;return false;"
-                                        class="reduced items-count btn-minus" type="button">–
-                                </button>
-                                <input type="number" maxlength="12" min="1" readonly=""
-                                       class="check_number_here input-text mobile_input number-sidebar qtyMobile21563033"
-                                       id="qtyMobile21563033" name="Lines" size="4" value="1">
-                                <button onclick="var result = document.getElementById('qtyMobile21563033'); var qtyMobile21563033 = result.value; if( !isNaN( qtyMobile21563033 )) result.value++;return false;"
-                                        class="increase items-count btn-plus" type="button">+
-                                </button>
-                            </div>
-                            <a class="button remove-item remove-item-cart" href="javascript:;"
-                               data-id="21563033">Xoá</a></div>
-                    </div>
+
                 </div>
                 <div class="header-cart-price" style="">
                     <div class="title-cart a-center"><span class="total_mobile a-center">Tổng tiền: <span
