@@ -14,15 +14,14 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Integer id;
-
     private String idCustom;
-
+    @JsonIgnore
     private Date createdDate;
 
     @JsonIgnore
     @ManyToOne
     private Customer customer;
-
+    @JsonIgnore
     private String status;
 
     public Cart(String idCustom, Date createdDate, String status) {
@@ -35,11 +34,11 @@ public class Cart {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,24 +50,12 @@ public class Cart {
         this.idCustom = idCustom;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Date getCreatedDate() {
         return createdDate;
     }
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Customer getCustomer() {
@@ -79,11 +66,20 @@ public class Cart {
         this.customer = customer;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Cart{" +
-                "id='" + id + '\'' +
-                ", dateCreated=" + createdDate +
+                "id=" + id +
+                ", idCustom='" + idCustom + '\'' +
+                ", createdDate=" + createdDate +
                 ", customer=" + customer +
                 ", status='" + status + '\'' +
                 '}';

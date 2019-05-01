@@ -91,11 +91,15 @@ public class HomeController {
     @RequestMapping(value={"/{category}/{product}/"})
     public String productDetail(Model model,
                                 @PathVariable("category") String categoryUrl,
-                                @PathVariable("product") String productUrl){
+                                @PathVariable("product") String productUrl,
+                                @CookieValue(value = "token", required = false) String token){
+
         Map<String, String> mapConfig = webConfigService.getAll();
         model.addAttribute("mapConfig", mapConfig);
-
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+        if(token == null) { //first time request // add token to set cookie
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
         model.addAttribute("categories", categoryService.getAll());
 
         Product productItem = productService.findFirstBySlug(productUrl);

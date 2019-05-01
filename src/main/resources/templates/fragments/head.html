@@ -53,6 +53,10 @@
         Bizweb.theme = {"id": 713219, "role": "main", "name": "Delicious 25-03-2019"};
         Bizweb.template = 'index';
     </script>
+    <script th:if="${ token!= null }">
+        var token = "[[${token}]]";
+        document.cookie = "token=" + token + ";";
+    </script>
     <meta name="token" id="token" th:content="${token}"/>
 </head>
 

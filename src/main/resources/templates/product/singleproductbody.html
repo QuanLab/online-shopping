@@ -11,7 +11,7 @@
 
                                     <div class="rows">
                                         <div class="col_large_default large-image">
-                                            <a th:href="${productItem.featureImage}" class="large_image_url checkurl"
+                                            <a href="#" class="large_image_url checkurl"
                                                data-rel="prettyPhoto[product-gallery]">
                                                 <img id="img_01" class="img-responsive" th:alt="${productItem.name}"
                                                      th:src="${productItem.featureImage}"
@@ -23,7 +23,8 @@
                                              data-loop="false" data-lg-items="4" data-md-items="4" data-sm-items="4"
                                              data-xs-items="2" data-margin="10">
                                             <div th:each="image,status : ${#strings.arraySplit(productItem.imageList, '|')}" class="item">
-                                                <a class="item_image" href="#" th:data-image="${image}" th:data-zoom-image="${image}">
+                                                <a class="item_image" href="#" th:data-image="${image}"
+                                                   th:data-zoom-image="${image}">
                                                     <img th:data-img="${image}" th:src="${image}" alt="${image}">
                                                 </a>
                                             </div>
@@ -36,7 +37,7 @@
                                     <h1 class="title-product" itemprop="name" th:text="${productItem.name}"></h1>
                                     <div class="fw" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                         <div class="group-status">
-
+                                            <input type="hidden" name="productId" th:value="${productItem.id}" />
 											<span class="variant-sku" th:text="${productItem.sku}">
 											</span>
                                             <span class="first_status"><span class="a_name">Tình trạng:</span>
@@ -51,11 +52,21 @@
 
                                         <div class="box-price">
                                         <span class="special-price">
-                                            <span class="price product-price" th:if="${productItem.price > 0 and productItem.salePrice > 0 }" th:text="${#numbers.formatDecimal(productItem.salePrice, 0, 0) + ' ₫'}"></span>
-                                            <span class="price product-price" th:if="${productItem.price > 0 and productItem.salePrice == 0 }" th:text="${#numbers.formatDecimal(productItem.price, 0, 0) + ' ₫'}"></span>
+                                            <span class="price product-price"
+                                                  th:if="${productItem.price > 0 and productItem.salePrice > 0 }"
+                                                  th:text="${#numbers.formatDecimal(productItem.salePrice, 0, 0) + ' ₫'}">
+                                            </span>
+                                            <span class="price product-price"
+                                                  th:if="${productItem.price > 0 and productItem.salePrice == 0 }"
+                                                  th:text="${#numbers.formatDecimal(productItem.price, 0, 0) + ' ₫'}">
+                                            </span>
                                             <span class="price product-price-old sale">&nbsp;&nbsp;
-                                            <span class="compare-price price product-price-old hidden-xs" th:if="${productItem.salePrice > 0}" th:text="${#numbers.formatDecimal(productItem.price, 0, 0) + ' ₫'}"></span>
-                                                <span class="old-price" itemprop="priceSpecification" itemscope="" itemtype="http://schema.org/priceSpecification">
+                                            <span class="compare-price price product-price-old hidden-xs"
+                                                  th:if="${productItem.salePrice > 0}"
+                                                  th:text="${#numbers.formatDecimal(productItem.price, 0, 0) + ' ₫'}">
+                                            </span>
+                                                <span class="old-price" itemprop="priceSpecification" itemscope=""
+                                                      itemtype="http://schema.org/priceSpecification">
                                                 <del th:if="${productItem.salePrice > 0}" class="price product-price-old sale"></del>
                                                 <meta itemprop="price" th:content="${productItem.price}">
                                                 <meta itemprop="priceCurrency" content="VND">
@@ -184,8 +195,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <span class="product-reviews-summary-actions">
-            </span>
+                                                        <span class="product-reviews-summary-actions"></span>
                                                         <div class="bizweb-product-reviews-form" id="bpr-form_13049772"
                                                              style="display:none;">
                                                         </div>
@@ -251,14 +261,14 @@
                                                      th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                             </a>
                                             <div class="icon-action hidden-xs hidden-sm hidden-md">
-                                                <form action="/cart/add" method="post" class="variants form-nut-grid" data-id="product-actions-13049130" enctype="multipart/form-data">
+                                                <form action="/cart/add" method="post" class="variants form-nut-grid" enctype="multipart/form-data">
                                                     <div>
                                                         <a data-toggle="tooltip" title="Xem nhanh"
-                                                           th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}" data-handle="lamington"
+                                                           th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}"
                                                            class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <input type="hidden" name="variantId" value="21561723" />
+                                                        <input type="hidden" name="productId" th:value="${product.id}" />
                                                         <button th:if="${product.price > 0}" title="Thêm vào giỏ hàng"
                                                                 class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart">
                                                             <i class="fa fa-shopping-bag" aria-hidden="true"></i>

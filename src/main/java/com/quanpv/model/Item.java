@@ -1,5 +1,7 @@
 package com.quanpv.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,17 +11,18 @@ public class Item {
     @Id
     @Column(name = "ITEM_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "CARD_ID")
     private Cart cart;
 
     @OneToOne
     private Product product;
-    private int quantity;
+    private Integer quantity;
 
-    public Item(Cart cart, Product product, int quantity) {
+    public Item(Cart cart, Product product, Integer quantity) {
         this.cart = cart;
         this.product = product;
         this.quantity = quantity;
@@ -28,11 +31,11 @@ public class Item {
     public Item() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,11 +55,11 @@ public class Item {
         this.product = product;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

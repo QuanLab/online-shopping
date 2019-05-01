@@ -42,7 +42,7 @@
     function applyStyles() {
       //Applying perfect scrollbar
       if ($('.scroll-container').length) {
-        const ScrollContainer = new PerfectScrollbar('.scroll-container');
+        var ScrollContainer = new PerfectScrollbar('.scroll-container');
       }
     }
 

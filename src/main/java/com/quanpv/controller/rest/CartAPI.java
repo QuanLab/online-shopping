@@ -1,10 +1,11 @@
 package com.quanpv.controller.rest;
 
-import com.quanpv.controller.entity.ListCat;
+import com.quanpv.controller.entity.CartWrapper;
 import com.quanpv.controller.entity.ResponseWrapper;
+import com.quanpv.dto.CartDTO;
 import com.quanpv.model.Cart;
-import com.quanpv.model.Category;
 import com.quanpv.model.Item;
+import com.quanpv.service.CartDTOService;
 import com.quanpv.service.CartService;
 import com.quanpv.service.ItemService;
 import com.quanpv.service.ProductService;
@@ -12,47 +13,58 @@ import com.quanpv.utils.Constant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/cart")
 public class CartAPI {
 
     private static final Logger logger = LogManager.getLogger();
     @Autowired
     private CartService cartService;
     @Autowired
+    private CartDTOService cartDTOService;
+    @Autowired
     private ProductService productService;
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping(value="addCart", method = RequestMethod.POST)
-    public ResponseWrapper deleteCategory(@RequestBody ListCat categories){
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        Cart existingCart = cartService.getByIdCustom(sessionID);
-        Integer id = 0;
+    @RequestMapping(value="", method = RequestMethod.GET)
+    public CartDTO getCart(@RequestParam(value = "token", required = false) String token){
+        cartDTOService.getByCart_IdAndCart_Status(token);
+        return cartDTOService.getByCart_IdAndCart_Status(token);
+    }
+
+    /**
+     * add product to cart
+     * @param cartWrapper
+     * @return
+     */
+    @RequestMapping(value="add", method = RequestMethod.POST)
+    public ResponseWrapper addCart(@RequestBody CartWrapper cartWrapper){
+        logger.info(cartWrapper.toString());
+        String token = cartWrapper.getToken();
+
+        Cart existingCart = cartService.getByIdCustom(token);
+        Integer id = Integer.valueOf(cartWrapper.getProductId());
+        Integer quantity = Integer.valueOf(cartWrapper.getQuantity());
         if(existingCart == null) {
             logger.info("Cart does not exists");
-            Cart cart = new Cart(sessionID, new Date(), Constant.STATUS_NEW);
+            Cart cart = new Cart(token, new Date(), Constant.STATUS_NEW);
             cartService.save(cart);
-            Item item = new Item(cart, productService.getById(id), 1);
+            Item item = new Item(cart, productService.getById(id), quantity);
             itemService.save(item);
         } else {
-            Item item = itemService.getByCardIdAndStatusAndProductId(sessionID, Constant.STATUS_NEW, id);
+            Item item = itemService.getByCardIdAndStatusAndProductId(token, Constant.STATUS_NEW, id);
             if(item!=null) {
-                item.setQuantity(item.getQuantity() + 1);
+                item.setQuantity(quantity);
                 itemService.save(item);
             } else {
-                itemService.save(new Item(existingCart, productService.getById(id), 1));
+                itemService.save(new Item(existingCart, productService.getById(id), quantity));
             }
         }
         return new ResponseWrapper(200, "SUCCESS");
     }
-
 }

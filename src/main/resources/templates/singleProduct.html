@@ -83,47 +83,13 @@
 	<div id="myModal" class="modal fade" role="dialog">
 	</div>
 </div>
-<!-- Bizweb javascript customer -->
 
-<!-- Bizweb javascript -->
 <script th:src="@{/js/option-selectors.js}" type="text/javascript"></script>
-<script th:src="@{/js/api.jquery.js}" type="text/javascript"></script>
-
-<!-- Plugin JS -->
+<!--<script th:src="@{/js/api.jquery.js}" type="text/javascript"></script>-->
 <script th:src="@{/js/plugin.js}" type="text/javascript"></script>
-<script th:src="@{/js/cs.script.js}" type="text/javascript"></script>
-
-<script th:replace="fragments/scriptcart :: scriptcart"></script>
 
 <script th:src="@{/js/main.js}" type="text/javascript"></script>
-<!-- Quick view -->
 <script th:src="@{/js/quickview.js}" type="text/javascript"></script>
-
-<!-- Product detail JS,CSS -->
-<script th:src="@{/assets/js/detail.js}" type="text/javascript"></script>
-<script th:src="@{/assets/js/jquery.elevatezoom308.min.js}" type="text/javascript"></script>
-<script th:src="@{/assets/js/jquery.prettyphoto.min005e.js}" type="text/javascript"></script>
-<script th:src="@{/assets/js/jquery.prettyphoto.init.min367a.js}" type="text/javascript"></script>
-<script type="text/javascript" >
-	var token = $('#token').attr("content");
-	console.log(token);
-	var data= {'token' : token};
-
-	function addCart() {
-		$.ajax({
-			url: '/api/v1/addCart',
-			dataType: 'json',
-			type: 'POST',
-			contentType: 'application/json; charset=utf-8',
-			data: JSON.stringify(data),
-			success: function( data, textStatus, jQxhr ){
-
-			},
-			error: function( jqXhr, textStatus, errorThrown ){
-				console.log(errorThrown);
-			}
-		});
-	}
-</script>
+<script th:src="@{/js/cart.js}" type="text/javascript"></script>
 </body>
 </html>
