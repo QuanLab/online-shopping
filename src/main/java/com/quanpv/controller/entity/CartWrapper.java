@@ -7,6 +7,9 @@ public class CartWrapper {
     private String productId;
     private String quantity;
 
+    public CartWrapper() {
+    }
+
     public String getToken() {
         return token;
     }

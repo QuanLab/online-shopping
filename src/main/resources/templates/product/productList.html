@@ -67,14 +67,14 @@
 
                         <div th:each="product : ${featuredProducts.content}" class="item_sidebar">
                             <div class="wrap-img">
-                                <a class="image_sidebar" th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}">
+                                <a class="image_sidebar" th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}" th:title="${product.name}">
                                     <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                          th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                 </a>
                             </div>
                             <div class="infor">
                                 <h3 class="title">
-                                    <a th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug}}" th:title="${product.name}"
+                                    <a th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}" th:title="${product.name}"
                                        th:text="${product.name}"></a>
                                 </h3>
                                 <div class="box-price">
@@ -175,8 +175,7 @@
                                                            class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <input class="hidden" type="hidden" name="variantId"
-                                                               value="21563056">
+                                                        <input class="hidden" type="hidden" name="productId" th:value="${product.id}">
                                                         <button th:if="${product.price > 0}" title="Thêm vào giỏ hàng"
                                                                 class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart">
                                                             <i class="fa fa-shopping-bag" aria-hidden="true"></i>
@@ -259,7 +258,7 @@
                 function replaceUrlParam(url, paramName, paramValue) {
                     var pattern = new RegExp('(' + paramName + '=).*?(&|$)'),
                         newUrl = url.replace(pattern, '$1' + paramValue + '$2');
-                    if (newUrl == url) {
+                    if (newUrl === url) {
                         newUrl = newUrl + (newUrl.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
                     }
                     return newUrl;

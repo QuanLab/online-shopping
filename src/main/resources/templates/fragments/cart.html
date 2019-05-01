@@ -28,8 +28,7 @@
                                 <div style="width: 17%" class="a-center"><span class="item-price"> <span
                                         class="price pricechange">100.000₫</span></span></div>
                                 <div style="width: 14%" class="a-center">
-                                    <div class="input_qty_pr"><input class="variantID" type="hidden" name="variantId"
-                                                                     value="21563056">
+                                    <div class="input_qty_pr"><input class="variantID" type="hidden" name="productId" th:value="${product.id}">
                                         <input type="text" maxlength="12" readonly="" min="0"
                                                class="check_number_here input-text number-sidebar input_pop input_pop qtyItem21563056"
                                                id="qtyItem21563056" name="Lines" size="4" value="1">
@@ -60,7 +59,7 @@
                                 </div>
                                 <div style="width: 14%" class="a-center">
                                     <div class="input_qty_pr">
-                                        <input class="variantID" type="hidden" name="variantId" value="21563033">
+                                        <input class="variantID" type="hidden" name="productId" th:value="${product.id}">
                                         <input type="text" maxlength="12" readonly="" min="0"
                                                class="check_number_here input-text number-sidebar input_pop input_pop qtyItem21563033"
                                                id="qtyItem21563033" name="Lines" size="4" value="1">

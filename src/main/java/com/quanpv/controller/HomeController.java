@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -38,8 +37,12 @@ public class HomeController {
     private PostService postService;
 
     @RequestMapping(value={""})
-    public String home(Model model){
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+    public String home(@CookieValue(value = "token", required = false) String token, Model model){
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+
+        model.addAttribute("token", token);
         model.addAttribute("mapConfig", webConfigService.getAll());
 
         Page<Product> featuredProducts = productService.getFeatured(0, 6);
@@ -52,6 +55,7 @@ public class HomeController {
         model.addAttribute("newProducts", newProducts);
 
         model.addAttribute("categories", categoryService.getAll());
+        System.out.println(categoryService.getAll());
 
         Page<Post> posts = postService.getLast(0, 6);
         model.addAttribute("posts", posts);
@@ -61,11 +65,15 @@ public class HomeController {
         return "index";
     }
 
-
     @RequestMapping(value={"/{category}/"})
-    public String category(Model model, @PathVariable("category") String categoryUrl,
-                                 @RequestParam(value = "page", required = false) Integer page,
-                                 @RequestParam(value = "sort", required = false) String sortBy){
+    public String category(Model model,
+                           @PathVariable("category") String categoryUrl,
+                           @RequestParam(value = "page", required = false) Integer page,
+                           @RequestParam(value = "sort", required = false) String sortBy,
+                           @CookieValue(value = "token", required = false) String token){
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
         model.addAttribute("categories", categoryService.getAll());
         Category category = categoryService.getBySlug(categoryUrl);
 
@@ -73,7 +81,7 @@ public class HomeController {
         mapConfig.put("breadcrumb", category.getName());
         mapConfig.put("isFeatured", "1");
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+        model.addAttribute("token", token);
 
         int offset = 0;
         if(page != null) {
@@ -94,16 +102,17 @@ public class HomeController {
                                 @PathVariable("product") String productUrl,
                                 @CookieValue(value = "token", required = false) String token){
 
-        Map<String, String> mapConfig = webConfigService.getAll();
-        model.addAttribute("mapConfig", mapConfig);
-        if(token == null) { //first time request // add token to set cookie
+        if(token == null) {
             token = RequestContextHolder.currentRequestAttributes().getSessionId();
         }
         model.addAttribute("token", token);
-        model.addAttribute("categories", categoryService.getAll());
 
+        Map<String, String> mapConfig = webConfigService.getAll();
+        model.addAttribute("mapConfig", mapConfig);
+
+        model.addAttribute("categories", categoryService.getAll());
         Product productItem = productService.findFirstBySlug(productUrl);
-        logger.info(productItem.toString());
+
         model.addAttribute("productItem", productItem);
         mapConfig.put("breadcrumb", productItem.getName());
         Page<Product> featuredProducts = productService.getFeatured(0, 6);
@@ -116,13 +125,19 @@ public class HomeController {
     }
 
     @RequestMapping(value={"san-pham"})
-    public String collectionAll(Model model, @RequestParam(value = "page", required = false) Integer page,
-                                @RequestParam(value = "sort", required = false) String sortBy){
+    public String collectionAll(Model model,
+                                @RequestParam(value = "page", required = false) Integer page,
+                                @RequestParam(value = "sort", required = false) String sortBy,
+                                @CookieValue(value = "token", required = false) String token){
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Tất cả sản phẩm");
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+        model.addAttribute("token", token);
 
         int offset = 0;
         if(page != null) {
@@ -140,12 +155,17 @@ public class HomeController {
     @RequestMapping(value={"san-pham-noi-bat"})
     public String featuredProduct(Model model,
                                   @RequestParam(value = "page", required = false) Integer page,
-                                  @RequestParam(value = "sort", required = false) String sortBy){
+                                  @RequestParam(value = "sort", required = false) String sortBy,
+                                  @CookieValue(value = "token", required = false) String token){
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm nổi bật");
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
 
         Page<Product> featuredProducts = productService.getFeatured(0, 5);
         model.addAttribute("featuredProducts", featuredProducts);
@@ -158,14 +178,19 @@ public class HomeController {
     @RequestMapping(value={"san-pham-ua-chuong"})
     public String popularProduct(Model model,
                                  @RequestParam(value = "page", required = false) Integer page,
-                                 @RequestParam(value = "sort", required = false) String sortBy){
+                                 @RequestParam(value = "sort", required = false) String sortBy,
+                                 @CookieValue(value = "token", required = false) String token){
         model.addAttribute("categories", categoryService.getAll());
 
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm ưa chuộng");
         mapConfig.put("isFeatured", "1");
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
 
         int offset = 0;
         if(page != null) {
@@ -183,12 +208,17 @@ public class HomeController {
     @RequestMapping(value={"san-pham-moi"})
     public String newProduct(Model model,
                              @RequestParam(value = "page", required = false) Integer page,
-                             @RequestParam(value = "sort", required = false) String sortBy){
+                             @RequestParam(value = "sort", required = false) String sortBy,
+                             @CookieValue(value = "token", required = false) String token){
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Sản phẩm mới");
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
 
         Page<Product> featuredProducts = productService.getFeatured(0, 5);
         model.addAttribute("featuredProducts", featuredProducts);
@@ -203,8 +233,11 @@ public class HomeController {
     }
 
     @RequestMapping(value={"lien-he"}, method = RequestMethod.GET)
-    public String contact(Model model){
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+    public String contact(Model model, @CookieValue(value = "token", required = false) String token){
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("breadcrumb", "Liên hệ");
@@ -213,8 +246,11 @@ public class HomeController {
     }
 
     @RequestMapping(value={"lien-he"}, method = RequestMethod.POST)
-    public String contactInfo(Model model){
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+    public String contactInfo(Model model, @CookieValue(value = "token", required = false) String token){
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
         Map<String, String> mapConfig = webConfigService.getAll();
 
         mapConfig.put("breadcrumb", "Liên hệ");
@@ -223,8 +259,11 @@ public class HomeController {
     }
 
     @RequestMapping(value={"gioi-thieu"})
-    public String about(Model model){
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+    public String about(Model model, @CookieValue(value = "token", required = false) String token){
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Giới thiệu Hoàng Anh Food");
@@ -234,13 +273,16 @@ public class HomeController {
     }
 
     @RequestMapping(value={"tin-tuc"})
-    public String news (Model model){
+    public String news (Model model, @CookieValue(value = "token", required = false) String token){
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Blog Hoang Anh Food");
         mapConfig.put("breadcrumb", "Blog");
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
 
         Page<Post> newPosts = postService.getLast(0, 6);
         model.addAttribute("newPosts", newPosts);
@@ -252,13 +294,19 @@ public class HomeController {
 
 
     @RequestMapping(value={"blog/{slug}/"})
-    public String blogPost (Model model, @PathVariable("slug") String slug){
+    public String blogPost (Model model,
+                            @PathVariable("slug") String slug ,
+                            @CookieValue(value = "token", required = false) String token){
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Blog Hoang Anh Food");
         mapConfig.put("breadcrumb", "Blog");
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
+
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
 
         Page<Post> posts = postService.getLast(0, 5);
         model.addAttribute("posts", posts);
@@ -268,27 +316,21 @@ public class HomeController {
         return "blogPost";
     }
 
-
-    @RequestMapping(value="/403")
-    public String Error403(){
-        return "403";
-    }
-
     @RequestMapping(value="/cart")
-    public String cart(@RequestParam(value = "id", required = false) Integer id, Model model){
+    public String cart(@CookieValue(value = "token", required = false) String token,
+                       Model model){
+        String cartId = token;
+        if(token == null) {
+            token = RequestContextHolder.currentRequestAttributes().getSessionId();
+        }
+        model.addAttribute("token", token);
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Giỏ hàng của tôi");
         mapConfig.put("breadcrumb", "Giỏ hàng");
         model.addAttribute("mapConfig", mapConfig);
-        model.addAttribute("token", RequestContextHolder.currentRequestAttributes().getSessionId());
 
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        if(id!=null) {
-            cartDTOService.deleteByCardIdAndStatusAndProductId(sessionID, Constant.STATUS_NEW, id);
-        }
-
-        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
+        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(cartId));
         model.addAttribute("categories", categoryService.getAll());
         return "shoppingCart";
     }
@@ -299,37 +341,16 @@ public class HomeController {
         return "login";
     }
 
-
-    @RequestMapping(value="/cart", method = RequestMethod.POST)
-    public String cartUpdate(@RequestParam(value = "quantity", required = false) List<Integer> quantityList,
-                             Model model ){
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        model.addAttribute("categories", categoryService.getAll());
-
-        if(quantityList!=null) {
-            List<Item> items = itemService.getByCart_IdCustomAndCart_Status(sessionID, Constant.STATUS_NEW);
-            for(int i=0; i <items.size(); i++) {
-                Item item = items.get(i);
-                item.setQuantity(quantityList.get(i));
-                itemService.save(item);
-            }
-        }
-
-        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
-        model.addAttribute("categories", categoryService.getAll());
-        return "shoppingCart";
-    }
-
     @RequestMapping(value="/checkout", method = RequestMethod.GET)
-    public String checkOut(Model model){
+    public String checkOut(Model model, @CookieValue(value = "token", required = false) String token){
         model.addAttribute("categories", categoryService.getAll());
         Map<String, String> mapConfig = webConfigService.getAll();
         mapConfig.put("title", "Giỏ hàng của tôi");
         mapConfig.put("breadcrumb", "Giỏ hàng");
         model.addAttribute("mapConfig", mapConfig);
 
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
+        String cartId = token;
+        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(cartId));
         return "checkout";
     }
 
@@ -360,5 +381,11 @@ public class HomeController {
         }
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
         return "checkout";
+    }
+
+
+    @RequestMapping(value="/403")
+    public String Error403(){
+        return "403";
     }
 }

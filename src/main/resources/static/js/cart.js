@@ -1,22 +1,3 @@
-var token = $('#token').attr("content");
-
-console.log(token);
-var data= {'token' : token};
-
-$("form").submit(function(e){
-    e.preventDefault();
-    var productId = $("input[name='productId']", this).val();
-    var quantity = $("input[name='quantity']", this).val();
-    if(quantity === undefined) {
-        data = {'token' : token, 'productId' : productId ,'quantity' : 1}
-    } else {
-        data = {'token' : token, 'productId' : productId ,'quantity' : quantity}
-    }
-    console.log(JSON.stringify(data));
-    addCart(data);
-    reloadCart(token);
-});
-
 function addCart(data) {
     $.ajax({
         url: '/api/v1/cart/add',
@@ -24,113 +5,181 @@ function addCart(data) {
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(data),
-        success: function( data, textStatus, jQxhr ){
-            $('#popup-cart').modal('show')
+        success: function (responseData, textStatus, jQxhr) {
+            updateCart();
+            console.log(JSON.stringify(responseData));
+            var product = responseData['object'];
+            showPopupAddToCart(product)
         },
-        error: function( jqXhr, textStatus, errorThrown ){
+        error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
         }
     });
 }
 
-function reloadCart() {
-    var token = $('#token').attr("content");
+function showPopupAddToCart(product) {
+    var popupCart = $('#popup-cart');
+    popupCart.empty();
+
+    $('<div class="modal-dialog">' +
+        '        <div class="modal-content">' +
+        '            <div class="modal-header">' +
+        '                <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close" style="position: relative; z-index: 9;">' +
+        '                    <span aria-hidden="true">×</span>' +
+        '                </button>' +
+        '                <h4 class="modal-title">Sản phẩm đã được thêm vào giỏ hàng</h4>' +
+        '            </div>' +
+        '            <div class="modal-body">' +
+        '                <div class="media">' +
+        '                    <div class="media-left">' +
+        '                        <div class="thumb-1x1"><img width="140px" src="' + product.featureImage + '" alt="' + product.name +'"></div>' +
+        '                    </div>' +
+        '                    <div class="media-body">' +
+        '                        <div class="product-title">' + product.name + '</div>' +
+        '                        <div class="product-new-price"><span>' + product.price+ 'đ</span></div>' +
+        '                        <button class="btn btn-block btn-outline-red" data-dismiss="modal">Tiếp tục mua hàng</button>' +
+        '                        <a href="/checkout" class="btn btn-block btn-red">Tiến hành thanh toán</a>' +
+        '                    </div>' +
+        '                </div>' +
+        '            </div>' +
+        '        </div>' +
+        '    </div>').appendTo(popupCart);
+
+    popupCart.modal('show')
+}
+
+function updateCartFromForm(data) {
+    var numberOfItem = 0;
+    if (data.items.length === 0) {
+        $(".count_item").text(numberOfItem);
+        return
+    } else {
+        $.each(data.items, function (index, item) {
+            numberOfItem = numberOfItem + item.quantity;
+        });
+        $(".count_item").text(numberOfItem);
+    }
+
+    var table = $('.mini-products-list');
+    table.empty();
+
+    if (numberOfItem > 0) {
+        var sub_total = 0;
+        $('<ul class="list-item-cart"></ul>').appendTo(table);
+        //append list item to cart on hover
+        $.each(data.items, function (index, item) {
+            sub_total = sub_total + item.product.price * item.quantity;
+            var slug = '/' + item.product.category.slug + '/' + item.product.slug + '/';
+            $('<li class="item productid-' + item.id + '">' +
+                '<div class="wrap_item">' +
+                '<a class="product-image" href="' + slug + '" title="' + item.product.name + '">' +
+                '<img alt="' + item.product.name + '" src="' + item.product.featureImage + '" width="100">' +
+                '</a>' +
+                '<div class="detail-item">' +
+                '<div class="product-details"> ' +
+                '<a href="javascript:;" data-id="' + item.product.id + '" title="Xóa" class="remove-item-cart fa fa-close">&nbsp;</a>' +
+                '<h3 class="product-name"> ' +
+                '<a href="' + slug + '" title="' + item.product.name + '">' + item.product.name + '</a>' +
+                '</h3>' +
+                '</div>' +
+                '<div class="product-details-bottom">' +
+                '<span class="price pricechange">' + item.product.price + '₫</span>' +
+                '<span class="hidden quaty item_quanty_count"> x ' + item.quantity + '</span>' +
+                '<div class="quantity-select qty_drop_cart">' +
+                '<input class="productId" type="hidden" name="productId" value="' + item.product.id + '">' +
+                '<button onclick="var result = document.getElementById(\'qty' + item.product.id + '\'); var qty' + item.product.id + ' = result.value; if( !isNaN(qty' + item.product.id + ') && qty' + item.product.id + ' > 1) result.value--;return false;" class="btn_reduced reduced items-count btn-minus" type="button">–</button>' +
+                '<input type="text" maxlength="12" readonly="" class="input-text number-sidebar qty' + item.product.id + '" id="qty' + item.product.id + '" name="Lines" size="4" value="' + item.quantity + '">' +
+                '<button onclick="var result = document.getElementById(\'qty' + item.product.id + '\'); var qty' + item.product.id + ' = result.value; if( !isNaN( qty' + item.product.id + ')) result.value++; return false;" class="btn_increase increase items-count btn-plus" type="button">+</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="border">' +
+                '</div>' +
+                '</div>' +
+                '</li>')
+                .appendTo(table.children('.list-item-cart'));
+        });
+        $('<div class="wrap_total"><div class="top-subtotal hidden">Phí vận chuyển: <span class="pricex">Tính khi thanh toán</span></div><div class="top-subtotal">Thành tiền: <span class="price">' + sub_total + '₫</span></div></div>').appendTo(table);
+        $('<div class="wrap_button"><div class="actions"><a href="/cart" class="btn btn-gray btn-cart-page pink"><span>Giỏ hàng</span></a> <a href="/checkout" class="btn btn-gray btn-checkout pink"><span>Thanh toán</span></a> </div></div>').appendTo(table);
+    } else {
+        $('<div class="no-item"><p>Không có sản phẩm nào.</p></div>').appendTo(table);
+    }
+    ;
+
+    // updateCartDesc(cart);
+    var numInput = document.querySelector('#cart-sidebar .qty_drop_cart input.input-text');
+    if (numInput != null) {
+        // Listen for input event on numInput.
+        numInput.addEventListener('input', function () {
+            // Let's match only digits.
+            var num = this.value.match(/^\d+$/);
+            if (num === 0) {
+                // If we have no match, value will be empty.
+                this.value = 1;
+            }
+            if (num === null) {
+                // If we have no match, value will be empty.
+                this.value = "1";
+            }
+        }, false)
+    }
+}
+
+$("form").submit(function (e) {
+    e.preventDefault();
+    var productId = $("input[name='productId']", this).val();
+    var quantity = $("input[name='quantity']", this).val();
+    var token =  getToken();
+    if (quantity === undefined) {
+        quantity = 1;
+    }
+    var data = {'token': token, 'productId': productId, 'quantity': quantity}
+    addCart(data);
+    updateCart();
+});
+
+function onCartRemoveClick(cart, productId) {
+    $.each(cart, function (key, value) {
+        if (key === 'items') {
+            $.each(value, function (i, item) {
+                if (item.product.id === productId) {
+                    $('.productid-' + productId).remove();
+                }
+            });
+        }
+    });
+    // updateCartDesc(cart);
+}
+
+function getToken() {
+    var token = Cookies.get('token');
+    if (token === undefined) {
+        token = ''
+    }
+    return token;
+}
+
+function updateCart() {
     $.ajax({
-        url: '/api/v1/cart?token=' + token,
+        url: '/api/v1/cart?token=' + getToken(),
         dataType: 'json',
         type: 'GET',
         contentType: 'application/json; charset=utf-8',
-        success: function( data, textStatus, jQxhr ){
-            console.log(JSON.stringify(data))
-            var numberOfItem  = 0
-            $.each(data.items, function ( index, item) {
-                numberOfItem = numberOfItem + item.quantity;
-            });
-            console.log(numberOfItem)
-            $(".count_item").text(numberOfItem)
+        success: function (data) {
+            updateCartFromForm(data);
+            // updateCartPopupForm(cart, '#popup-cart-desktop .tbody-popup');
         },
-        error: function( jqXhr, textStatus, errorThrown ){
+        error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
         }
     });
 }
 
 $(document).ready(function () {
-    reloadCart();
+    updateCart();
 });
 
-// Bizweb.updateCartFromForm = function (cart, cart_summary_id, cart_count_id) {
-//     if ((typeof cart_summary_id) === 'string') {
-//         var cart_summary = jQuery(cart_summary_id);
-//         if (cart_summary.length) {
-//             // Start from scratch.
-//             cart_summary.empty();
-//             // Pull it all out.
-//             jQuery.each(cart, function (key, value) {
-//                 if (key === 'items') {
-//
-//                     var table = jQuery(cart_summary_id);
-//                     if (value.length) {
-//                         jQuery('<ul class="list-item-cart"></ul>').appendTo(table);
-//                         jQuery.each(value, function (i, item) {
-//
-//                             var src = item.image;
-//                             if (src == null) {
-//                                 src = "https://bizweb.dktcdn.net/thumb/large/assets/themes_support/noimage.gif";
-//                             }
-//                             var buttonQty = "";
-//                             if (item.quantity == '1') {
-//                                 // buttonQty = 'disabled';
-//                             } else {
-//                                 buttonQty = '';
-//                             }
-//                             jQuery('<li class="item productid-' + item.variant_id + '">' +
-//                                 '<div class="wrap_item">' +
-//                                 '<a class="product-image" href="' + item.url + '" title="' + item.name + '">'
-//                                 + '<img alt="' + item.name + '" src="' + src + '"width="' + '100' + '"\>' +
-//                                 '</a>' +
-//                                 '<div class="detail-item"><div class="product-details">' +
-//                                 '<a href="javascript:;" data-id="' + item.variant_id + '" title="Xóa" class="remove-item-cart fa fa-close">&nbsp;</a>'
-//                                 + '<h3 class="product-name"> <a href="' + item.url + '" title="' + item.name + '">' + item.name + '</a></h3>' +
-//                                 '</div>'
-//                                 + '<div class="product-details-bottom"><span class="price pricechange">' + Bizweb.formatMoney(item.price, "{{amount_no_decimals_with_comma_separator}}₫") + '</span>' +
-//                                 '<span class="hidden quaty item_quanty_count"> x ' + item.quantity + '</span>'
-//                                 + '<div class="quantity-select qty_drop_cart">' +
-//                                 '<input class="variantID" type="hidden" name="variantId" value="' + item.variant_id + '">' +
-//                                 '<button onClick="var result = document.getElementById(\'qty' + item.variant_id + '\'); var qty' + item.variant_id + ' = result.value; if( !isNaN( qty' + item.variant_id + ' ) &amp;&amp; qty' + item.variant_id + ' &gt; 1 ) result.value--;return false;" class="btn_reduced reduced items-count btn-minus" ' + buttonQty + ' type="button">–</button><input type="text" maxlength="12" readonly class="input-text number-sidebar qty' + item.variant_id + '" id="qty' + item.variant_id + '" name="Lines" id="updates_' + item.variant_id + '" size="4" value="' + item.quantity + '"><button onClick="var result = document.getElementById(\'qty' + item.variant_id + '\'); var qty' + item.variant_id + ' = result.value; if( !isNaN( qty' + item.variant_id + ' )) result.value++;return false;" class="btn_increase increase items-count btn-plus" type="button">+</button></div>'
-//                                 + '</div></div><div class="border"></div></li>')
-//                                 .appendTo(table.children('.list-item-cart'));
-//                         });
-//                         jQuery('<div class="wrap_total"><div class="top-subtotal hidden">Phí vận chuyển: <span class="pricex">Tính khi thanh toán</span></div><div class="top-subtotal">Thành tiền: <span class="price">' + Bizweb.formatMoney(cart.total_price, "{{amount_no_decimals_with_comma_separator}}₫") + '</span></div></div>').appendTo(table);
-//                         jQuery('<div class="wrap_button"><div class="actions"><a href="/cart" class="btn btn-gray btn-cart-page pink"><span>Giỏ hàng</span></a> <a href="/checkout" class="btn btn-gray btn-checkout pink"><span>Thanh toán</span></a> </div></div>').appendTo(table);
-//                     }
-//                     else {
-//                         jQuery('<div class="no-item"><p>Không có sản phẩm nào.</p></div>').appendTo(table);
-//
-//                     }
-//                 }
-//             });
-//         }
-//     }
-//     updateCartDesc(cart);
-//     var numInput = document.querySelector('#cart-sidebar .qty_drop_cart input.input-text');
-//     if (numInput != null) {
-//         // Listen for input event on numInput.
-//         numInput.addEventListener('input', function () {
-//             // Let's match only digits.
-//             var num = this.value.match(/^\d+$/);
-//             if (num == 0) {
-//                 // If we have no match, value will be empty.
-//                 this.value = 1;
-//             }
-//             if (num === null) {
-//                 // If we have no match, value will be empty.
-//                 this.value = "1";
-//             }
-//         }, false)
-//     }
-// }
-//
+
 // Bizweb.updateCartPageForm = function (cart, cart_summary_id, cart_count_id) {
 //     if ((typeof cart_summary_id) === 'string') {
 //         var cart_summary = jQuery(cart_summary_id);
@@ -405,30 +454,3 @@ $(document).ready(function () {
 //     });
 //     updateCartDesc(cart);
 // }
-// Bizweb.onCartRemoveClick = function (cart, variantId) {
-//     jQuery.each(cart, function (key, value) {
-//         if (key === 'items') {
-//             jQuery.each(value, function (i, item) {
-//                 if (item.variant_id == variantId) {
-//                     $('.productid-' + variantId).remove();
-//                 }
-//             });
-//         }
-//     });
-//     updateCartDesc(cart);
-// }
-//
-// $(window).ready(function () {
-//     $.ajax({
-//         type: 'GET',
-//         url: '/api/v1/cart',
-//         async: true,
-//         cache: false,
-//         dataType: 'json',
-//         success: function (cart) {
-//             Bizweb.updateCartFromForm(cart, '.mini-products-list');
-//             Bizweb.updateCartPopupForm(cart, '#popup-cart-desktop .tbody-popup');
-//
-//         }
-//     });
-// });

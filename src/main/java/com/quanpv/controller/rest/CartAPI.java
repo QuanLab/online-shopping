@@ -50,21 +50,25 @@ public class CartAPI {
         Cart existingCart = cartService.getByIdCustom(token);
         Integer id = Integer.valueOf(cartWrapper.getProductId());
         Integer quantity = Integer.valueOf(cartWrapper.getQuantity());
+
+        ResponseWrapper responseWrapper = new ResponseWrapper(200, "SUCCESS");
         if(existingCart == null) {
             logger.info("Cart does not exists");
             Cart cart = new Cart(token, new Date(), Constant.STATUS_NEW);
             cartService.save(cart);
             Item item = new Item(cart, productService.getById(id), quantity);
             itemService.save(item);
+            responseWrapper.setObject(item.getProduct());
         } else {
             Item item = itemService.getByCardIdAndStatusAndProductId(token, Constant.STATUS_NEW, id);
             if(item!=null) {
-                item.setQuantity(quantity);
+                item.setQuantity(item.getQuantity() + quantity);
                 itemService.save(item);
             } else {
-                itemService.save(new Item(existingCart, productService.getById(id), quantity));
+                item = itemService.save(new Item(existingCart, productService.getById(id), quantity));
             }
+            responseWrapper.setObject(item.getProduct());
         }
-        return new ResponseWrapper(200, "SUCCESS");
+        return responseWrapper;
     }
 }
