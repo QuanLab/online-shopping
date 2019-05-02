@@ -103,7 +103,7 @@ function updateCartFromForm(data) {
                 '<div class="quantity-select qty_drop_cart">' +
                 '<input class="productId" type="hidden" name="productId" value="' + item.product.id + '">' +
                 '<button onclick="var result = document.getElementById(\'qty' + item.product.id + '\'); var qty' + item.product.id + ' = result.value; if( !isNaN(qty' + item.product.id + ') && qty' + item.product.id + ' > 1) result.value--;return false;" class="btn_reduced reduced items-count btn-minus" type="button">–</button>' +
-                '<input type="text" maxlength="12" readonly="" class="input-text number-sidebar qty' + item.product.id + '" id="qty' + item.product.id + '" name="Lines" size="4" value="' + item.quantity + '">' +
+                '<input type="text" maxlength="12" readonly="" class="input-text number-sidebar qty' + item.product.id + '" id="qty' + item.product.id + '" name="qty" size="4" value="' + item.quantity + '">' +
                 '<button onclick="var result = document.getElementById(\'qty' + item.product.id + '\'); var qty' + item.product.id + ' = result.value; if( !isNaN( qty' + item.product.id + ')) result.value++; return false;" class="btn_increase increase items-count btn-plus" type="button">+</button>' +
                 '</div>' +
                 '</div>' +
@@ -179,6 +179,15 @@ $('.remove-item-cart').on("click", function(){
     $(this).parents('.item-cart').remove()
 });
 
+$(document).on("click", ".items-count", function(){
+    $(this).siblings().each(function (index, item) {
+        console.log(item)
+    });
+    var productId = $(this).siblings('.productId').val();
+    var quantity = $(this).siblings('input[name="qty"]').val();
+    var data = {'token': getToken(), 'productId': productId, 'quantity': quantity};
+    updateCartItem(data);
+});
 
 function getToken() {
     var token = Cookies.get('token');
