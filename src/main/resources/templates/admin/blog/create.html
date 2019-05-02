@@ -1,0 +1,45 @@
+<div th:fragment="create" class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-body">
+            <form class="forms-sample">
+                <div class="col-lg-12 col-md-6">
+                    <input type="text" class="form-control hidden" id="id">
+                    <div class="form-group row">
+                        <label for="name">Tiêu đề</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group row">
+                        <label for="slug">Đường dẫn bài viết</label>
+                        <input type="text" class="form-control" id="slug">
+                    </div>
+                    <div class="form-group row">
+                        <label for="slug">Từ khóa (SEO)</label>
+                        <input type="text" class="form-control" id="keywords">
+                    </div>
+                    <div class="form-group row">
+                        <label for="slug">Mô tả</label>
+                        <textarea type="text" class="form-control" id="description"></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <label for="slug">Ảnh hiển thị</label>
+                        <input type="text" class="form-control" id="featuredImage">
+                        <button>Chọn ảnh</button>
+                    </div>
+                </div>
+
+                <script th:src="@{/js/sprite.svg.js}"></script>
+                <div class="editor-full" style="margin-bottom: 25px;">
+                    <p>Nội dung</p>
+                    <div id="document-full" class="ql-scroll-y" style="height: 300px;">
+
+                    </div>
+                </div>
+            </form>
+            <button id="btnSavePost" type="submit" class="btn-success mr-2">Lưu lại</button>
+            <button class="btn btn-light">Bỏ qua</button>
+            <div id="updateStatus" class="hidden"  style="color: green;">
+
+            </div>
+        </div>
+    </div>
+</div>

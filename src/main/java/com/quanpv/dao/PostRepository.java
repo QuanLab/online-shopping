@@ -10,16 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface PostRepository extends PagingAndSortingRepository<Post, Integer> {
 
-    /**
-     *
-     * @param pageable
-     * @return
-     */
     Page<Post> findAll(Pageable pageable);
-
 
     Post findTopBySlug(String  slug);
 
-
-//    Page<Post> findAndOrderByCreatedDate();
 }

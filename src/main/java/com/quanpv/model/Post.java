@@ -9,40 +9,32 @@ import java.util.Date;
 @Entity
 @Table(name = "POST")
 public class Post {
-
     @Id
     @Column(name = "POST_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
     private String title;
-
     private String slug;
-
     private String keywords;
-
     @Column(length = 1000)
     private String description;
-
     private String featuredImage;
-
-    @Column(length = 1000)
+    @Column(length = 10000)
     private String content;
-
     private String tags;
-
     private Date createdDate;
-
     private Date updatedDate;
 
     public Post() {
-
+        this.createdDate = new Date();
+        this.updatedDate = createdDate;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

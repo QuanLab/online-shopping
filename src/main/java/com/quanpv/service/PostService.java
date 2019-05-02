@@ -16,15 +16,23 @@ public class PostService {
     @Autowired
     private PostRepository repository;
 
+    public Iterable<Post> findAll() {
+        return repository.findAll();
+    }
+
+    public Iterable<Post> findAll(Integer offset, Integer limit) {
+        Pageable pageable = PageRequest.of(offset, limit);
+        return repository.findAll(pageable);
+    }
+
+    public Post findById(Integer id) {
+        return repository.findById(id).orElseGet(null);
+    }
 
     public Post findBySlug(String slug) {
         return repository.findTopBySlug(slug);
     }
 
-    /**
-     *
-     * @return
-     */
     public Page<Post> getLast(Integer offset, Integer limit) {
         Sort sort = new Sort(
                 new Sort.Order(Sort.Direction.DESC, "id")

@@ -29,6 +29,8 @@ public class AdminController {
     private CartService cartService;
     @Autowired
     private CartDTOService cartDTOService;
+    @Autowired
+    private PostService postService;
 
     @RequestMapping(value="", method = RequestMethod.GET)
     public String dashboard(Model model){
@@ -66,19 +68,28 @@ public class AdminController {
 
     @RequestMapping(value="blog/", method = RequestMethod.GET)
     public String adminBlog(Model model){
+        model.addAttribute("posts", postService.findAll());
+        return "adminBlogs";
+    }
 
-//        model.addAttribute("product", productService.getById(id));
-//        model.addAttribute("categories", categoryService.getAll());
+
+    @RequestMapping(value="blog/edit", method = RequestMethod.GET)
+    public String adminEditBlog(Model model, @RequestParam(value = "id", required = false) Integer id){
+        model.addAttribute("post", postService.findById(id));
         return "adminBlog";
     }
 
+    @RequestMapping(value="blog/create", method = RequestMethod.GET)
+    public String adminCreateBlog(Model model, @RequestParam(value = "id", required = false) Integer id){
+        return "adminBlog";
+    }
 
     @RequestMapping(value="users/", method = RequestMethod.GET)
     public String adminUser(Model model){
 
 //        model.addAttribute("product", productService.getById(id));
 //        model.addAttribute("categories", categoryService.getAll());
-        return "adminBlog";
+        return "adminBlogs";
     }
 
 

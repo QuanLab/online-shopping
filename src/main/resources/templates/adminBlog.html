@@ -10,10 +10,13 @@
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
-        <div id="content">
+        <div th:if="${ post == null }">
             <nav th:replace="admin/toolbar :: toolbar"></nav>
-            <!--<nav th:replace="admin/productList :: productList"></nav>-->
-
+            <nav th:replace="admin/blog/create :: create"></nav>
+        </div>
+        <div th:if="${ post != null }">
+            <nav th:replace="admin/toolbar :: toolbar"></nav>
+            <nav th:if="${post != null}" th:replace="admin/blog/edit :: edit"></nav>
         </div>
         <!-- End of Main Content -->
         <div th:replace="admin/footer :: footer"></div>
@@ -27,8 +30,15 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+
 <div th:replace="admin/logoutModal :: logoutModal"></div>
 <!-- Bootstrap core JavaScript-->
+
+<link rel="stylesheet" th:href="@{/css/quill.css}">
+<link rel="stylesheet" th:href="@{/css/quill.snow.css}">
+<link rel="stylesheet" th:href="@{/css/quill.bubble.css}">
+<script th:src="@{/js/bootstrap-quill.js}"></script>
+
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
@@ -45,6 +55,124 @@
 <!-- Page level custom scripts -->
 <script th:src="@{/js/datatables-demo.js}"></script>
 
-</body>
+<script>
+    var toolbarOptions = [
+        [{
+            'header': [1, 2, 3, 4, 5, 6, false]
+        }],
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['blockquote', 'code-block'],
 
+        [{
+            'header': 1
+        }, {
+            'header': 2
+        }], // custom button values
+        [{
+            'list': 'ordered'
+        }, {
+            'list': 'bullet'
+        }],
+        [{
+            'script': 'sub'
+        }, {
+            'script': 'super'
+        }], // superscript/subscript
+        [{
+            'indent': '-1'
+        }, {
+            'indent': '+1'
+        }], // outdent/indent
+        [{
+            'direction': 'rtl'
+        }], // text direction
+
+        [{
+            'size': ['small', false, 'large', 'huge']
+        }], // custom dropdown
+
+        [{
+            'color': []
+        }, {
+            'background': []
+        }], // dropdown with defaults from theme
+        [{
+            'font': []
+        }],
+        [{
+            'align': []
+        }],
+        ['link', 'image'],
+
+        ['clean'] // remove formatting button
+    ];
+
+    var quillFull = new Quill('#document-full', {
+        modules: {
+            toolbar: toolbarOptions,
+            autoformat: true
+        },
+        theme: 'snow',
+        placeholder: "Write something..."
+    });
+</script>
+<script>
+    $("#btnSavePost").on( "click", function () {
+        var id = $("#id").val();
+        var name = $("#name").val();
+        var slug = $("#slug").val();
+        var color = $("#color").val();
+        var size = $("#size").val();
+        var price = $("#price").val();
+        var quantity = $("#quantity").val();
+        var createdDate = $("#createDate").val();
+        var category = $("#category option:selected").val();
+        var description = $("#document-full").children().first().html();
+        var data = {"id" : id, "name" : name, "slug": slug, "color" :color, "size" : size, "price": price,
+            "quantity" : quantity, "createdDate" : createdDate, "category": {"id" : category}, "description": description};
+        // save product to database
+        $.ajax({
+            url: '/api/v1/product',
+            dataType: 'json',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            success: function( data, textStatus, jQxhr ){
+                var updateStatus = $("#updateStatus");
+                updateStatus.empty()
+                updateStatus.append("<span>Lưu thành công</span>")
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+                console.log( errorThrown );
+            }
+        });
+    })
+</script>
+<script type="text/javascript">
+    $(function ($) {
+        // init the state from the input
+        $(".image-checkbox").each(function () {
+            if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+                $(this).addClass('image-checkbox-checked');
+            }
+            else {
+                $(this).removeClass('image-checkbox-checked');
+            }
+        });
+
+        // sync the state to the input
+        $(".image-checkbox").on("click", function (e) {
+            if ($(this).hasClass('image-checkbox-checked')) {
+                $(this).removeClass('image-checkbox-checked');
+                $(this).find('input[type="checkbox"]').first().removeAttr("checked");
+            }
+            else {
+                $(this).addClass('image-checkbox-checked');
+                $(this).find('input[type="checkbox"]').first().attr("checked", "checked");
+            }
+            e.preventDefault();
+        });
+    });
+</script>
+</body>
 </html>

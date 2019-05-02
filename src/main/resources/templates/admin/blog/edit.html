@@ -1,0 +1,112 @@
+<div th:fragment="edit" class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-body">
+            <form class="forms-sample">
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group row">
+                        <label for="name">ID</label>
+                        <input type="text" class="form-control hidden" id="id" th:value="${post.id}">
+                    </div>
+                    <div class="form-group row">
+                        <label for="name">Tiêu đề</label>
+                        <input type="text" class="form-control" id="name" th:value="${post.title}">
+                    </div>
+                    <div class="form-group row">
+                        <label for="slug">Đường dẫn bài viết</label>
+                        <input type="text" class="form-control" id="slug" th:value="${post.slug}">
+                    </div>
+                    <div class="form-group row">
+                        <label for="slug">Từ khóa (SEO)</label>
+                        <input type="text" class="form-control" id="keywords" th:value="${post.keywords}">
+                    </div>
+                    <div class="form-group row">
+                        <label for="slug">Mô tả</label>
+                        <textarea type="text" class="form-control" id="description" th:value="${post.description}"></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <label for="slug">Ảnh hiển thị</label>
+                        <input type="text" class="form-control" id="featuredImage" th:value="${post.featuredImage}">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMedia">
+                            Chọn ảnh
+                        </button>
+                        <div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Chọn ảnh trong thư viện</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-md-3 text-center">
+                                            <label class="image-checkbox" title="England">
+                                                <img src="http://www.prepbootstrap.com/Content/images/template/gamesschedule/england.jpg" />
+                                                <input type="checkbox" name="team[]" value="england"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <label class="image-checkbox" title="Germany">
+                                                <img src="http://www.prepbootstrap.com/Content/images/template/gamesschedule/germany.jpg" />
+                                                <input type="checkbox" name="team[]" value="germany" />
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <label class="image-checkbox" title="Italy">
+                                                <img src="http://www.prepbootstrap.com/Content/images/template/gamesschedule/italy.jpg" />
+                                                <input type="checkbox" name="team[]" value="italy" />
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <label class="image-checkbox" title="Spain">
+                                                <img src="http://www.prepbootstrap.com/Content/images/template/gamesschedule/spain.jpg" />
+                                                <input type="checkbox" name="team[]" value="spain" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <style>
+                                        .image-checkbox {
+                                            cursor: pointer;
+                                            box-sizing: border-box;
+                                            -moz-box-sizing: border-box;
+                                            -webkit-box-sizing: border-box;
+                                            border: 4px solid transparent;
+                                            outline: 0;
+                                        }
+
+                                        .image-checkbox input[type="checkbox"] {
+                                            display: none;
+                                        }
+
+                                        .image-checkbox-checked {
+                                            border-color: #f58723;
+                                        }
+                                    </style>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                                        <a class="btn btn-primary btn-select-image" href="javascript;">Chọn</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <script th:src="@{/js/sprite.svg.js}"></script>
+                <div class="editor-full" style="margin-bottom: 25px;">
+                    <p>Nội dung</p>
+                    <div id="document-full" class="ql-scroll-y" style="height: 300px;" th:utext="${post.content}">
+
+                    </div>
+                </div>
+            </form>
+            <button id="btnSavePost" type="submit" class="btn-success mr-2">Lưu lại</button>
+            <button class="btn btn-light">Bỏ qua</button>
+            <div id="updateStatus" class="hidden"  style="color: green;">
+
+            </div>
+        </div>
+    </div>
+</div>
