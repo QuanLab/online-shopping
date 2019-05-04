@@ -218,8 +218,9 @@ public class Product {
                 "id=" + id +
                 ", sku='" + sku + '\'' +
                 ", name='" + name + '\'' +
+                ", slug='" + slug + '\'' +
                 ", description='" + description + '\'' +
-                ", image='" + featureImage + '\'' +
+                ", featureImage='" + featureImage + '\'' +
                 ", imageList='" + imageList + '\'' +
                 ", color='" + color + '\'' +
                 ", size='" + size + '\'' +
@@ -229,7 +230,8 @@ public class Product {
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
                 ", isPopular=" + isPopular +
-                ", isHighlighted=" + isFeature +
+                ", isFeature=" + isFeature +
+                ", isDraft=" + isDraft +
                 ", category=" + category +
                 '}';
     }

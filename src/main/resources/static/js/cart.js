@@ -205,7 +205,7 @@ function updateCartFromPage(data) {
     }
 
     $('.totals_price').text(sub_total + 'đ');
-    $('. totals_price_mobile').text(sub_total + 'đ');
+    $('.totals_price_mobile').text(sub_total + 'đ');
 }
 
 

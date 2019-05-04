@@ -35,7 +35,7 @@ public class Application implements CommandLineRunner {
 		Category category3 = new Category("Đồng hồ", "Đồng hồ cao cấp dành cho doanh nhân");
 		category3.setSlug("dong-ho");
 
-		String imageList = "/images/products/try2-jpeg.jpg|/images/products/try4-jpeg.jpg";
+		String imageList = "/images/products/try2-jpeg.jpg|/images/products/try4-jpeg.jpg|/images/products/try15-jpeg.jpg|/images/products/try2-jpeg.jpg|/images/products/try4-jpeg.jpg|/images/products/try15-jpeg.jpg";
 		Product product = new Product("", "Áo phông nam", "Sản phẩm mới về", "/images/products/try2-jpeg.jpg", imageList, 120000, 12 );
 		product.setSalePrice(115000);
 		product.setFeature(true);

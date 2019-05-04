@@ -118,18 +118,17 @@
 </script>
 <script>
     $("#btnSaveProduct").on( "click", function () {
-        var id = $("#id").val();
-        var name = $("#name").val();
-        var slug = $("#slug").val();
-        var color = $("#color").val();
-        var size = $("#size").val();
-        var price = $("#price").val();
-        var quantity = $("#quantity").val();
-        var createdDate = $("#createDate").val();
-        var category = $("#category option:selected").val();
-        var description = $("#document-full").children().first().html();
-        var data = {"id" : id, "name" : name, "slug": slug, "color" :color, "size" : size, "price": price,
-            "quantity" : quantity, "createdDate" : createdDate, "category": {"id" : category}, "description": description};
+        var data = {
+            "id" : $("#id").val(),
+            "name" : $("#name").val(),
+            "slug": $("#slug").val(),
+            "quantity": $("#quantity").val(),
+            "price": $("#price").val(),
+            "category": {"id" : $("#category option:selected").val()},
+            "imageList" : $('#imageList').val(),
+            "featureImage" : $('#featuredImage').val(),
+            "description": $("#document-full").children().first().html()
+        };
         // save product to database
         $.ajax({
             url: '/api/v1/product',
@@ -163,9 +162,24 @@
         e.preventDefault();
     });
 
+    $(document).on("click", '.image-checkbox-multi', function (e) {
+        if ($(this).hasClass('image-checkbox-checked')) {
+            $(this).removeClass('image-checkbox-checked');
+            $(this).find('input[type="checkbox"]').first().removeAttr("checked");
+        } else {
+            $(this).addClass('image-checkbox-checked');
+            $(this).find('input[type="checkbox"]').first().attr("checked", "checked");
+        }
+        e.preventDefault();
+    });
+
 
     $('.btnSelectImage').on('click', function () {
         loadImageToModal('.modal-body', 'image-checkbox');
+    });
+
+    $('.btnSelectImageList').on('click', function () {
+        loadImageToModal('.modal-body', 'image-checkbox-multi');
     });
 
     function loadImageToModal(modalBodyClass, imageCheckBoxClass) {
@@ -214,7 +228,12 @@
             imagesSelected.push(imgSelected)
         });
         $('#modalMedia').modal('hide');
-        $('#featuredImage').val(imagesSelected.join('|'));
+
+        if($('.image-checkbox-multi').length === 0) {
+            $('#featuredImage').val(imagesSelected.join('|'));
+        } else {
+            $('#imageList').val(imagesSelected.join('|'));
+        }
         e.preventDefault();
     })
 </script>
