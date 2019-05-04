@@ -1,0 +1,44 @@
+<div th:fragment="modalMedia" class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="modalMediaLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalMediaLabel">Chọn ảnh trong thư viện</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <style>
+                .image-checkbox {
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    border: 4px solid transparent;
+                    outline: 0;
+                }
+                .image-checkbox input[type="checkbox"] {
+                    display: none;
+                }
+                .image-checkbox-checked {
+                    border-color: #f58723;
+                }
+                .modal-dialog {
+                    max-width: 80%;
+                    width: auto !important;
+                    display: inline-block;
+                }
+                .modal{
+                    text-align: center;
+                }
+            </style>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary btnSelectImageAccepted" type="button" data-dismiss="modal">Chọn</button>
+            </div>
+        </div>
+    </div>
+</div>

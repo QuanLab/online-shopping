@@ -4,80 +4,44 @@
             <form class="forms-sample">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group row">
-                        <label for="id">ID</label>
-                        <input type="text" class="form-control" disabled id="id" th:value="${post.id}">
+                        <input type="hidden" class="form-control" disabled id="id" th:value="${post.id}">
+                        <div class="col-lg-6 col-md-6">
+                            <label for="title">Tiêu đề</label>
+                            <input type="text" class="form-control" id="title" th:value="${post.title}">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label for="slug">Đường dẫn bài viết</label>
+                            <input type="text" class="form-control" id="slug" th:value="${post.slug}">
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label for="title">Tiêu đề</label>
-                        <input type="text" class="form-control" id="title" th:value="${post.title}">
+                        <div class="col-lg-6 col-md-6">
+                            <label for="slug">Từ khóa (SEO)</label>
+                            <input type="text" class="form-control" id="keywords" th:value="${post.keywords}">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label for="tags">Tags</label>
+                            <input type="text" class="form-control" id="tags" th:value="${post.tags}">
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label for="slug">Đường dẫn bài viết</label>
-                        <input type="text" class="form-control" id="slug" th:value="${post.slug}">
-                    </div>
-                    <div class="form-group row">
-                        <label for="slug">Từ khóa (SEO)</label>
-                        <input type="text" class="form-control" id="keywords" th:value="${post.keywords}">
-                    </div>
-                    <div class="form-group row">
-                        <label for="tags">Tags</label>
-                        <input type="text" class="form-control" id="tags" th:value="${post.tags}">
-                    </div>
-                    <div class="form-group row">
-                        <label for="slug">Mô tả</label>
-                        <textarea type="text" class="form-control" id="description" th:value="${post.description}"></textarea>
-                    </div>
-                    <div class="form-group row">
-                        <label for="slug">Ảnh hiển thị</label>
-                        <input type="text" class="form-control" id="featuredImage" disabled th:value="${post.featuredImage}">
-                        <button type="button" class="btn btn-primary btnSelectImage" data-toggle="modal" data-target="#modalMedia">
-                            Chọn ảnh
-                        </button>
-                        <div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="modalMediaLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalMediaLabel">Chọn ảnh trong thư viện</h5>
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                    </div>
-                                    <style>
-                                        .image-checkbox {
-                                            cursor: pointer;
-                                            box-sizing: border-box;
-                                            -moz-box-sizing: border-box;
-                                            -webkit-box-sizing: border-box;
-                                            border: 4px solid transparent;
-                                            outline: 0;
-                                        }
-                                        .image-checkbox input[type="checkbox"] {
-                                            display: none;
-                                        }
-                                        .image-checkbox-checked {
-                                            border-color: #f58723;
-                                        }
-                                        .modal-dialog {
-                                            max-width: 80%;
-                                            width: auto !important;
-                                            display: inline-block;
-                                        }
-                                        .modal{
-                                            text-align: center;
-                                        }
-                                    </style>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                                        <button class="btn btn-primary btnSelectImageAccepted" type="button" data-dismiss="modal">Chọn</button>
+                        <div class="col-lg-6 col-md-6">
+                            <label for="slug">Mô tả</label>
+                            <input type="text" class="form-control" id="description" th:value="${post.description}">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label for="slug">Ảnh bài viết</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="featuredImage" th:value="${post.featuredImage}" aria-describedby="button-addon2" disabled>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary btnSelectImage" type="button" id="button-addon2">
+                                        Chọn
+                                    </button>
+                                    <div th:replace="admin/modalMedia :: modalMedia">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
