@@ -1,6 +1,8 @@
 package com.quanpv.model;
 
 import com.quanpv.utils.Slug;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,8 +31,9 @@ public class Product {
     private float salePrice;
     private int quantity ;
 
-    @Column(updatable = false)
+    @CreationTimestamp
     private Date createdDate;
+    @UpdateTimestamp
     private Date updatedDate;
     private boolean isPopular;
 

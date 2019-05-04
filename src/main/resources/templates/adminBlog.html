@@ -117,62 +117,105 @@
     });
 </script>
 <script>
-    $("#btnSavePost").on( "click", function () {
-        var id = $("#id").val();
-        var name = $("#name").val();
-        var slug = $("#slug").val();
-        var color = $("#color").val();
-        var size = $("#size").val();
-        var price = $("#price").val();
-        var quantity = $("#quantity").val();
-        var createdDate = $("#createDate").val();
-        var category = $("#category option:selected").val();
-        var description = $("#document-full").children().first().html();
-        var data = {"id" : id, "name" : name, "slug": slug, "color" :color, "size" : size, "price": price,
-            "quantity" : quantity, "createdDate" : createdDate, "category": {"id" : category}, "description": description};
-        // save product to database
+    $("#btnSavePost").on("click", function () {
+        var data = {
+            "id": $("#id").val(),
+            "title": $("#title").val(),
+            "slug": $("#slug").val(),
+            "keywords":  $("#keywords").val(),
+            "tags":  $("#tags").val(),
+            "description": $("#description").val(),
+            'featuredImage': $("#featuredImage").val(),
+            'content': $("#document-full").children().first().html()
+        }
+
         $.ajax({
-            url: '/api/v1/product',
+            url: '/api/v1/post',
             dataType: 'json',
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
-            success: function( data, textStatus, jQxhr ){
+            success: function (data, textStatus, jQxhr) {
                 var updateStatus = $("#updateStatus");
-                updateStatus.empty()
+                updateStatus.empty();
                 updateStatus.append("<span>Lưu thành công</span>")
             },
-            error: function( jqXhr, textStatus, errorThrown ){
-                console.log( errorThrown );
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
             }
-        });
-    })
-</script>
-<script type="text/javascript">
-    $(function ($) {
-        // init the state from the input
-        $(".image-checkbox").each(function () {
-            if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
-                $(this).addClass('image-checkbox-checked');
-            }
-            else {
-                $(this).removeClass('image-checkbox-checked');
-            }
-        });
-
-        // sync the state to the input
-        $(".image-checkbox").on("click", function (e) {
-            if ($(this).hasClass('image-checkbox-checked')) {
-                $(this).removeClass('image-checkbox-checked');
-                $(this).find('input[type="checkbox"]').first().removeAttr("checked");
-            }
-            else {
-                $(this).addClass('image-checkbox-checked');
-                $(this).find('input[type="checkbox"]').first().attr("checked", "checked");
-            }
-            e.preventDefault();
         });
     });
+
+
+    $(document).on("click", '.image-checkbox', function (e) {
+        var hasChecked = $(this).hasClass('image-checkbox-checked');
+        //reset all checkbox to non-checked
+        $(".image-checkbox").each(function () {
+            $(this).removeClass('image-checkbox-checked');
+            $(this).find('input[type="checkbox"]').first().removeAttr("checked");
+        });
+
+        if (!hasChecked) {
+            $(this).addClass('image-checkbox-checked');
+            $(this).find('input[type="checkbox"]').first().attr("checked", "checked");
+        }
+        e.preventDefault();
+    });
+
+
+    $('.btnSelectImage').on('click', function () {
+        loadImageToModal('.modal-body', 'image-checkbox');
+    });
+
+    function loadImageToModal(modalBodyClass, imageCheckBoxClass) {
+        $.ajax({
+            url: '/api/v1/images?offset=0&limit=5',
+            dataType: 'json',
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+
+            success: function (data, textStatus, jQxhr) {
+                var modalBody = $(modalBodyClass);
+                modalBody.empty();
+                var row = $('<div class="row"></div>')
+                var numRowElement = 0;
+                $.each(data, function (index, imageUrl) {
+                    $('<div class="col-md-1">' +
+                        '<label class="' + imageCheckBoxClass + '">' +
+                        '<img style="max-width: 100%;" src="' + imageUrl + '" />' +
+                        '<input type="checkbox"/>' +
+                        '</label>' +
+                        '</div>'
+                    ).appendTo(row);
+                    numRowElement = numRowElement + 1;
+                    if (numRowElement === 12) {
+                        row.appendTo(modalBody);
+                        row.empty();
+                        numRowElement = 0;
+                    }
+                });
+                if (numRowElement > 0) {
+                    row.appendTo(modalBody);
+                    row.empty();
+                }
+                $('#modalMedia').modal({show: true});
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('.btnSelectImageAccepted').on('click', function (e) {
+        var imagesSelected = [];
+        $('.image-checkbox-checked img').each(function (index, item) {
+            var imgSelected = $(this).attr('src');
+            imagesSelected.push(imgSelected)
+        });
+        $('#modalMedia').modal('hide');
+        $('#featuredImage').val(imagesSelected.join('|'));
+        e.preventDefault();
+    })
 </script>
 </body>
 </html>

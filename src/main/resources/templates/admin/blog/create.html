@@ -3,10 +3,13 @@
         <div class="card-body">
             <form class="forms-sample">
                 <div class="col-lg-12 col-md-6">
-                    <input type="text" class="form-control hidden" id="id">
                     <div class="form-group row">
-                        <label for="name">Tiêu đề</label>
-                        <input type="text" class="form-control" id="name">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" disabled id="id">
+                    </div>
+                    <div class="form-group row">
+                        <label for="title">Tiêu đề</label>
+                        <input type="text" class="form-control" id="title">
                     </div>
                     <div class="form-group row">
                         <label for="slug">Đường dẫn bài viết</label>
@@ -17,13 +20,64 @@
                         <input type="text" class="form-control" id="keywords">
                     </div>
                     <div class="form-group row">
+                        <label for="tags">Tags</label>
+                        <input type="text" class="form-control" id="tags">
+                    </div>
+                    <div class="form-group row">
                         <label for="slug">Mô tả</label>
                         <textarea type="text" class="form-control" id="description"></textarea>
                     </div>
                     <div class="form-group row">
                         <label for="slug">Ảnh hiển thị</label>
-                        <input type="text" class="form-control" id="featuredImage">
-                        <button>Chọn ảnh</button>
+                        <input type="text" class="form-control" id="featuredImage" disabled>
+                        <button type="button" class="btn btn-primary btnSelectImage" data-toggle="modal" data-target="#modalMedia">
+                            Chọn ảnh
+                        </button>
+                        <div class="modal fade" id="modalMedia" tabindex="-1" role="dialog" aria-labelledby="modalMediaLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalMediaLabel">Chọn ảnh trong thư viện</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <style>
+                                        .image-checkbox {
+                                            cursor: pointer;
+                                            box-sizing: border-box;
+                                            -moz-box-sizing: border-box;
+                                            -webkit-box-sizing: border-box;
+                                            border: 4px solid transparent;
+                                            outline: 0;
+                                        }
+                                        .image-checkbox input[type="checkbox"] {
+                                            display: none;
+                                        }
+                                        .image-checkbox-checked {
+                                            border-color: #f58723;
+                                        }
+                                        .modal-dialog {
+                                            max-width: 80%;
+                                            width: auto !important;
+                                            display: inline-block;
+                                        }
+                                        .modal{
+                                            text-align: center;
+                                        }
+                                    </style>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                                        <button class="btn btn-primary btnSelectImageAccepted" type="button" data-dismiss="modal">Chọn</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -35,7 +89,7 @@
                     </div>
                 </div>
             </form>
-            <button id="btnSavePost" type="submit" class="btn-success mr-2">Lưu lại</button>
+            <button id="btnSavePost" type="button" class=" btn btn-primary ">Lưu lại</button>
             <button class="btn btn-light">Bỏ qua</button>
             <div id="updateStatus" class="hidden"  style="color: green;">
 

@@ -1,7 +1,6 @@
 package com.quanpv.model;
 
 import com.quanpv.utils.Slug;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -22,12 +21,13 @@ public class Post {
     @Column(length = 10000)
     private String content;
     private String tags;
+
+    @Column(updatable = false)
     private Date createdDate;
     private Date updatedDate;
 
     public Post() {
         this.createdDate = new Date();
-        this.updatedDate = createdDate;
     }
 
     public Integer getId() {
@@ -43,7 +43,6 @@ public class Post {
     }
 
     public void setTitle(String title) {
-        this.setSlug(Slug.makeSlug(title));
         this.title = title;
     }
 
@@ -109,6 +108,11 @@ public class Post {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+
+    public void initSlug(){
+        this.slug = Slug.makeSlug(this.title);
     }
 
     @Override
