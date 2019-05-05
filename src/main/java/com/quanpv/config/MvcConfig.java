@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class MvcConfig implements WebMvcConfigurer {
 
     private final String[] RESOURCE_ALLOWED = new String[]{
-            "file:///home/quanpv/workspace/online-shopping/src/main/resources/", "file:///root/"
+            "file:///home/quanpv/workspace/online-shopping/src/main/resources/static/", "file:///root/wwww/static/"
     };
 
     @Override
@@ -26,8 +26,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-                .addResourceHandler("/resources/**")
-                .addResourceLocations("/public", "classpath:/static/");
+                .addResourceHandler("/**")
+                .addResourceLocations(RESOURCE_ALLOWED);
     }
 
 }

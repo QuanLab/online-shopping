@@ -34,9 +34,24 @@
                         <div class="col-lg-6 col-md-6">
                             <label for="slug">Ảnh sản phẩm</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="featuredImage" aria-describedby="button-addon2" disabled>
+                                <input type="text" class="form-control" id="featuredImage" aria-describedby="button-addon" disabled>
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary btnSelectImage" type="button" id="button-addon2">
+                                    <button class="btn btn-outline-secondary btnSelectImage" type="button" id="button-addon">
+                                        Chọn
+                                    </button>
+                                    <div th:replace="admin/modalMedia :: modalMedia">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6 col-md-6">
+                            <label for="slug">Ảnh (chi tiet)</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="imageList" aria-describedby="button-addon2" disabled>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary btnSelectImageList" type="button" id="button-addon2">
                                         Chọn
                                     </button>
                                     <div th:replace="admin/modalMedia :: modalMedia">
@@ -55,7 +70,7 @@
                     </div>
                 </div>
             </form>
-            <button id="btnSaveProduct" type="submit" class="btn-success mr-2">Lưu lại</button>
+            <button id="btnSaveProduct" type="submit" class="btn btn-primary">Lưu lại</button>
             <button class="btn btn-light">Bỏ qua</button>
             <div id="updateStatus" style="color: green;">
 

@@ -309,30 +309,30 @@ var selectCallback = function(variant, selector) {
 	 } 
 	  
 	   };
-	   jQuery(function($) {
-		   if(variantsize == true ){
-
-			   new Bizweb.OptionSelectors('product-selectors', {
-				   product: productJson,
-				   onVariantSelected: selectCallback,
-				   enableHistoryState: true
-			   });
-		   }
-
-		   // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
-		   if(productOptionsSize == 1){
-			   $('.selector-wrapper:eq(0)').prepend('<label>'+ optionsFirst +'</label>');
-		   }
-
-		   // Hide selectors if we only have 1 variant and its title contains 'Default'.
-		   if(cdefault == 1){
-			   $('.selector-wrapper').hide();
-		   } 
-		   $('.selector-wrapper').css({
-			   'text-align':'left',
-			   'margin-bottom':'15px'
-		   });
-	   });
+	   // jQuery(function($) {
+		//    if(variantsize == true ){
+       //
+		// 	   new Bizweb.OptionSelectors('product-selectors', {
+		// 		   product: productJson,
+		// 		   onVariantSelected: selectCallback,
+		// 		   enableHistoryState: true
+		// 	   });
+		//    }
+       //
+		//    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+		//    if(productOptionsSize == 1){
+		// 	   $('.selector-wrapper:eq(0)').prepend('<label>'+ optionsFirst +'</label>');
+		//    }
+       //
+		//    // Hide selectors if we only have 1 variant and its title contains 'Default'.
+		//    if(cdefault == 1){
+		// 	   $('.selector-wrapper').hide();
+		//    }
+		//    $('.selector-wrapper').css({
+		// 	   'text-align':'left',
+		// 	   'margin-bottom':'15px'
+		//    });
+	   // });
 
 	   jQuery('.swatch :radio').change(function() {
 		   var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
