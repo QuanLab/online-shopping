@@ -50,7 +50,28 @@
         } else {
             $('.item-cb').prop('checked', false)
         }
-    })
+    });
+
+    function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+
+    $('select').on('change', function () {
+        var url = document.location.href;
+        if(url.indexOf('?') === -1) {
+            url = url + '?limit=' + this.value;
+        } else {
+            url = updateQueryStringParameter(url, 'limit', this.value)
+        }
+        window.location.assign(url);
+    });
 </script>
 </body>
 

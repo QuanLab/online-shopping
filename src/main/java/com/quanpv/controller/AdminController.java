@@ -41,6 +41,7 @@ public class AdminController {
             offset = page - 1;
         }
         model.addAttribute("products", productService.getAll(offset, limit));
+        model.addAttribute("limit", limit);
         return "dashboard";
     }
 
@@ -49,12 +50,13 @@ public class AdminController {
     public String adminProducts(Model model,
                                 @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                                 @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit){
-
         Integer offset = 0;
         if(page > 0) {
             offset = page - 1;
         }
+        logger.info("limit " + limit);
         model.addAttribute("products", productService.getAll(offset, limit));
+        model.addAttribute("limit", limit);
         return "adminProducts";
     }
 

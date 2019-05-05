@@ -1,9 +1,19 @@
 <div th:fragment="productList" class="container-fluid">
     <div class="card mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Danh muc san pham</h6>
         </div>
         <div class="card-body">
+            <div>
+                <label>Hien thi</label><span> </span><label>
+                <select id="limit" class="custom-select custom-select-sm form-control form-control-sm">
+                <option value="10" th:selected="${limit == 10}">10</option>
+                <option value="25" th:selected="${limit == 25}">25</option>
+                <option value="50" th:selected="${limit == 50}">50</option>
+                <option value="100" th:selected="${limit == 100}">100</option>
+                </select>
+            </label>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
@@ -36,19 +46,23 @@
             <div class="dataTables_paginate paging_simple_numbers">
                 <ul class="pagination">
                     <li th:if="${products.number > 0}" class="paginate_button page-item previous">
-                        <a th:href="@{'/admin/products/?page=' + ${products.number}}" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                        <a th:href="@{'/admin/products/?page=' + ${products.number} + '&limit=' + ${limit}}" data-dt-idx="0" tabindex="0"
+                           class="page-link">Previous</a>
                     </li>
                     <li th:if="${products.number == 0}" class="paginate_button page-item previous disabled">
                         <a href="#" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
                     </li>
                     <li class="paginate_button page-item active">
-                        <a href="#"  data-dt-idx="1" tabindex="0" class="page-link" th:text="${products.number + 1}"></a>
+                        <a href="#" data-dt-idx="1" tabindex="0" class="page-link" th:text="${products.number + 1}"></a>
                     </li>
                     <li th:if="${products.totalPages -1 > products.number}" class="paginate_button page-item next">
-                        <a th:href="@{'/admin/products/?page=' + ${products.number + 2} }" data-dt-idx="2" tabindex="0" class="page-link">Next</a>
+                        <a th:href="@{'/admin/products/?page=' + ${products.number + 2}  + '&limit=' + ${limit}}" data-dt-idx="2" tabindex="0"
+                           class="page-link">Next</a>
                     </li>
-                    <li th:if="${products.totalPages -1 <= products.number}" class="paginate_button page-item next disabled">
-                        <a th:href="@{'/admin/products/?page=' + ${products.number + 2} }" data-dt-idx="2" tabindex="0" class="page-link">Next</a>
+                    <li th:if="${products.totalPages -1 <= products.number}"
+                        class="paginate_button page-item next disabled">
+                        <a th:href="@{'/admin/products/?page=' + ${products.number + 2} + '&limit=' + ${limit} }" data-dt-idx="2" tabindex="0"
+                           class="page-link">Next</a>
                     </li>
                 </ul>
             </div>
