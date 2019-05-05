@@ -33,17 +33,28 @@ public class AdminController {
     private PostService postService;
 
     @RequestMapping(value="", method = RequestMethod.GET)
-    public String dashboard(Model model){
-
-        model.addAttribute("products", productService.getAll(0, 12));
+    public String dashboard(Model model,
+                            @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                            @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit){
+        Integer offset = 0;
+        if(page > 0) {
+            offset = page - 1;
+        }
+        model.addAttribute("products", productService.getAll(offset, limit));
         return "dashboard";
     }
 
 
     @RequestMapping(value="products", method = RequestMethod.GET)
-    public String adminProducts(Model model){
+    public String adminProducts(Model model,
+                                @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit){
 
-        model.addAttribute("products", productService.getAll(0, 12));
+        Integer offset = 0;
+        if(page > 0) {
+            offset = page - 1;
+        }
+        model.addAttribute("products", productService.getAll(offset, limit));
         return "adminProducts";
     }
 

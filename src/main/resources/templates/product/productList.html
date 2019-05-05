@@ -67,14 +67,17 @@
 
                         <div th:each="product : ${featuredProducts.content}" class="item_sidebar">
                             <div class="wrap-img">
-                                <a class="image_sidebar" th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}" th:title="${product.name}">
+                                <a class="image_sidebar"
+                                   th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}"
+                                   th:title="${product.name}">
                                     <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                          th:data-lazyload="${product.featureImage}" th:alt="${product.name}">
                                 </a>
                             </div>
                             <div class="infor">
                                 <h3 class="title">
-                                    <a th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}" th:title="${product.name}"
+                                    <a th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}"
+                                       th:title="${product.name}"
                                        th:text="${product.name}"></a>
                                 </h3>
                                 <div class="box-price">
@@ -159,7 +162,8 @@
 
                                     <div class="items">
                                         <div class="image">
-                                            <a class="image_product" th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}"
+                                            <a class="image_product"
+                                               th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}"
                                                th:title="${product.name}">
                                                 <img class="img-responsive" th:src="@{/assets/no-image.jpg}"
                                                      th:data-lazyload="${product.featureImage}"
@@ -175,7 +179,8 @@
                                                            class="button_action xem_nhanh btn-circle btn_view btn right-to quick-view">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <input class="hidden" type="hidden" name="productId" th:value="${product.id}">
+                                                        <input class="hidden" type="hidden" name="productId"
+                                                               th:value="${product.id}">
                                                         <button th:if="${product.price > 0}" title="Thêm vào giỏ hàng"
                                                                 class="button_action btn-buy btn-cart btn btn-circle left-to add_to_cart">
                                                             <i class="fa fa-shopping-bag" aria-hidden="true"></i>
@@ -187,17 +192,25 @@
 
                                         <div class="infor">
                                             <h3 class="title">
-                                                <a th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}" th:title="${product.name}"
+                                                <a th:href="@{ '/' + ${product.category.slug} + '/' + ${product.slug} + '/'}"
+                                                   th:title="${product.name}"
                                                    th:text="${product.name}"></a>
                                             </h3>
                                             <div class="box-price">
                                                 <span class="special-price">
-                                                <span class="price product-price" th:if="${product.price > 0 and product.salePrice > 0 }" th:text="${#numbers.formatDecimal(product.salePrice, 0, 0) + ' ₫'}"></span>
-                                                <span class="price product-price" th:if="${product.price > 0 and product.salePrice == 0 }" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+                                                <span class="price product-price"
+                                                      th:if="${product.price > 0 and product.salePrice > 0 }"
+                                                      th:text="${#numbers.formatDecimal(product.salePrice, 0, 0) + ' ₫'}"></span>
+                                                <span class="price product-price"
+                                                      th:if="${product.price > 0 and product.salePrice == 0 }"
+                                                      th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
                                                 <span class="product-item-price-sale old-price">&nbsp;&nbsp;
-				                                    <span class="compare-price price product-price-old hidden-xs" th:if="${product.salePrice > 0}" th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
+				                                    <span class="compare-price price product-price-old hidden-xs"
+                                                          th:if="${product.salePrice > 0}"
+                                                          th:text="${#numbers.formatDecimal(product.price, 0, 0) + ' ₫'}"></span>
 			                                    </span>
-                                                <span th:if="${product.price == 0}" class="price product-price">Liên hệ</span>
+                                                <span th:if="${product.price == 0}"
+                                                      class="price product-price">Liên hệ</span>
                                                 </span>
                                             </div>
                                         </div>
@@ -205,75 +218,75 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-xs-right f-right xs_padding">
+                            <nav>
+                                <ul class="pagination clearfix">
+                                    <li class="page-item" th:if="${products.number > 0}">
+                                        <a class="page-link hidden-xs"
+                                           th:href="@{'/san-pham?page=' + ${products.number} }">
+                                            <i class="fa fa-angle-left" aria-hidden="true"></i>Quay lại
+                                        </a>
+                                    </li>
+                                    <li class="page-item disabled" th:if="${products.number == 0}">
+                                        <a class="page-link hidden-xs" href="#">
+                                            <i class="fa fa-angle-left" aria-hidden="true"></i>Quay lại
+                                        </a>
+                                    </li>
+                                    <li class="active page-item">
+                                        <a class="page-link" href="#" style="pointer-events:none"
+                                           th:text="${products.number + 1}"></a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" th:if="${products.totalPages -1 > products.number}"
+                                           th:href="@{'/san-pham?page=' + ${products.number + 2} }"
+                                           th:text="${products.number + 2}">
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link hidden-xs"
+                                           th:if="${products.totalPages -1 > products.number}"
+                                           th:href="@{'/san-pham?page=' + ${products.number + 2} }" title="2">Xem tiếp
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </section>
+
+                    <script>
+                        $('#sortBy').val('created-desc');
+                        $('#sortBy').bind('change', function () {
+                            var url = window.location.href;
+                            url = replaceUrlParam(url, 'sortby', $(this).val());
+                            window.location.href = url;
+                        });
+                        $('.switch-view').bind('click', function () {
+                            var url = window.location.href;
+                            url = replaceUrlParam(url, 'view', $(this).data('view'));
+                            window.location.href = url;
+                        });
+
+                        function replaceUrlParam(url, paramName, paramValue) {
+                            var pattern = new RegExp('(' + paramName + '=).*?(&|$)'),
+                                newUrl = url.replace(pattern, '$1' + paramValue + '$2');
+                            if (newUrl === url) {
+                                newUrl = newUrl + (newUrl.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
+                            }
+                            return newUrl;
+                        }
+                    </script>
 
                 </div>
-                <div class="text-xs-right f-right xs_padding">
-                    <nav>
-                        <ul class="pagination clearfix">
-                            <li class="page-item" th:if="${products.number > 0}">
-                                <a class="page-link hidden-xs" th:href="@{'/san-pham?page=' + ${products.number} }">
-                                    <i class="fa fa-angle-left" aria-hidden="true"></i>Quay lại
-                                </a>
-                            </li>
-                            <li class="page-item disabled" th:if="${products.number == 0}">
-                                <a class="page-link hidden-xs" th:href="@{'/san-pham?page=' + ${products.number} }">
-                                    <i class="fa fa-angle-left" aria-hidden="true"></i>Quay lại
-                                </a>
-                            </li>
-                            <li class="active page-item">
-                                <a class="page-link" href="#" style="pointer-events:none"
-                                   th:text="${products.number + 1}"></a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" th:if="${products.totalPages -1 > products.number}"
-                                   th:href="@{'/san-pham?page=' + ${products.number + 2} }"
-                                   th:text="${products.number + 2}">
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link hidden-xs" th:if="${products.totalPages -1 > products.number}"
-                                   th:href="@{'/san-pham?page=' + ${products.number + 2} }" title="2">Xem tiếp
-                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
             </section>
 
-            <script>
-                $('#sortBy').val('created-desc');
-                $('#sortBy').bind('change', function () {
-                    var url = window.location.href;
-                    url = replaceUrlParam(url, 'sortby', $(this).val());
-                    window.location.href = url;
-                });
-                $('.switch-view').bind('click', function () {
-                    var url = window.location.href;
-                    url = replaceUrlParam(url, 'view', $(this).data('view'));
-                    window.location.href = url;
-                });
-
-                function replaceUrlParam(url, paramName, paramValue) {
-                    var pattern = new RegExp('(' + paramName + '=).*?(&|$)'),
-                        newUrl = url.replace(pattern, '$1' + paramValue + '$2');
-                    if (newUrl === url) {
-                        newUrl = newUrl + (newUrl.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
-                    }
-                    return newUrl;
-                }
-            </script>
-
-        </div>
-        </section>
-
-        <div id="open-filters" class="open-filters hidden-lg hidden-md">
+            <div id="open-filters" class="open-filters hidden-lg hidden-md">
 				<span class="fter">
 					<i class="fa fa-filter"></i>
 					<span>Lọc</span>
 				</span>
+            </div>
         </div>
     </div>
-</div>
 </div>

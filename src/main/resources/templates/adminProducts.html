@@ -12,7 +12,7 @@
         <!-- Main Content -->
         <div id="content">
             <nav th:replace="admin/toolbar :: toolbar"></nav>
-            <nav th:replace="admin/productList :: productList"></nav>
+            <nav th:replace="admin/product/productList :: productList"></nav>
         </div>
         <!-- End of Main Content -->
         <div th:replace="admin/footer :: footer"></div>
@@ -43,7 +43,15 @@
 
 <!-- Page level custom scripts -->
 <script th:src="@{/js/datatables-demo.js}"></script>
-
+<script type="text/javascript">
+    $('#selectAll').on('click', function () {
+        if($('#selectAll').prop('checked') === true) {
+            $('.item-cb').prop('checked', true)
+        } else {
+            $('.item-cb').prop('checked', false)
+        }
+    })
+</script>
 </body>
 
 </html>
