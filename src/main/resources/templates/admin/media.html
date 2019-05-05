@@ -1,9 +1,40 @@
 <div th:fragment="media" class="container-fluid">
-    <div class="card">
-        <div class="row">
-            <div class="col-md-3">
 
+    <div class="card" style="padding: 10px;">
+        <p>Tải lên tu may tinh</p>
+        <form method="POST" enctype="multipart/form-data" action="/admin/media/">
+            <input  id="files" type="file" name="file" />
+            <button type="submit" class="btn btn-primary btnUpload" value="Upload">Tải lên</button>
+        </form>
+    </div>
+
+    <div class="card"  style="padding: 10px;">
+        <p>Quản lý ảnh</p>
+        <div class="row">
+            <div th:each="image : ${ images }" class="col-md-2">
+                <label class="image-checkbox-multi">
+                    <img style="max-width: 100%; max-height: 70%;" th:src="${image}">
+                    <input type="checkbox"/>'
+                </label>
             </div>
         </div>
+        <style>
+            .image-checkbox-multi {
+                cursor: pointer;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                border: 4px solid transparent;
+                outline: 0;
+            }
+            .image-checkbox-multi input[type="checkbox"] {
+                display: none;
+            }
+
+            .image-checkbox-checked {
+                border-color: #f58723;
+            }
+        </style>
     </div>
+    <button id="btnDeleteImage" type="button" class="btn btn-danger">Delete</button>
 </div>

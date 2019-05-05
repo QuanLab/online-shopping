@@ -1,24 +1,18 @@
 package com.quanpv.controller.rest;
 
 
-import com.quanpv.controller.FileUploadController;
-import com.quanpv.controller.entity.ListCat;
+import com.quanpv.controller.entity.ImageWrapper;
 import com.quanpv.controller.entity.ResponseWrapper;
-import com.quanpv.model.Category;
 import com.quanpv.model.Post;
 import com.quanpv.model.Product;
 import com.quanpv.service.CategoryService;
 import com.quanpv.service.PostService;
 import com.quanpv.service.ProductService;
 import com.quanpv.storage.StorageService;
-import com.quanpv.utils.Slug;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -45,11 +38,21 @@ public class AdminAPI {
     private PostService postService;
 
     @RequestMapping(value="deleteCategory", method = RequestMethod.POST)
-    public ResponseWrapper deleteCategory(@RequestBody ListCat categories){
-        for(Category category : categories.getList()) {
-            logger.info("Delete categories");
-            categoryService.delete(category.getId());
-        }
+    public ResponseWrapper deleteCategory(@RequestBody ImageWrapper imageWrapper){
+//        categoryService.deteletAllById(imageWrapper.getList());
+        return new ResponseWrapper(200, "SUCCESS");
+    }
+
+
+    @RequestMapping(value="deleteProduct", method = RequestMethod.POST)
+    public ResponseWrapper deleteProduct(@RequestBody ImageWrapper imageWrapper){
+        logger.info(imageWrapper.getList());
+        return new ResponseWrapper(200, "SUCCESS");
+    }
+
+    @RequestMapping(value="deleteImage", method = RequestMethod.POST)
+    public ResponseWrapper deleteImage(@RequestBody ImageWrapper imageWrapper){
+        logger.info(imageWrapper.getList());
         return new ResponseWrapper(200, "SUCCESS");
     }
 

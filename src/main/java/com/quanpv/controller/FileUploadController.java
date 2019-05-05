@@ -1,6 +1,10 @@
 package com.quanpv.controller;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.quanpv.storage.StorageFileNotFoundException;
@@ -35,11 +39,18 @@ public class FileUploadController {
     @GetMapping("/admin/media/")
     public String listUploadedFiles(Model model) throws IOException {
 
-        model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-                        "serveFile", path.getFileName().toString()).build().toString())
-                .collect(Collectors.toList()));
+        Integer offset = 0;
+        Integer limit = 60;
 
+        Iterator<Path> pathIterator = storageService.loadAll().skip(offset).limit(limit).iterator();
+        List<String> imageList = new ArrayList<>();
+        while (pathIterator.hasNext()) {
+            Path path = pathIterator.next();
+            String fileName = "/images/products/" + path.getFileName().toFile().getName();
+            imageList.add(fileName);
+        }
+
+        model.addAttribute("images", imageList);
         return "adminMedia";
     }
 
@@ -57,8 +68,7 @@ public class FileUploadController {
             RedirectAttributes redirectAttributes) {
 
         storageService.store(file);
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
+        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
 
         return "redirect:/admin/media/";
     }

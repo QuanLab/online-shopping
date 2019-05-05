@@ -4,11 +4,11 @@ import com.quanpv.model.Category;
 
 import java.util.List;
 
-public class ListCat {
+public class ImageWrapper {
 
     private List<Category> list;
 
-    public ListCat() {
+    public ImageWrapper() {
 
     }
 
@@ -23,7 +23,7 @@ public class ListCat {
 
     @Override
     public String toString() {
-        return "ListCat{" +
+        return "ImageWrapper{" +
                 "list=" + list +
                 '}';
     }
