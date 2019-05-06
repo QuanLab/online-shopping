@@ -100,6 +100,13 @@ public class AdminAPI {
         return new ResponseWrapper(200, "SUCCESS");
     }
 
+    @RequestMapping(value="about", method = RequestMethod.POST)
+    public ResponseWrapper saveAbout(@RequestBody Map<String, String> mapConfig){
+        logger.info("Save mapConfig : " + mapConfig.toString());
+        webConfigService.save(new WebConfig("about", mapConfig.get("about")));
+        return new ResponseWrapper(200, "SUCCESS");
+    }
+
 
     @RequestMapping("images")
     public List<String> listUploadedFiles(@RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,

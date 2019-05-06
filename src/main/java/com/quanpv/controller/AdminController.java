@@ -104,9 +104,8 @@ public class AdminController {
 
     @RequestMapping(value="page/", method = RequestMethod.GET)
     public String adminPage(Model model){
-
-//        model.addAttribute("customers", customerService.getAll());
-        return "adminPage";
+        model.addAttribute("mapConfig", webConfigService.getAll());
+        return "adminAbout";
     }
 
 
