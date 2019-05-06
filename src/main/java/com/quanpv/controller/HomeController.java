@@ -335,7 +335,6 @@ public class HomeController {
         return "shoppingCart";
     }
 
-
     @RequestMapping(value={"login"})
     public String login(){
         return "login";
@@ -353,36 +352,6 @@ public class HomeController {
         model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(cartId));
         return "checkout";
     }
-
-    @RequestMapping(value="/checkout", method = RequestMethod.POST)
-    public String checkOutSubmit(@RequestParam(value = "name", required = false, defaultValue = "") String name,
-                                 @RequestParam(value = "address", required = false, defaultValue = "") String address,
-                                 @RequestParam(value = "phone", required = false, defaultValue = "") String phone,
-                                 Model model){
-        model.addAttribute("categories", categoryService.getAll());
-        String sessionID = RequestContextHolder.currentRequestAttributes().getSessionId();
-
-        if(name.equals("")|| address.equals("")||phone.equals("")) {
-            model.addAttribute("invalid", "Thông tin không hợp lệ");
-
-        } else {
-            Customer customer = new Customer(name, address, phone);
-
-            Cart cart = cartService.getByIdCustom(sessionID);
-            if(cart==null) {
-                model.addAttribute("invalid", "Giỏ hàng chưa có sản phẩm nào");
-            } else {
-                cart.setCustomer(customer);
-                cart.setStatus(Constant.STATUS_CHECKOUT);
-                customerService.save(customer);
-                cartService.save(cart);
-                model.addAttribute("success", "Đặt hàng thành công");
-            }
-        }
-        model.addAttribute("cart", cartDTOService.getByCart_IdAndCart_Status(sessionID));
-        return "checkout";
-    }
-
 
     @RequestMapping(value="/403")
     public String Error403(){

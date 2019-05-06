@@ -1,16 +1,13 @@
 package com.quanpv.controller.rest;
 
-
+import com.quanpv.controller.entity.CheckoutWrapper;
 import com.quanpv.controller.entity.IdsWrapper;
 import com.quanpv.controller.entity.ImageWrapper;
 import com.quanpv.controller.entity.ResponseWrapper;
-import com.quanpv.model.Category;
-import com.quanpv.model.Post;
-import com.quanpv.model.Product;
-import com.quanpv.service.CategoryService;
-import com.quanpv.service.PostService;
-import com.quanpv.service.ProductService;
+import com.quanpv.model.*;
+import com.quanpv.service.*;
 import com.quanpv.storage.StorageService;
+import com.quanpv.utils.Constant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +35,10 @@ public class AdminAPI {
     private StorageService storageService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private CustomerService customerService;
 
     @RequestMapping(value="deleteCategory", method = RequestMethod.POST)
     public ResponseWrapper deleteCategory(@RequestBody IdsWrapper wrapper){
@@ -105,5 +106,19 @@ public class AdminAPI {
         return categoryService.getById(id);
     }
 
-
+    @RequestMapping(value="checkout", method = RequestMethod.POST)
+    public ResponseWrapper checkOut(@RequestBody CheckoutWrapper wrapper){
+        logger.info(wrapper.toString());
+//        Customer customer = new Customer(wrapper.getName(), wrapper.getEmail(), wrapper.getPhone(), wrapper.getAdddres());
+//
+//        Cart cart = cartService.getByIdCustom(wrapper.getToken());
+//        cart.setStatus(Constant.STATUS_CHECKOUT);
+//
+//        cart.setCustomer(customer);
+//        cart.setCustomer(customer);
+//        cart.setStatus(Constant.STATUS_CHECKOUT);
+//        customerService.save(customer);
+//        cartService.save(cart);
+        return new ResponseWrapper(200, "Đặt hàng thành công");
+    }
 }
