@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered col-lg-6 left" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" cellspacing="0">
                         <thead>
                         <tr>
                             <th><input type="checkbox" id="selectAll"> Chọn tất cả</th>
@@ -17,20 +17,54 @@
                         <tr class="rowClick" th:each="cat : ${categories}">
                             <td>
                                 <input type="checkbox" class="checkbox item-cb" th:id="${cat.id}">
+                                <span> </span><span th:text="${cat.id}"></span>
                             </td>
                             <td><a th:text="${cat.name}"></a></td>
                             <td th:text="${cat.slug}"></td>
-                            <td th:text="${cat.description}"></td>
+                            <td>
+                                <span th:text="${cat.description}"></span>
+                                <i class="fa fa-edit btnEdit" th:data-id="${cat.id}" style="float: right;  cursor: pointer;"></i>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
-                    <button id="btnDeleteAll" class="btn btn-danger" >Xóa tất cả</button>
+                    <button class="btn btn-primary btn-create">Tạo mới</button>
+                    <button id="btnDeleteAll" class="btn btn-danger" style="float:right;">Xóa tất cả</button>
                 </div>
             </div>
         </div>
-
         <div id="updateStatus" style="color: green;">
 
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form class="forms-sample">
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group row">
+                        <input type="hidden" class="form-control" id="id">
+                        <div class="col-lg-6 col-md-6">
+                            <label for="name">Tên danh mục</label>
+                            <input type="text" class="form-control" id="name">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label for="slug">Url (slug)</label>
+                            <input type="text" class="form-control" id="slug">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6 col-md-6">
+                            <label for="name">Mô tả</label>
+                            <textarea type="text" class="form-control" id="description"></textarea>
+                        </div>
+                        <!--<div class="col-lg-6 col-md-6">-->
+                            <!--<label for="slug">Url (slug)</label>-->
+                            <!--<input type="text" class="form-control" id="slug">-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </form>
+            <button class="btn btn-primary btn-save">Lưu lại</button>
         </div>
     </div>
 </div>

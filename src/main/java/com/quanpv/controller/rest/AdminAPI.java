@@ -4,6 +4,7 @@ package com.quanpv.controller.rest;
 import com.quanpv.controller.entity.IdsWrapper;
 import com.quanpv.controller.entity.ImageWrapper;
 import com.quanpv.controller.entity.ResponseWrapper;
+import com.quanpv.model.Category;
 import com.quanpv.model.Post;
 import com.quanpv.model.Product;
 import com.quanpv.service.CategoryService;
@@ -40,15 +41,14 @@ public class AdminAPI {
 
     @RequestMapping(value="deleteCategory", method = RequestMethod.POST)
     public ResponseWrapper deleteCategory(@RequestBody IdsWrapper wrapper){
-//        categoryService.deteletAllById(imageWrapper.getList());
-        logger.info(wrapper.getList());
+        categoryService.delete(wrapper.getList());
+        logger.info("deleteCategory " + wrapper.getList());
         return new ResponseWrapper(200, "SUCCESS");
     }
 
-
     @RequestMapping(value="deleteProduct", method = RequestMethod.POST)
     public ResponseWrapper deleteProduct(@RequestBody IdsWrapper wrapper){
-        logger.info(wrapper.getList());
+        logger.info("deleteProduct " + wrapper.getList());
         productService.delete(wrapper.getList());
         return new ResponseWrapper(200, "SUCCESS");
     }
@@ -59,13 +59,19 @@ public class AdminAPI {
         return new ResponseWrapper(200, "SUCCESS");
     }
 
-
     @RequestMapping(value="product", method = RequestMethod.POST)
     public ResponseWrapper createProduct(@RequestBody Product product){
         product.setUpdatedDate(new Date());
         product.setCategory(categoryService.getById(product.getCategory().getId()));
         logger.info("Create new product: " + product.toString());
         productService.save(product);
+        return new ResponseWrapper(200, "SUCCESS");
+    }
+
+    @RequestMapping(value="category", method = RequestMethod.POST)
+    public ResponseWrapper createCategory(@RequestBody Category category){
+        logger.info("Save category : " + category.toString());
+        categoryService.save(category);
         return new ResponseWrapper(200, "SUCCESS");
     }
 
@@ -82,8 +88,8 @@ public class AdminAPI {
 
 
     @RequestMapping("images")
-    public List<String> listUploadedFiles(@RequestParam("offset") Integer offset,
-                                          @RequestParam("limit") Integer limit) throws IOException {
+    public List<String> listUploadedFiles(@RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,
+                                          @RequestParam(value = "limit", required = false, defaultValue = "60") Integer limit) throws IOException {
         Iterator<Path> pathIterator = storageService.loadAll().skip(offset).limit(limit).iterator();
         List<String> imageList = new ArrayList<>();
         while (pathIterator.hasNext()) {
@@ -93,5 +99,11 @@ public class AdminAPI {
         }
         return imageList;
     }
+
+    @RequestMapping(value="category", method = RequestMethod.GET)
+    public Category createPost(@RequestParam("id") Integer id){
+        return categoryService.getById(id);
+    }
+
 
 }

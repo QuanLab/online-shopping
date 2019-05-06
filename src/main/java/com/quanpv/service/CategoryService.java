@@ -26,7 +26,6 @@ public class CategoryService {
         return repository.findTop1BySlug(slug);
     }
 
-
     public void save(Category product){
         repository.save(product);
     }
@@ -35,4 +34,9 @@ public class CategoryService {
         repository.deleteById(id);
     }
 
+    public void delete(List<Integer> ids) {
+        for(Integer id: ids) {
+            repository.deleteById(id);
+        }
+    }
 }
