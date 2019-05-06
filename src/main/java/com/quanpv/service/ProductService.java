@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -39,6 +41,12 @@ public class ProductService {
 
     public void delete(int id) {
         repository.deleteById(id);
+    }
+
+    public void delete(List<Integer> ids) {
+        for(Integer id : ids) {
+            delete(id);
+        }
     }
 
     /**

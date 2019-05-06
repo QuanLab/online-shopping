@@ -4,13 +4,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
     private final String[] RESOURCE_ALLOWED = new String[]{
-            "file:///home/quanpv/workspace/online-shopping/src/main/resources/static/", "file:///root/wwww/static/"
+            "file:///home/quanpv/workspace/online-shopping/src/main/resources/static/",
+            "file:///C://Users//quanpv/workspace/online-shopping/src/main/resources/static/"
     };
 
     @Override

@@ -1,6 +1,7 @@
 package com.quanpv.controller.rest;
 
 
+import com.quanpv.controller.entity.IdsWrapper;
 import com.quanpv.controller.entity.ImageWrapper;
 import com.quanpv.controller.entity.ResponseWrapper;
 import com.quanpv.model.Post;
@@ -38,21 +39,23 @@ public class AdminAPI {
     private PostService postService;
 
     @RequestMapping(value="deleteCategory", method = RequestMethod.POST)
-    public ResponseWrapper deleteCategory(@RequestBody ImageWrapper imageWrapper){
+    public ResponseWrapper deleteCategory(@RequestBody IdsWrapper wrapper){
 //        categoryService.deteletAllById(imageWrapper.getList());
+        logger.info(wrapper.getList());
         return new ResponseWrapper(200, "SUCCESS");
     }
 
 
     @RequestMapping(value="deleteProduct", method = RequestMethod.POST)
-    public ResponseWrapper deleteProduct(@RequestBody ImageWrapper imageWrapper){
-        logger.info(imageWrapper.getList());
+    public ResponseWrapper deleteProduct(@RequestBody IdsWrapper wrapper){
+        logger.info(wrapper.getList());
+        productService.delete(wrapper.getList());
         return new ResponseWrapper(200, "SUCCESS");
     }
 
     @RequestMapping(value="deleteImage", method = RequestMethod.POST)
-    public ResponseWrapper deleteImage(@RequestBody ImageWrapper imageWrapper){
-        logger.info(imageWrapper.getList());
+    public ResponseWrapper deleteImage(@RequestBody ImageWrapper wrapper){
+        logger.info(wrapper.getList());
         return new ResponseWrapper(200, "SUCCESS");
     }
 

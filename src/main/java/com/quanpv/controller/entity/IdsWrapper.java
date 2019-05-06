@@ -1,23 +1,20 @@
 package com.quanpv.controller.entity;
 
-import com.quanpv.model.Category;
-
 import java.util.List;
 
-public class ImageWrapper {
+public class IdsWrapper {
 
-    private List<String> list;
+    private List<Integer> list;
 
-    public ImageWrapper() {
+    public IdsWrapper() {
 
     }
 
-
-    public List<String> getList() {
+    public List<Integer> getList() {
         return list;
     }
 
-    public void setList(List<String> list) {
+    public void setList(List<Integer> list) {
         this.list = list;
     }
 

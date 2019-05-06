@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface ProductRepository extends PagingAndSortingRepository<Product, Integer> {
 
-
     /**
      * find all product with pageable
      * @param pageable

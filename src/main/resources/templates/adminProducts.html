@@ -45,7 +45,7 @@
 <script th:src="@{/js/datatables-demo.js}"></script>
 <script type="text/javascript">
     $('#selectAll').on('click', function () {
-        if($('#selectAll').prop('checked') === true) {
+        if ($('#selectAll').prop('checked') === true) {
             $('.item-cb').prop('checked', true)
         } else {
             $('.item-cb').prop('checked', false)
@@ -57,21 +57,45 @@
         var separator = uri.indexOf('?') !== -1 ? "&" : "?";
         if (uri.match(re)) {
             return uri.replace(re, '$1' + key + "=" + value + '$2');
-        }
-        else {
+        } else {
             return uri + separator + key + "=" + value;
         }
     }
 
     $('select').on('change', function () {
         var url = document.location.href;
-        if(url.indexOf('?') === -1) {
+        if (url.indexOf('?') === -1) {
             url = url + '?limit=' + this.value;
         } else {
             url = updateQueryStringParameter(url, 'limit', this.value)
         }
         window.location.assign(url);
     });
+
+    $('.btnDelete').on('click', function () {
+        var itemSelected = [];
+        $('.item-cb:checked').each(function () {
+            itemSelected.push(this.id)
+        });
+
+        if (itemSelected.length > 0) {
+            $.ajax({
+                url: '/api/v1/deleteProduct',
+                dataType: 'json',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({'list': itemSelected}),
+                success: function (data, textStatus, jQxhr) {
+                    window.location.reload();
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        } else {
+            alert("Bạn phải chọn ít nhất một sản phẩm để khi xóa")
+        }
+    })
 </script>
 </body>
 
