@@ -9,10 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-/**
- * @author quanpv
- *
- */
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
@@ -22,8 +18,6 @@ public class AdminController {
     @Autowired
     private ProductService productService;
     @Autowired
-    private CustomerService customerService;
-    @Autowired
     private CategoryService categoryService;
     @Autowired
     private CartService cartService;
@@ -31,6 +25,8 @@ public class AdminController {
     private CartDTOService cartDTOService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private WebConfigService webConfigService;
 
     @RequestMapping(value="", method = RequestMethod.GET)
     public String dashboard(Model model,
@@ -116,8 +112,7 @@ public class AdminController {
 
     @RequestMapping(value="setting/", method = RequestMethod.GET)
     public String adminSetting(Model model){
-
-//        model.addAttribute("customer", customerService.getById(id));
+        model.addAttribute("mapConfig", webConfigService.getAll());
         return "adminSetting";
     }
 

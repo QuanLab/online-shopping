@@ -24,12 +24,6 @@ public class HomeController {
     @Autowired
     private ProductService productService;
     @Autowired
-    private CustomerService customerService;
-    @Autowired
-    private ItemService itemService;
-    @Autowired
-    private CartService cartService;
-    @Autowired
     private CartDTOService cartDTOService;
     @Autowired
     private WebConfigService webConfigService;

@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -39,6 +36,8 @@ public class AdminAPI {
     private CartService cartService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private WebConfigService webConfigService;
 
     @RequestMapping(value="deleteCategory", method = RequestMethod.POST)
     public ResponseWrapper deleteCategory(@RequestBody IdsWrapper wrapper){
@@ -62,6 +61,9 @@ public class AdminAPI {
 
     @RequestMapping(value="product", method = RequestMethod.POST)
     public ResponseWrapper createProduct(@RequestBody Product product){
+        if(product.getId() == null) {
+            product.setCreatedDate(new Date());
+        }
         product.setUpdatedDate(new Date());
         product.setCategory(categoryService.getById(product.getCategory().getId()));
         logger.info("Create new product: " + product.toString());
@@ -87,6 +89,17 @@ public class AdminAPI {
         return new ResponseWrapper(200, "SUCCESS");
     }
 
+    @RequestMapping(value="setting", method = RequestMethod.POST)
+    public ResponseWrapper saveSetting(@RequestBody Map<String, String> mapConfig){
+        logger.info("Save mapConfig : " + mapConfig.toString());
+        List<WebConfig> list = new ArrayList<>();
+        for(String key : mapConfig.keySet()) {
+            list.add(new WebConfig(key, mapConfig.get(key)));
+        }
+        webConfigService.save(list);
+        return new ResponseWrapper(200, "SUCCESS");
+    }
+
 
     @RequestMapping("images")
     public List<String> listUploadedFiles(@RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,
@@ -109,16 +122,16 @@ public class AdminAPI {
     @RequestMapping(value="checkout", method = RequestMethod.POST)
     public ResponseWrapper checkOut(@RequestBody CheckoutWrapper wrapper){
         logger.info(wrapper.toString());
-//        Customer customer = new Customer(wrapper.getName(), wrapper.getEmail(), wrapper.getPhone(), wrapper.getAdddres());
-//
-//        Cart cart = cartService.getByIdCustom(wrapper.getToken());
-//        cart.setStatus(Constant.STATUS_CHECKOUT);
-//
-//        cart.setCustomer(customer);
-//        cart.setCustomer(customer);
-//        cart.setStatus(Constant.STATUS_CHECKOUT);
-//        customerService.save(customer);
-//        cartService.save(cart);
+        Customer customer = new Customer(wrapper.getName(), wrapper.getEmail(), wrapper.getPhone(), wrapper.getAdddres());
+
+        Cart cart = cartService.getByIdCustom(wrapper.getToken());
+        cart.setStatus(Constant.STATUS_CHECKOUT);
+
+        cart.setCustomer(customer);
+        cart.setCustomer(customer);
+        cart.setStatus(Constant.STATUS_CHECKOUT);
+        customerService.save(customer);
+        cartService.save(cart);
         return new ResponseWrapper(200, "Đặt hàng thành công");
     }
 }

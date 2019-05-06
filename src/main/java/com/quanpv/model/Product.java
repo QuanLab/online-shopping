@@ -15,7 +15,7 @@ public class Product {
     @Id
     @Column(name = "PRODUCT_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     private String sku;
     private String name;
@@ -31,9 +31,7 @@ public class Product {
     private float salePrice;
     private int quantity ;
 
-    @CreationTimestamp
     private Date createdDate;
-    @UpdateTimestamp
     private Date updatedDate;
     private boolean isPopular;
 
@@ -63,11 +61,11 @@ public class Product {
         this.slug = getDefaultSlug();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

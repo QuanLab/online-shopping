@@ -1,5 +1,6 @@
 package com.quanpv;
 
+import com.quanpv.config.GlobalConfiguration;
 import com.quanpv.model.*;
 import com.quanpv.service.*;
 import com.quanpv.storage.StorageProperties;
@@ -11,7 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 
 @SpringBootApplication
-@EnableConfigurationProperties(StorageProperties.class)
+@EnableConfigurationProperties({StorageProperties.class,GlobalConfiguration.class})
 public class Application implements CommandLineRunner {
 
 	public static void main(String[] args) {

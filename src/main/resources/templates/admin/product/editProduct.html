@@ -37,7 +37,7 @@
                         <div class="col-lg-6 col-md-6">
                             <label for="slug">Ảnh sản phẩm</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="featuredImage" aria-describedby="button-addon1" disabled>
+                                <input type="text" class="form-control" id="featuredImage" th:value="${product.featureImage}" aria-describedby="button-addon1" disabled>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary btnSelectImage" type="button" id="button-addon1">
                                         Chọn
@@ -52,7 +52,7 @@
                         <div class="col-lg-6 col-md-6">
                             <label for="slug">Ảnh (chi tiet)</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="imageList" aria-describedby="button-addon2" disabled>
+                                <input type="text" class="form-control" id="imageList" th:value="${product.imageList}" aria-describedby="button-addon2" disabled>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary btnSelectImageList" type="button" id="button-addon2">
                                         Chọn

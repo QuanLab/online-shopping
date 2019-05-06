@@ -17,16 +17,17 @@
     <link href="//bizweb.dktcdn.net/assets/themes_support/checkout.css?20192802" rel="stylesheet" type="text/css" />
 
     <script>
-        var Bizweb = Bizweb || {};
-        Bizweb.store = 'template-delicious.bizwebvietnam.net';
-        Bizweb.theme = {"id":713219,"role":"main","name":"Delicious 25-03-2019"};
-        Bizweb.template = '';
+        var HoangAnhFood = HoangAnhFood || {};
+        HoangAnhFood.store = 'template-delicious.bizwebvietnam.net';
+        HoangAnhFood.theme = {"id":713219,"role":"main","name":"Delicious 25-03-2019"};
+        HoangAnhFood.template = '';
     </script>
 
-    <script type="text/javascript">if (typeof Bizweb == 'undefined') { Bizweb = {}; }
-    Bizweb.Checkout = {};
-    Bizweb.Checkout.token = "4085c6bbdf954120bcaf09d25de21984";
-    Bizweb.Checkout.apiHost = "template-delicious.bizwebvietnam.net";
+    <script type="text/javascript">
+        if (typeof HoangAnhFood == 'undefined') { HoangAnhFood = {}; }
+        HoangAnhFood.Checkout = {};
+        HoangAnhFood.Checkout.token = "4085c6bbdf954120bcaf09d25de21984";
+        HoangAnhFood.Checkout.apiHost = "template-delicious.bizwebvietnam.net";
     </script>
 </head>
 
@@ -44,7 +45,7 @@
         </div>
     </div>
 </div>
-<button class="order-summary-toggle" bind-event-click="Bizweb.StoreCheckout.toggleOrderSummary(this)">
+<button class="order-summary-toggle" bind-event-click="HoangAnhFood.StoreCheckout.toggleOrderSummary(this)">
     <div class="wrap">
         <h2>
             <label class="control-label">Đơn hàng</label>
@@ -61,7 +62,7 @@
     </div>
 </button>
 
-<div context="paymentStatus" define='{ paymentStatus: new Bizweb.PaymentStatus(this,{payment_processing:"",payment_provider_id:"",payment_info:{} }) }'>
+<div context="paymentStatus" define='{ paymentStatus: new HoangAnhFood.PaymentStatus(this,{payment_processing:"",payment_provider_id:"",payment_info:{} }) }'>
 
 </div>
 <form method="post" action="" data-toggle="validator" class="content stateful-form formCheckout">

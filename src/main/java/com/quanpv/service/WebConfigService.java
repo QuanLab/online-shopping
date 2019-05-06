@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -32,6 +33,10 @@ public class WebConfigService {
 
     public void save(WebConfig webConfig){
         repository.save(webConfig);
+    }
+
+    public void save(List<WebConfig> list){
+        repository.saveAll(list);
     }
 
     public void delete(int id) {
