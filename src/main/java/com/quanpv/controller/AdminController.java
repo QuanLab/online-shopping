@@ -1,5 +1,6 @@
 package com.quanpv.controller;
 
+import com.quanpv.model.Cart;
 import com.quanpv.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Iterator;
 
 
 @Controller
@@ -116,11 +119,14 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value="orders", method = RequestMethod.GET)
+    @RequestMapping(value="orders/", method = RequestMethod.GET)
     public String dashboardOrders(Model model){
-
+        Iterator<Cart> iterator = cartService.getByStatusCheckout().iterator();
+        while (iterator.hasNext()) {
+            logger.info(iterator.next().toString());
+        }
         model.addAttribute("orders", cartService.getByStatusCheckout());
-        return "dashboardOrders";
+        return "adminOrders";
     }
 
 

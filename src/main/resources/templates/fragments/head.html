@@ -32,8 +32,6 @@
         var template = 'index';
     </script>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <!-- Plugin CSS -->
     <link th:href="@{/css/plugin.scss.css}" rel="stylesheet" type="text/css"/>
 
@@ -53,13 +51,16 @@
         Bizweb.theme = {"id": 713219, "role": "main", "name": "Delicious 25-03-2019"};
         Bizweb.template = 'index';
     </script>
-    <script th:src="@{/js/js.cookie.min.js}"></script>
+    <script async th:src="@{/js/js.cookie.min.js}"></script>
     <script>
-        var token = "[[${token}]]"; //get from thymeleaf
-        var cookieToken = Cookies.get('token');
-        if (cookieToken === undefined) {
-            Cookies.set('token', token, { expires: 3});
-        }
+        $(document).load(function () {
+            var token = "[[${token}]]"; //get from thymeleaf
+            var cookieToken = Cookies.get('token');
+            if (cookieToken === undefined) {
+                Cookies.set('token', token, { expires: 3});
+            }
+        })
     </script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
