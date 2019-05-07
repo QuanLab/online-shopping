@@ -136,11 +136,9 @@ public class AdminAPI {
     @RequestMapping(value="checkout", method = RequestMethod.POST)
     public ResponseWrapper checkOut(@RequestBody CheckoutWrapper wrapper){
         logger.info(wrapper.toString());
-        Customer customer = new Customer(wrapper.getName(), wrapper.getEmail(), wrapper.getPhone(), wrapper.getAdddres());
+        Customer customer = new Customer(wrapper.getName(), wrapper.getEmail(), wrapper.getPhone(), wrapper.getAdddress());
 
         Cart cart = cartService.getByIdCustom(wrapper.getToken());
-        cart.setStatus(Constant.STATUS_CHECKOUT);
-
         cart.setCustomer(customer);
         cart.setCustomer(customer);
         cart.setStatus(Constant.STATUS_CHECKOUT);
