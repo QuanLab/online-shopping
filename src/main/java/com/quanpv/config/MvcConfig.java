@@ -10,7 +10,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     private final String[] RESOURCE_ALLOWED = new String[]{
             "file:///home/quanpv/workspace/online-shopping/src/main/resources/static/",
-            "file:///C://Users//quanpv/workspace/online-shopping/src/main/resources/static/"
+            "file:///root/www/static/",
+//            "file:///C://Users//quanpv/workspace/online-shopping/src/main/resources/static/"
     };
 
     @Override

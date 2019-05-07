@@ -1,91 +1,70 @@
-<div th:fragment="quickview" id="quick-view-product" class="quickview-product" style="display:none;" >
-    <div class="quickview-overlay fancybox-overlay fancybox-overlay-fixed"></div>
-    <div class="quick-view-product"></div>
-    <div id="quickview-modal" style="display:none;">
-        <div class="block-quickview primary_block row">
-
-            <div class="product-left-column col-xs-12 col-sm-5 col-md-5 col-lg-5">
-                <div class="clearfix image-block">
+<div th:fragment="quickview" class="modal fade" id="quick-view-product" tabindex="-1" role="dialog"
+     aria-labelledby="modalMediaLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content quick-view-product">
+            <div class="block-quickview primary_block row">
+                <a title="Close" class="quickview-close close-window quickviewsclose" href="javascript:;"><i class="fa fa-times"></i></a>
+                <div class="product-left-column col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                    <div class="clearfix image-block">
 					<span class="view_full_size">
 						<a class="img-product" title="" href="">
-							<img id="product-featured-image-quickview"
-                                 class="img-responsive product-featured-image-quickview" th:src="@{/assets/logo.jpg}"
-                                 alt="quickview"/>
+							<img id="product-featured-image-quickview" class="img-responsive product-featured-image-quickview" alt="quickview">
 						</a>
 					</span>
-                    <div class="loading-imgquickview" style="display:none;"></div>
-                </div>
-                <div class="more-view-wrapper clearfix">
-                    <div class="thumbs_quickview" id="thumbs_list_quickview">
-                        <ul class=" list-unstyled product-photo-thumbs quickview-more-views-owlslider"
-                            id="thumblist_quickview"></ul>
+                        <div class="loading-imgquickview" style="display:none;"></div>
+                    </div>
+                    <div class="more-view-wrapper clearfix">
+                        <div class="thumbs_quickview" id="thumbs_list_quickview">
+                            <ul class=" list-unstyled product-photo-thumbs quickview-more-views-owlslider" id="thumblist_quickview"></ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="product-center-column product-info product-item col-xs-5 col-sm-7 col-md-7 col-lg-7">
-                <div class="head-qv">
-                    <h3 class="qwp-name">abc</h3>
+                <div class="product-center-column product-info product-item col-xs-5 col-sm-7 col-md-7 col-lg-7">
+                    <div class="head-qv">
+                        <h3 class="qwp-name">
 
-                </div>
-                <div class="quickview-info">
-
-                    <span class="sku_name"></span>
-                    <span class="vendor_ status">Tình trạng: <span class="status_name"></span></span>
-                    <span class="prices">
-						<span class="price"></span>
-						<del class="old-price"></del>
+                        </h3>
+                    </div>
+                    <div class="quickview-info">
+                        <span class="sku_name"><span class="sku">Mã sản phẩm: <span class="skuname">Chưa có</span>&nbsp;&nbsp;</span></span>
+                        <span class="vendor_ status">Tình trạng: <span class="status_name">Còn hàng</span></span>
+                        <span class="prices">
 					</span>
-                </div>
+                    </div>
 
-                <form action="/cart/add" method="post" enctype="multipart/form-data"
-                      class="quick_option variants form-ajaxtocart">
+                    <form action="/cart/add" method="post" enctype="multipart/form-data" class="quick_option variants form-ajaxtocart" id="product-actions-13049190">
 					<span class="price-product-detail hidden" style="opacity: 0;">
 						<span class=""></span>
 					</span>
-                    <select name='variantId' class="hidden" style="display:none"></select>
-                    <div class="clearfix"></div>
-                    <div class="quantity_wanted_p">
-                        <div class="option-type quantity-option">
-                            <header class="not_bg_quick_view">Số lượng:</header>
-                            <div class="input_qty_qv input_number_product">
-                                <a class="btn_num num_1 button button_qty"
-                                   onClick="var result = document.getElementById('quantity-detail');
-                                       var qtyqv = result.value; if( !isNaN( qtyqv ) &amp;&amp; qtyqv &gt; 1 ) result.value--;return false;">-</a>
-                                <input type="text" id="quantity-detail" name="quantity" value="1"
-                                       onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode))) return false;"
-                                       onchange="if(this.value == 0)this.value=1;"
-                                       class="form-control prd_quantity">
-                                <a class="btn_num num_2 button button_qty"
-                                   onClick="var result = document.getElementById('quantity-detail');
-                                       var qtyqv = result.value; if( !isNaN( qtyqv )) result.value++;return false;">+
-                                </a>
+                        <div class="clearfix"></div>
+                        <div class="quantity_wanted_p">
+                            <div class="option-type quantity-option">
+                                <header class="not_bg_quick_view">Số lượng:</header>
+                                <div class="input_qty_qv input_number_product"><a class="btn_num num_1 button button_qty" onclick="var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if( !isNaN( qtyqv ) &amp;&amp; qtyqv > 1 ) result.value--;return false;">-</a>
+                                    <input type="text" id="quantity-detail" name="quantity" value="1" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;" onchange="if(this.value == 0)this.value=1;" class="form-control prd_quantity">
+                                    <a class="btn_num num_2 button button_qty" onclick="var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if( !isNaN( qtyqv )) result.value++;return false;">+</a>
+                                </div>
                             </div>
+                            <button type="submit" name="add" class="btn btn-primary fix_add_to_cart button_cart_buy_enable add_to_cart_detail ajax_addtocart">
+                                <i class="ion-android-cart"></i>&nbsp;&nbsp;<span>Thêm vào giỏ hàng</span>
+                            </button>
                         </div>
-                        <button type="submit" name="add"
-                                class="btn btn-primary fix_add_to_cart button_cart_buy_enable add_to_cart_detail ajax_addtocart">
-                            <i class="ion-android-cart"></i>&nbsp;&nbsp;<span>Thêm vào giỏ hàng</span>
-                        </button>
+
+
+                        <div class="total-price" style="display:none">970.000₫</div>
+                        <input type="hidden" name="productId" value="13049190"></form>
+                    <div class="phone">
+                        <div class="icon">
+                            <img th:src="@{/assets/phone.png}" alt="phone">
+                        </div>
+                        <p>Đặt mua qua điện thoại (8h - 22h)
+                            <br>
+                            <a th:href="@{'tel:' + ${mapConfig.phone}}" th:text="${mapConfig.phone}"></a>
+                        </p>
                     </div>
 
-                    <div class="total-price" style="display:none">
-                        <label>Tổng cộng: </label>
-                        <span></span>
-                    </div>
-
-                </form>
-                <div class="phone">
-                    <div class="icon">
-                        <img th:src="@{/assets/phone.png}" alt="phone">
-                    </div>
-                    <p>Đặt mua qua điện thoại (8h - 22h)
-                        <br><a th:href="@{'tel:' + ${mapConfig.phone}}" th:text="${mapConfig.phone}"></a>
-                    </p>
                 </div>
             </div>
         </div>
-        <a title="Close" class="quickview-close close-window quickviewsclose" href="javascript:;">
-            <i class="fa fa-times">
-            </i>
-        </a>
     </div>
 </div>

@@ -71,6 +71,13 @@ public class AdminAPI {
         return new ResponseWrapper(200, "SUCCESS");
     }
 
+    @RequestMapping(value="product", method = RequestMethod.GET)
+    public Product getProduct(@RequestParam(value = "id") Integer id){
+        logger.info(productService.getById(id).toString());
+        return productService.getById(id);
+    }
+
+
     @RequestMapping(value="category", method = RequestMethod.POST)
     public ResponseWrapper createCategory(@RequestBody Category category){
         logger.info("Save category : " + category.toString());
