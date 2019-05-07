@@ -5,7 +5,7 @@ public class CheckoutWrapper {
     private String name;
     private String email;
     private String phone;
-    private String adddres;
+    private String adddress;
     private String note;
     private String token;
 
@@ -37,12 +37,12 @@ public class CheckoutWrapper {
         this.phone = phone;
     }
 
-    public String getAdddres() {
-        return adddres;
+    public String getAdddress() {
+        return adddress;
     }
 
-    public void setAdddres(String adddres) {
-        this.adddres = adddres;
+    public void setAdddress(String adddress) {
+        this.adddress = adddress;
     }
 
     public String getNote() {
@@ -67,7 +67,7 @@ public class CheckoutWrapper {
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", adddres='" + adddres + '\'' +
+                ", adddres='" + adddress + '\'' +
                 ", note='" + note + '\'' +
                 ", token='" + token + '\'' +
                 '}';
