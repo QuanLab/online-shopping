@@ -153,6 +153,8 @@ function updateCartFromPage(data) {
 
     var table = $('.cart-tbody');
     table.empty();
+    var cart_page_mobile = $('.cart_page_mobile');
+    cart_page_mobile.empty();
     var sub_total = 0;
 
     if (numberOfItem > 0) {
@@ -199,9 +201,30 @@ function updateCartFromPage(data) {
                 '   </div>' +
                 '</div>')
                 .appendTo(table);
+
+            $('<div class="item-product item-mobile-cart item">' +
+                '    <div class="item-product-cart-mobile"><a href="' + slug+'"> </a>' +
+                '       <a class="product-images1" href="' + slug + '" title="' + item.product.name +'">' +
+                '           <img width="80" height="150" alt="' + item.product.name + '" src="' + item.product.featureImage + '"></a></div>\n' +
+                '    <div class="title-product-cart-mobile">' +
+                '        <h3><a href="' + slug + '" title="'  + item.product.name + '">' + item.product.name +'</a></h3>\n' +
+                '        <p>Giá: <span class="pricechange">' + item.product.price + '₫</span></p>' +
+                '    </div>' +
+                '    <div class="select-item-qty-mobile">' +
+                '        <div class="txt_center in_put check_">' +
+                '       <input class="productId" type="hidden" name="productId" value="' + item.product.id + '">' +
+                '       <button onclick="var result = document.getElementById(\'qtyMobile' +  item.product.id +'\'); var qtyMobile' +  item.product.id +' = result.value; if( !isNaN( qtyMobile'+ item.product.id +' ) &amp;&amp; qtyMobile' + item.product.id + ' > 0 ) result.value--;return false;" class="reduced items-count btn-minus" type="button">–</button>' +
+                '       <input type="number" maxlength="12" min="1" readonly="" class="check_number_here input-text mobile_input number-sidebar qtyMobile'+ item.product.id + '" id="qtyMobile' + item.product.id + '" name="qty" size="4" value="' + item.quantity + '">' +
+                '       <button onclick="var result = document.getElementById(\'qtyMobile' + item.product.id + '\'); var qtyMobile'+ item.product.id + ' = result.value; if( !isNaN( qtyMobile' + item.product.id + ')) result.value++;return false;" class="increase items-count btn-plus" type="button">+</button>' +
+                '   </div>' +
+                '   <a class="button remove-item remove-item-cart" href="javascript:;" data-id="' + item.product.id +'">Xoá</a>' +
+                '    </div>' +
+                '</div>')
+                .appendTo(cart_page_mobile);
         });
     } else {
         $('<div class="no-item"><p>Không có sản phẩm nào.</p></div>').appendTo(table);
+        $('<div class="no-item"><p>Không có sản phẩm nào.</p></div>').appendTo(cart_page_mobile);
     }
 
     $('.totals_price').text(sub_total + 'đ');
@@ -209,10 +232,10 @@ function updateCartFromPage(data) {
 }
 
 
-$("form").submit(function (e) {
-    e.preventDefault();
-    var productId = $("input[name='productId']", this).val();
-    var quantity = $("input[name='quantity']", this).val();
+$(".btn-cart").on('click', function (e) {
+    var form = $(this).parents('form:first');
+    var productId = $("input[name='productId']", form).val();
+    var quantity = $("input[name='quantity']", form).val();
     var token =  getToken();
     if (quantity === undefined) {
         quantity = 1;
@@ -220,6 +243,7 @@ $("form").submit(function (e) {
     var data = {'token': token, 'productId': productId, 'quantity': quantity}
     addCart(data);
     updateCart();
+    e.preventDefault();
 });
 
 $(document).on("click", ".remove-item-cart", function(){
