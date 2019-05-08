@@ -17,10 +17,17 @@ public class Cart {
     private String idCustom;
     @JsonIgnore
     private Date createdDate;
+    @JsonIgnore
+    private Date checkoutDate;
 
     @JsonIgnore
     @ManyToOne
     private Customer customer;
+
+    private String promotionCode;
+
+    private float shippingFee;
+
     @JsonIgnore
     private String status;
 
@@ -58,12 +65,36 @@ public class Cart {
         this.createdDate = createdDate;
     }
 
+    public Date getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate) {
+        this.checkoutDate = checkoutDate;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getPromotionCode() {
+        return promotionCode;
+    }
+
+    public void setPromotionCode(String promotionCode) {
+        this.promotionCode = promotionCode;
+    }
+
+    public float getShippingFee() {
+        return shippingFee;
+    }
+
+    public void setShippingFee(float shippingFee) {
+        this.shippingFee = shippingFee;
     }
 
     public String getStatus() {

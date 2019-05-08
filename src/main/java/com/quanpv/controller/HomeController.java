@@ -49,7 +49,6 @@ public class HomeController {
         model.addAttribute("newProducts", newProducts);
 
         model.addAttribute("categories", categoryService.getAll());
-        System.out.println(categoryService.getAll());
 
         Page<Post> posts = postService.getLast(0, 6);
         model.addAttribute("posts", posts);

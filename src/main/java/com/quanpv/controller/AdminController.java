@@ -25,7 +25,7 @@ public class AdminController {
     @Autowired
     private CartService cartService;
     @Autowired
-    private CartDTOService cartDTOService;
+    private ItemService itemService;
     @Autowired
     private PostService postService;
     @Autowired
@@ -92,18 +92,9 @@ public class AdminController {
     }
 
     @RequestMapping(value="blog/create", method = RequestMethod.GET)
-    public String adminCreateBlog(Model model, @RequestParam(value = "id", required = false) Integer id){
+    public String adminCreateBlog(){
         return "adminBlog";
     }
-
-    @RequestMapping(value="users/", method = RequestMethod.GET)
-    public String adminUser(Model model){
-
-//        model.addAttribute("product", productService.getById(id));
-//        model.addAttribute("categories", categoryService.getAll());
-        return "adminBlogs";
-    }
-
 
     @RequestMapping(value="page/", method = RequestMethod.GET)
     public String adminPage(Model model){
@@ -130,11 +121,12 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value="orders/{id}", method = RequestMethod.GET)
-    public String dashboardOrder(@PathVariable("id") int id, Model model){
-
-        System.out.println(cartDTOService.getByCart_Id(id).toString());
-        model.addAttribute("cart", cartDTOService.getByCart_Id(id));
-        return "dashboardOrder";
+    @RequestMapping(value="order/{id}", method = RequestMethod.GET)
+    public String dashboardOrder( Model model, @PathVariable("id") Integer id){
+        logger.info(cartService.getById(id).toString());
+        model.addAttribute("cart", cartService.getById(id));
+        logger.info(itemService.getByCartId(id).toString());
+        model.addAttribute("items", itemService.getByCartId(id));
+        return "adminOrder";
     }
 }

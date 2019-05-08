@@ -20,6 +20,7 @@ public class Item {
 
     @OneToOne
     private Product product;
+
     private Integer quantity;
 
     public Item(Cart cart, Product product, Integer quantity) {

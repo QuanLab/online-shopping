@@ -21,7 +21,7 @@ public class ItemService {
         return repository.findById(id).orElse(null);
     }
 
-    public List<Item> getByCartId(int id){
+    public List<Item> getByCartId(Integer id){
         return repository.findByCart_Id(id);
     }
 

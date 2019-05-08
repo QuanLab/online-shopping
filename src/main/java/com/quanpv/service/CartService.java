@@ -24,7 +24,7 @@ public class CartService {
         return null;
     }
 
-    public Cart getById(int id){
+    public Cart getById(Integer id){
         return repository.findById(id).orElse(null);
     }
 

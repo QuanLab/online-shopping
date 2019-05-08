@@ -1,0 +1,37 @@
+<div th:fragment="orderDetail" class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-body">
+            <form class="forms-sample">
+                <div class="col-lg-12 col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <td>Ten khach hang</td>
+                                <td th:text="${cart.customer.name}"></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td th:text="${cart.customer.email}"></td>
+                            </tr>
+                            <tr>
+                                <td>Số điện thoại</td>
+                                <td th:text="${cart.customer.phoneNumber}"></td>
+                            </tr>
+                            <tr>
+                                <td>Địa chỉ</td>
+                                <td th:text="${cart.customer.address}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+            <button id="btnSaveProduct" type="submit" class="btn btn-primary">Lưu lại</button>
+            <button class="btn btn-light">Bỏ qua</button>
+            <div id="updateStatus" style="color: green;">
+
+            </div>
+        </div>
+    </div>
+</div>
