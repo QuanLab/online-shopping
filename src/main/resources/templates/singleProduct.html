@@ -91,5 +91,12 @@
 <script th:src="@{/js/quickview.js}" type="text/javascript"></script>
 <script th:src="@{/js/jquery.elevatezoom308.min.js}" type="text/javascript"></script>
 <script th:src="@{/js/cart.js}" type="text/javascript"></script>
+<script type="text/javascript">
+    var token = "[[${token}]]";
+    var cookieToken = Cookies.get('token');
+    if (cookieToken === undefined) {
+        Cookies.set('token', token, { expires: 3});
+    }
+</script>
 </body>
 </html>

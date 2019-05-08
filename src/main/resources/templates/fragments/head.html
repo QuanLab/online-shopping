@@ -52,15 +52,6 @@
         Bizweb.template = 'index';
     </script>
     <script async th:src="@{/js/js.cookie.min.js}"></script>
-    <script>
-        $(document).load(function () {
-            var token = "[[${token}]]"; //get from thymeleaf
-            var cookieToken = Cookies.get('token');
-            if (cookieToken === undefined) {
-                Cookies.set('token', token, { expires: 3});
-            }
-        })
-    </script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
