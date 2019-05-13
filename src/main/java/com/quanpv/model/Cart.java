@@ -28,6 +28,10 @@ public class Cart {
 
     private float shippingFee;
 
+    private String note;
+
+    private float totalCost;
+
     @JsonIgnore
     private String status;
 
@@ -95,6 +99,22 @@ public class Cart {
 
     public void setShippingFee(float shippingFee) {
         this.shippingFee = shippingFee;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public float getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(float totalCost) {
+        this.totalCost = totalCost;
     }
 
     public String getStatus() {

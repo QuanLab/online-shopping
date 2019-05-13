@@ -114,7 +114,8 @@ public class AdminController {
     public String dashboardOrders(Model model){
         Iterator<Cart> iterator = cartService.getByStatusCheckout().iterator();
         while (iterator.hasNext()) {
-            logger.info(iterator.next().toString());
+            Cart cart = iterator.next();
+            logger.info(cart.toString());
         }
         model.addAttribute("orders", cartService.getByStatusCheckout());
         return "adminOrders";

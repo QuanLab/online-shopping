@@ -22,9 +22,45 @@
                                 <td>Địa chỉ</td>
                                 <td th:text="${cart.customer.address}"></td>
                             </tr>
+                            <tr>
+                                <td>Ghi chú</td>
+                                <td th:text="${cart.note}"></td>
+                            </tr>
+                            <tr>
+                                <td>Trạng thái</td>
+                                <td th:text="${cart.status}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tổng tiền</td>
+                                <td th:text="${cart.totalCost}"></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>Tổng tiền</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item : ${items}">
+                                <td>
+                                    <a th:href="@{ '/admin/product?id=' + ${item.product.id}}" th:text="${item.product.name}"></a>
+                                </td>
+                                <td th:text="${item.quantity}"></td>
+                                <td th:text="${ #numbers.formatDecimal(item.product.price, 0, 0) }"></td>
+                                <td th:text="${ #numbers.formatDecimal(item.product.price * item.quantity, 0, 0) }"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </form>
             <button id="btnSaveProduct" type="submit" class="btn btn-primary">Lưu lại</button>

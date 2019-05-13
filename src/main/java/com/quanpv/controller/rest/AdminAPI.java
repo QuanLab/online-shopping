@@ -142,6 +142,7 @@ public class AdminAPI {
         cart.setCustomer(customer);
         cart.setCustomer(customer);
         cart.setStatus(Constant.STATUS_CHECKOUT);
+        cart.setNote(wrapper.getNote());
         customerService.save(customer);
         cartService.save(cart);
         return new ResponseWrapper(200, "Đặt hàng thành công");

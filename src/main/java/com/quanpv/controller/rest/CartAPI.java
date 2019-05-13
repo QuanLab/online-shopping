@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/cart")
@@ -82,7 +83,6 @@ public class CartAPI {
         Cart existingCart = cartService.getByIdCustom(token);
         Integer id = Integer.valueOf(cartWrapper.getProductId());
         Integer quantity = Integer.valueOf(cartWrapper.getQuantity());
-
         ResponseWrapper responseWrapper = new ResponseWrapper(200, "SUCCESS");
 
         if(existingCart == null) {
